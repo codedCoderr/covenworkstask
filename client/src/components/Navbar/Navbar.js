@@ -6,26 +6,11 @@ import './Navbar.css';
 const Navbar = ({ logout, isAuthenticated }) => {
   return (
     <div>
-      <nav className='navbar navbar-expand-md bg-light navbar-light fixed-top'>
-        <Link to='/' className='navbar-brand'>
-          <img alt='logo' src='' className='nav-brand-image' />
-        </Link>
-        <button
-          className='navbar-toggler'
-          type='button'
-          data-toggle='collapse'
-          data-target='#collapsibleNavbar'>
-          <span className='navbar-toggler-icon button-nav' />
-        </button>
+      <nav className='navbar navbar-expand bg-light navbar-light fixed-top'>
         <div
           className='flex-row-reverse collapse navbar-collapse'
           id='collapsibleNavbar'>
           <ul className='navbar-nav'>
-            <li className='nav-item'>
-              <Link className='nav-link' to='/'>
-                Home
-              </Link>
-            </li>
 
             {isAuthenticated ? (
               <Fragment>
@@ -35,7 +20,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
                   </Link>{' '}
                 </li>
                 <li onClick={logout} className='nav-item'>
-                  <Link className='nav-link' to='/login'>
+                  <Link className='nav-link' to='/'>
                     <span className='hide-sm'>Logout</span>{' '}
                     <i className='fas fa-sign-out-alt'> </i>
                   </Link>{' '}
@@ -44,7 +29,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
             ) : (
               <Fragment>
                 <li className='nav-item'>
-                  <Link className='nav-link' to='/login'>
+                  <Link className='nav-link' to='/'>
                     Login
                   </Link>
                 </li>

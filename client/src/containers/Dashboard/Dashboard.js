@@ -263,7 +263,7 @@ const Dashboard = ({ logout }) => {
           <li
             onClick={logout}
             style={{ listStyle: 'none', color: 'rgba(0,0,0,0.87)' }}>
-            <Link to='/login'>
+            <Link to='/'>
               <ListItem button>
                 <ListItemIcon>
                   <ExitToApp />
