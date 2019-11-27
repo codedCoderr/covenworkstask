@@ -183,7 +183,8 @@ const useStyles = makeStyles(theme => ({
   },
   paper2: {
     position: 'absolute',
-    width: 450,
+    width: 600,
+    height: 400,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3)
@@ -192,14 +193,21 @@ const useStyles = makeStyles(theme => ({
 
 const Dashboard = ({ logout }) => {
   const classes = useStyles();
-      const [modalStyle] = React.useState(getModalStyle);
+  const [modalStyle] = React.useState(getModalStyle);
 
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
+  const [openModal, setOpenModal] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+  const handleModalOpen = () => {
+    setOpenModal(true);
+  };
+  const handleModalClose = () => {
+    setOpenModal(false);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
@@ -283,11 +291,24 @@ const Dashboard = ({ logout }) => {
             {tileData.map(tile => (
               <GridListTile key={tile.img}>
                 <img src={tile.img} alt={tile.title} />
+                <Modal
+                  aria-labelledby='simple-modal-title'
+                  aria-describedby='simple-modal-description'
+                  open={openModal}
+                  onClose={handleModalClose}>
+                  <div style={modalStyle} className={classes.paper2}>
+                    <h2>{tile.title}</h2>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Morbi accumsan odio enim, non pharetra est ultrices et.
+                    </p>
+                  </div>
+                </Modal>
                 <GridListTileBar
                   title={tile.title}
                   actionIcon={
                     <IconButton
-                      onClick={handleDrawerOpen}
+                      onClick={handleModalOpen}
                       aria-label={`info about ${tile.title}`}
                       className={classes.icon}>
                       <InfoIcon />
@@ -298,19 +319,6 @@ const Dashboard = ({ logout }) => {
             ))}
           </GridList>
         </div>
-        <Modal
-          aria-labelledby='simple-modal-title'
-          aria-describedby='simple-modal-description'
-          open={open}
-          onClose={handleDrawerClose}>
-          <div style={modalStyle} className={classes.paper2}>
-            <h2>Simple React Modal</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-              accumsan odio enim, non pharetra est ultrices et.
-            </p>
-          </div>
-        </Modal>
         <div className={classes.appBarSpacer} />
         <Container maxWidth='lg' className={classes.container}>
           {/* <Grid container spacing={3}>
