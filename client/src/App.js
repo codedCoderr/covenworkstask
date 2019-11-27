@@ -5,6 +5,7 @@ import { store, persistor } from './store';
 import Alert from './components/Alert/Alert';
 import Routes from './components/Routes/Routes';
 import { PersistGate } from 'redux-persist/integration/react';
+
 const App = () => {
   return (
     <Provider store={store}>
