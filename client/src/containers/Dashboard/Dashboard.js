@@ -31,32 +31,6 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 // import ListSubheader from '@material-ui/core/ListSubheader';
 import InfoIcon from '@material-ui/icons/Info';
 
-const tileData = [
-  {
-    img:
-      'https://image.shutterstock.com/image-photo/atlanta-georgia-usa-downtown-skyline-260nw-1031967217.jpg',
-    title: 'Atlanta',
-    author: 'author'
-  },
-  {
-    img:
-      'https://image.shutterstock.com/image-photo/new-york-city-skyline-cityscape-260nw-57571180.jpg',
-    title: 'NewYork',
-    author: 'author'
-  },
-  {
-    img:
-      'https://image.shutterstock.com/image-photo/amsterdam-skyline-shortly-after-sunset-260nw-128463995.jpg',
-    title: 'Amsterdam',
-    author: 'author'
-  },
-  {
-    img:
-      'https://image.shutterstock.com/image-photo/big-ben-houses-parliament-london-260nw-107597459.jpg',
-    title: 'London',
-    author: 'author'
-  }
-];
 const Copyright = () => {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
@@ -69,10 +43,10 @@ const Copyright = () => {
     </Typography>
   );
 };
-function rand() {
+const rand = () => {
   return Math.round(Math.random() * 20) - 10;
-}
-function getModalStyle() {
+};
+const getModalStyle = () => {
   const top = 50 + rand();
   const left = 50 + rand();
   return {
@@ -80,7 +54,7 @@ function getModalStyle() {
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`
   };
-}
+};
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -194,20 +168,48 @@ const Dashboard = ({ logout }) => {
   const [modalStyle] = React.useState(getModalStyle);
 
   const [open, setOpen] = React.useState(false);
-  const [openModal, setOpenModal] = React.useState(false);
+  const [openModal1, setOpenModal1] = React.useState(false);
+  const [openModal2, setOpenModal2] = React.useState(false);
+  const [openModal3, setOpenModal3] = React.useState(false);
+  const [openModal4, setOpenModal4] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const handleModalOpen = () => {
-    setOpenModal(true);
+  const handleModalOpen1 = () => {
+    setOpenModal1(true);
+    
   };
-  const handleModalClose = () => {
-    setOpenModal(false);
+  const handleModalClose1 = () => {
+    setOpenModal1(false);
+  
   };
-  // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const handleModalOpen2 = () => {
+    setOpenModal2(true);
+    
+  };
+  const handleModalClose2 = () => {
+    setOpenModal2(false);
+    
+  };
+  const handleModalOpen3 = () => {
+    
+    setOpenModal3(true);
+  };
+  const handleModalClose3 = () => {
+    
+    setOpenModal3(false);
+  };
+  const handleModalOpen4 = () => {
+    
+    setOpenModal4(true);
+  };
+  const handleModalClose4 = () => {
+    setOpenModal4(false);
+  };
+  
 
   return (
     <div className={classes.root}>
@@ -250,7 +252,6 @@ const Dashboard = ({ logout }) => {
         </div>
         <Divider />
         <List>
-          {/* <ul> */}
           <li style={{ listStyle: 'none' }}>
             <ListItem button>
               <ListItemIcon>
@@ -259,7 +260,6 @@ const Dashboard = ({ logout }) => {
               <ListItemText primary='Dashboard' />
             </ListItem>
           </li>
-          {/* </ul> */}
           <li
             onClick={logout}
             style={{ listStyle: 'none', color: 'rgba(0,0,0,0.87)' }}>
@@ -277,59 +277,142 @@ const Dashboard = ({ logout }) => {
           </li>
         </List>
         <Divider />
-        {/* <List>{secondaryListItems}</List> */}
+    
       </Drawer>
 
       <main style={{ marginTop: '80px' }} className={classes.content}>
         <div className={classes.root2}>
           <GridList cellHeight={180} className={classes.gridList}>
-            <GridListTile key='Subheader' cols={2} style={{ height: 'auto' }}>
-              {/* <ListSubheader component='div'>December</ListSubheader> */}
+            <GridListTile
+              key='Subheader'
+              cols={2}
+              style={{ height: 'auto' }}></GridListTile>
+
+            <GridListTile key='1'>
+              <img
+                src='https://image.shutterstock.com/image-photo/atlanta-georgia-usa-downtown-skyline-260nw-1031967217.jpg'
+                alt='Atlanta'
+              />
+              <Modal
+                aria-labelledby='simple-modal-title'
+                aria-describedby='simple-modal-description'
+                open={openModal1}
+                onClose={handleModalClose1}>
+                <div style={modalStyle} className={classes.paper2}>
+                  <h2>Atlanta</h2>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Morbi accumsan odio enim, non pharetra est ultrices et.
+                  </p>
+                </div>
+              </Modal>
+              <GridListTileBar
+                title='Atlanta'
+                actionIcon={
+                  <IconButton
+                    onClick={handleModalOpen1}
+                    aria-label={`info about Atlanta`}
+                    className={classes.icon}>
+                    <InfoIcon />
+                  </IconButton>
+                }
+              />
             </GridListTile>
-            {tileData.map(tile => (
-              <GridListTile key={tile.img}>
-                <img src={tile.img} alt={tile.title} />
-                <Modal
-                  aria-labelledby='simple-modal-title'
-                  aria-describedby='simple-modal-description'
-                  open={openModal}
-                  onClose={handleModalClose}>
-                  <div style={modalStyle} className={classes.paper2}>
-                    <h2>{tile.title}</h2>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Morbi accumsan odio enim, non pharetra est ultrices et.
-                    </p>
-                  </div>
-                </Modal>
-                <GridListTileBar
-                  title={tile.title}
-                  actionIcon={
-                    <IconButton
-                      onClick={handleModalOpen}
-                      aria-label={`info about ${tile.title}`}
-                      className={classes.icon}>
-                      <InfoIcon />
-                    </IconButton>
-                  }
-                />
-              </GridListTile>
-            ))}
+            <GridListTile key='2'>
+              <img
+                src='https://image.shutterstock.com/image-photo/new-york-city-skyline-cityscape-260nw-57571180.jpg'
+                alt='New York'
+              />
+              <Modal
+                aria-labelledby='simple-modal-title'
+                aria-describedby='simple-modal-description'
+                open={openModal2}
+                onClose={handleModalClose2}>
+                <div style={modalStyle} className={classes.paper2}>
+                  <h2>New York</h2>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Morbi accumsan odio enim, non pharetra est ultrices et.
+                  </p>
+                </div>
+              </Modal>
+              <GridListTileBar
+                title='New York'
+                actionIcon={
+                  <IconButton
+                    onClick={handleModalOpen2}
+                    aria-label={`info about New York`}
+                    className={classes.icon}>
+                    <InfoIcon />
+                  </IconButton>
+                }
+              />
+            </GridListTile>
+            <GridListTile key='3'>
+              <img
+                src='https://image.shutterstock.com/image-photo/amsterdam-skyline-shortly-after-sunset-260nw-128463995.jpg'
+                alt='Amsterdam'
+              />
+              <Modal
+                aria-labelledby='simple-modal-title'
+                aria-describedby='simple-modal-description'
+                open={openModal3}
+                onClose={handleModalClose3}>
+                <div style={modalStyle} className={classes.paper2}>
+                  <h2>Amsterdam</h2>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Morbi accumsan odio enim, non pharetra est ultrices et.
+                  </p>
+                </div>
+              </Modal>
+              <GridListTileBar
+                title='Amsterdam'
+                actionIcon={
+                  <IconButton
+                    onClick={handleModalOpen3}
+                    aria-label={`info about Amsterdam`}
+                    className={classes.icon}>
+                    <InfoIcon />
+                  </IconButton>
+                }
+              />
+            </GridListTile>
+            <GridListTile key='4'>
+              <img
+                src='https://image.shutterstock.com/image-photo/big-ben-houses-parliament-london-260nw-107597459.jpg'
+                alt='London'
+              />
+              <Modal
+                aria-labelledby='simple-modal-title'
+                aria-describedby='simple-modal-description'
+                open={openModal4}
+                onClose={handleModalClose4}>
+                <div style={modalStyle} className={classes.paper2}>
+                  <h2>London</h2>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Morbi accumsan odio enim, non pharetra est ultrices et.
+                  </p>
+                </div>
+              </Modal>
+              <GridListTileBar
+                title='London'
+                actionIcon={
+                  <IconButton
+                    onClick={handleModalOpen4}
+                    aria-label={`info about London`}
+                    className={classes.icon}>
+                    <InfoIcon />
+                  </IconButton>
+                }
+              />
+            </GridListTile>
           </GridList>
         </div>
         <div className={classes.appBarSpacer} />
         <Container maxWidth='lg' className={classes.container}>
-          {/* <Grid container spacing={3}>
-            
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}></Paper>
-            </Grid>
-            
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}></Paper>
-            </Grid>
-            
-          </Grid> */}
+         
           <Box pt={4}>
             <Copyright />
           </Box>
