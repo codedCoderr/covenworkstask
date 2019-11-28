@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Modal from '@material-ui/core/Modal';
-
+import { fetchArrivals, fetchDepartures } from '../../actions/flightInfo';
 import Container from '@material-ui/core/Container';
 // import Grid from '@material-ui/core/Grid';
 // import Paper from '@material-ui/core/Paper';
@@ -163,7 +163,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Dashboard = ({ logout }) => {
+const Dashboard = ({ logout, fetchArrivals, fetchDepartures }) => {
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
 
@@ -180,36 +180,36 @@ const Dashboard = ({ logout }) => {
   };
   const handleModalOpen1 = () => {
     setOpenModal1(true);
-    
+    fetchArrivals('KATL', '1574859599', '1574924852');
+    fetchDepartures('KATL', '1574859599', '1574924852');
   };
   const handleModalClose1 = () => {
     setOpenModal1(false);
-  
   };
   const handleModalOpen2 = () => {
     setOpenModal2(true);
-    
+    fetchArrivals('ZBAA', '1574859599', '1574924852');
+    fetchDepartures('ZBAA', '1574859599', '1574924852');
   };
   const handleModalClose2 = () => {
     setOpenModal2(false);
-    
   };
   const handleModalOpen3 = () => {
-    
     setOpenModal3(true);
+    fetchArrivals('OMDB', '1574859599', '1574924852');
+    fetchDepartures('OMDB', '1574859599', '1574924852');
   };
   const handleModalClose3 = () => {
-    
     setOpenModal3(false);
   };
   const handleModalOpen4 = () => {
-    
     setOpenModal4(true);
+    fetchArrivals('KLAX', '1574859599', '1574924852');
+    fetchDepartures('KLAX', '1574859599', '1574924852');
   };
   const handleModalClose4 = () => {
     setOpenModal4(false);
   };
-  
 
   return (
     <div className={classes.root}>
@@ -277,7 +277,6 @@ const Dashboard = ({ logout }) => {
           </li>
         </List>
         <Divider />
-    
       </Drawer>
 
       <main style={{ marginTop: '80px' }} className={classes.content}>
@@ -291,7 +290,7 @@ const Dashboard = ({ logout }) => {
             <GridListTile key='1'>
               <img
                 src='https://image.shutterstock.com/image-photo/atlanta-georgia-usa-downtown-skyline-260nw-1031967217.jpg'
-                alt='Atlanta'
+                alt='Hartsfield–Jackson Atlanta International Airport'
               />
               <Modal
                 aria-labelledby='simple-modal-title'
@@ -299,7 +298,7 @@ const Dashboard = ({ logout }) => {
                 open={openModal1}
                 onClose={handleModalClose1}>
                 <div style={modalStyle} className={classes.paper2}>
-                  <h2>Atlanta</h2>
+                  <h2>Hartsfield–Jackson Atlanta International Airport</h2>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Morbi accumsan odio enim, non pharetra est ultrices et.
@@ -307,11 +306,11 @@ const Dashboard = ({ logout }) => {
                 </div>
               </Modal>
               <GridListTileBar
-                title='Atlanta'
+                title='Hartsfield–Jackson Atlanta International Airport'
                 actionIcon={
                   <IconButton
                     onClick={handleModalOpen1}
-                    aria-label={`info about Atlanta`}
+                    aria-label={`info about Hartsfield–Jackson Atlanta International Airport`}
                     className={classes.icon}>
                     <InfoIcon />
                   </IconButton>
@@ -321,7 +320,7 @@ const Dashboard = ({ logout }) => {
             <GridListTile key='2'>
               <img
                 src='https://image.shutterstock.com/image-photo/new-york-city-skyline-cityscape-260nw-57571180.jpg'
-                alt='New York'
+                alt='Beijing Capital International Airport'
               />
               <Modal
                 aria-labelledby='simple-modal-title'
@@ -329,7 +328,7 @@ const Dashboard = ({ logout }) => {
                 open={openModal2}
                 onClose={handleModalClose2}>
                 <div style={modalStyle} className={classes.paper2}>
-                  <h2>New York</h2>
+                  <h2>Beijing Capital International Airport</h2>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Morbi accumsan odio enim, non pharetra est ultrices et.
@@ -337,11 +336,11 @@ const Dashboard = ({ logout }) => {
                 </div>
               </Modal>
               <GridListTileBar
-                title='New York'
+                title='Beijing Capital International Airport'
                 actionIcon={
                   <IconButton
                     onClick={handleModalOpen2}
-                    aria-label={`info about New York`}
+                    aria-label={`info about Beijing Capital International Airport`}
                     className={classes.icon}>
                     <InfoIcon />
                   </IconButton>
@@ -351,7 +350,7 @@ const Dashboard = ({ logout }) => {
             <GridListTile key='3'>
               <img
                 src='https://image.shutterstock.com/image-photo/amsterdam-skyline-shortly-after-sunset-260nw-128463995.jpg'
-                alt='Amsterdam'
+                alt='Dubai International Airport'
               />
               <Modal
                 aria-labelledby='simple-modal-title'
@@ -359,7 +358,7 @@ const Dashboard = ({ logout }) => {
                 open={openModal3}
                 onClose={handleModalClose3}>
                 <div style={modalStyle} className={classes.paper2}>
-                  <h2>Amsterdam</h2>
+                  <h2>Dubai International Airport</h2>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Morbi accumsan odio enim, non pharetra est ultrices et.
@@ -367,11 +366,11 @@ const Dashboard = ({ logout }) => {
                 </div>
               </Modal>
               <GridListTileBar
-                title='Amsterdam'
+                title='Dubai International Airport'
                 actionIcon={
                   <IconButton
                     onClick={handleModalOpen3}
-                    aria-label={`info about Amsterdam`}
+                    aria-label={`info about Dubai International Airport`}
                     className={classes.icon}>
                     <InfoIcon />
                   </IconButton>
@@ -381,7 +380,7 @@ const Dashboard = ({ logout }) => {
             <GridListTile key='4'>
               <img
                 src='https://image.shutterstock.com/image-photo/big-ben-houses-parliament-london-260nw-107597459.jpg'
-                alt='London'
+                alt='Los Angeles International Airport'
               />
               <Modal
                 aria-labelledby='simple-modal-title'
@@ -389,7 +388,7 @@ const Dashboard = ({ logout }) => {
                 open={openModal4}
                 onClose={handleModalClose4}>
                 <div style={modalStyle} className={classes.paper2}>
-                  <h2>London</h2>
+                  <h2>Los Angeles International Airport</h2>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Morbi accumsan odio enim, non pharetra est ultrices et.
@@ -397,11 +396,11 @@ const Dashboard = ({ logout }) => {
                 </div>
               </Modal>
               <GridListTileBar
-                title='London'
+                title='Los Angeles International Airport'
                 actionIcon={
                   <IconButton
                     onClick={handleModalOpen4}
-                    aria-label={`info about London`}
+                    aria-label={`info about Los Angeles International Airport`}
                     className={classes.icon}>
                     <InfoIcon />
                   </IconButton>
@@ -412,7 +411,6 @@ const Dashboard = ({ logout }) => {
         </div>
         <div className={classes.appBarSpacer} />
         <Container maxWidth='lg' className={classes.container}>
-         
           <Box pt={4}>
             <Copyright />
           </Box>
@@ -423,5 +421,5 @@ const Dashboard = ({ logout }) => {
 };
 export default connect(
   null,
-  { logout }
+  { logout, fetchArrivals, fetchDepartures }
 )(Dashboard);

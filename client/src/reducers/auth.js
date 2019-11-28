@@ -28,7 +28,6 @@ export default function(state = initialState, action) {
       localStorage.removeItem('token');
       return {
         ...state,
-        isSignedInWithGoogle: !1,
         loading: !1,
         token: null,
         isAuthenticated: !1
