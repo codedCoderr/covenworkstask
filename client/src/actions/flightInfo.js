@@ -11,7 +11,7 @@ const base_url = 'https://covenworks.herokuapp.com';
 
 export const fetchArrivals = (airport, begin, end) => async dispatch => {
   const body = JSON.stringify({ airport, begin, end });
-  console.log(body)
+  console.log(body);
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -19,12 +19,12 @@ export const fetchArrivals = (airport, begin, end) => async dispatch => {
     }
   };
   try {
-    const response = await axios.get(
+    const response = await axios.post(
       base_url + '/api/v1/arrival',
       body,
       config
     );
-    console.log(response)
+    console.log(response);
     if (response.data.success) {
       dispatch({ type: FETCH_ARRIVALS_SUCCESS, payload: response.data });
     } else {
@@ -43,12 +43,12 @@ export const fetchDepartures = (airport, begin, end) => async dispatch => {
     }
   };
   try {
-    const response = await axios.get(
+    const response = await axios.post(
       base_url + '/api/v1/departure',
       body,
       config
     );
-        console.log(response.data);
+    console.log(response.data);
 
     if (response.data.success) {
       dispatch({ type: FETCH_DEPARTURES_SUCCESS, payload: response.data });
