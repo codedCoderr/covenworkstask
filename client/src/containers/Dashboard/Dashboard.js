@@ -1381,7 +1381,7 @@ const Dashboard = ({
                 open={openModal7}
                 onClose={handleModalClose7}>
                 <div style={modalStyle} className={classes.paper2}>
-                  <h2>Heathrow Airport</h2>
+                  <h2>O Hare International Airport</h2>
                   <div className={classes2.tableWrapper}>
                     <Table
                       stickyHeader
