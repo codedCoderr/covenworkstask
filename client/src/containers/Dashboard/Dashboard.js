@@ -286,24 +286,7 @@ const Dashboard = ({
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
   const classes2 = useStyles2();
-  // const [page, setPage] = React.useState(0);
-  // const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  // const emptyRows =
-  //   rowsPerPage -
-  //   Math.min(
-  //     rowsPerPage,
-  //     arrivals.length === undefined ? 0 : arrivals - page * rowsPerPage
-  //   );
-
-  // const handleChangePage = (event, newPage) => {
-  //   setPage(newPage);
-  // };
-
-  // const handleChangeRowsPerPage = event => {
-  //   setRowsPerPage(parseInt(event.target.value, 10));
-  //   setPage(0);
-  // };
   const [open, setOpen] = React.useState(false);
   const [openModal1, setOpenModal1] = React.useState(false);
   const [openModal2, setOpenModal2] = React.useState(false);
@@ -327,14 +310,14 @@ const Dashboard = ({
     fetchArrivals(
       'KATL',
       moment()
-        .subtract(12, 'hours')
+        .subtract(14, 'hours')
         .unix(),
       moment().unix()
     );
     fetchDepartures(
       'KATL',
       moment()
-        .subtract(12, 'hours')
+        .subtract(14, 'hours')
         .unix(),
       moment().unix()
     );
@@ -347,14 +330,14 @@ const Dashboard = ({
     fetchArrivals(
       'KDEN',
       moment()
-        .subtract(12, 'hours')
+        .subtract(14, 'hours')
         .unix(),
       moment().unix()
     );
     fetchDepartures(
       'KDEN',
       moment()
-        .subtract(12, 'hours')
+        .subtract(14, 'hours')
         .unix(),
       moment().unix()
     );
@@ -367,14 +350,14 @@ const Dashboard = ({
     fetchArrivals(
       'OMDB',
       moment()
-        .subtract(12, 'hours')
+        .subtract(14, 'hours')
         .unix(),
       moment().unix()
     );
     fetchDepartures(
       'OMDB',
       moment()
-        .subtract(12, 'hours')
+        .subtract(14, 'hours')
         .unix(),
       moment().unix()
     );
@@ -388,14 +371,14 @@ const Dashboard = ({
     fetchArrivals(
       'KLAX',
       moment()
-        .subtract(12, 'hours')
+        .subtract(14, 'hours')
         .unix(),
       moment().unix()
     );
     fetchDepartures(
       'KLAX',
       moment()
-        .subtract(12, 'hours')
+        .subtract(14, 'hours')
         .unix(),
       moment().unix()
     );
@@ -408,14 +391,14 @@ const Dashboard = ({
     fetchArrivals(
       'RJTT',
       moment()
-        .subtract(12, 'hours')
+        .subtract(14, 'hours')
         .unix(),
       moment().unix()
     );
     fetchDepartures(
       'RJTT',
       moment()
-        .subtract(12, 'hours')
+        .subtract(14, 'hours')
         .unix(),
       moment().unix()
     );
@@ -428,14 +411,14 @@ const Dashboard = ({
     fetchArrivals(
       'EGLL',
       moment()
-        .subtract(12, 'hours')
+        .subtract(14, 'hours')
         .unix(),
       moment().unix()
     );
     fetchDepartures(
       'EGLL',
       moment()
-        .subtract(12, 'hours')
+        .subtract(14, 'hours')
         .unix(),
       moment().unix()
     );
@@ -448,14 +431,14 @@ const Dashboard = ({
     fetchArrivals(
       'KORD',
       moment()
-        .subtract(12, 'hours')
+        .subtract(14, 'hours')
         .unix(),
       moment().unix()
     );
     fetchDepartures(
       'KORD',
       moment()
-        .subtract(12, 'hours')
+        .subtract(14, 'hours')
         .unix(),
       moment().unix()
     );
@@ -468,14 +451,14 @@ const Dashboard = ({
     fetchArrivals(
       'VHHH',
       moment()
-        .subtract(12, 'hours')
+        .subtract(14, 'hours')
         .unix(),
       moment().unix()
     );
     fetchDepartures(
       'VHHH',
       moment()
-        .subtract(12, 'hours')
+        .subtract(14, 'hours')
         .unix(),
       moment().unix()
     );
@@ -488,14 +471,14 @@ const Dashboard = ({
     fetchArrivals(
       'EHAM',
       moment()
-        .subtract(12, 'hours')
+        .subtract(14, 'hours')
         .unix(),
       moment().unix()
     );
     fetchDepartures(
       'EHAM',
       moment()
-        .subtract(12, 'hours')
+        .subtract(14, 'hours')
         .unix(),
       moment().unix()
     );
@@ -508,14 +491,14 @@ const Dashboard = ({
     fetchArrivals(
       'CYYZ',
       moment()
-        .subtract(12, 'hours')
+        .subtract(14, 'hours')
         .unix(),
       moment().unix()
     );
     fetchDepartures(
       'CYYZ',
       moment()
-        .subtract(12, 'hours')
+        .subtract(14, 'hours')
         .unix(),
       moment().unix()
     );
@@ -636,7 +619,7 @@ const Dashboard = ({
                         </TableHead>
                         <TableBody>
                           {arrivals.length <= 0
-                            ? 'Please be patient while arrivals to Hartsfield-Jackson Atlanta International Airport within the last 12 hours are being fetched...'
+                            ? 'Please be patient while arrivals to Hartsfield-Jackson Atlanta International Airport within the last 14 hours are being fetched...'
                             : arrivals.data.map(row => (
                                 <TableRow key={uuid()}>
                                   <TableCell
@@ -686,7 +669,7 @@ const Dashboard = ({
                         </TableHead>
                         <TableBody>
                           {departures.length <= 0
-                            ? 'Please be patient while departures from Hartsfield-Jackson Atlanta International Airport within the last 20 hours are being fetched...'
+                            ? 'Please be patient while departures from Hartsfield-Jackson Atlanta International Airport within the last 14 hours are being fetched...'
                             : departures.data.map(row => (
                                 <TableRow key={uuid()}>
                                   <TableCell
@@ -765,7 +748,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {arrivals.length <= 0
-                          ? 'Please be patient while arrivals to Denver International Airport within the last 12 hours are being fetched...'
+                          ? 'Please be patient while arrivals to Denver International Airport within the last 14 hours are being fetched...'
                           : arrivals.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -815,7 +798,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {departures.length <= 0
-                          ? 'Please be patient while departures from Denver International Airport within the last 12 hours are being fetched...'
+                          ? 'Please be patient while departures from Denver International Airport within the last 14 hours are being fetched...'
                           : departures.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -893,7 +876,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {arrivals.length <= 0
-                          ? 'Please be patient while arrivals to Dubai International Airport within the last 12 hours are being fetched...'
+                          ? 'Please be patient while arrivals to Dubai International Airport within the last 14 hours are being fetched...'
                           : arrivals.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -943,7 +926,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {departures.length <= 0
-                          ? 'Please be patient while departures from Dubai International Airport within the last 12 hours are being fetched...'
+                          ? 'Please be patient while departures from Dubai International Airport within the last 14 hours are being fetched...'
                           : departures.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1021,7 +1004,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {arrivals.length <= 0
-                          ? 'Please be patient while arrivals to Los Angeles International Airport within the last 12 hours are being fetched...'
+                          ? 'Please be patient while arrivals to Los Angeles International Airport within the last 14 hours are being fetched...'
                           : arrivals.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1071,7 +1054,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {departures.length <= 0
-                          ? 'Please be patient while departures from Los Angeles International Airport within the last 12 hours are being fetched...'
+                          ? 'Please be patient while departures from Los Angeles International Airport within the last 14 hours are being fetched...'
                           : departures.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1149,7 +1132,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {arrivals.length <= 0
-                          ? 'Please be patient while arrivals to Tokyo Haneda Airport within the last 12 hours are being fetched...'
+                          ? 'Please be patient while arrivals to Tokyo Haneda Airport within the last 14 hours are being fetched...'
                           : arrivals.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1199,7 +1182,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {departures.length <= 0
-                          ? 'Please be patient while departures from Tokyo Haneda Airport within the last 12 hours are being fetched...'
+                          ? 'Please be patient while departures from Tokyo Haneda Airport within the last 14 hours are being fetched...'
                           : departures.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1277,7 +1260,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {arrivals.length <= 0
-                          ? 'Please be patient while arrivals to Heathrow Airport within the last 12 hours are being fetched...'
+                          ? 'Please be patient while arrivals to Heathrow Airport within the last 14 hours are being fetched...'
                           : arrivals.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1327,7 +1310,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {departures.length <= 0
-                          ? 'Please be patient while departures from Heathrow Airport within the last 12 hours are being fetched...'
+                          ? 'Please be patient while departures from Heathrow Airport within the last 14 hours are being fetched...'
                           : departures.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1405,7 +1388,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {arrivals.length <= 0
-                          ? 'Please be patient while arrivals to O Hare International Airport within the last 12 hours are being fetched...'
+                          ? 'Please be patient while arrivals to O Hare International Airport within the last 14 hours are being fetched...'
                           : arrivals.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1455,7 +1438,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {departures.length <= 0
-                          ? 'Please be patient while departures from O Hare International Airport within the last 12 hours are being fetched...'
+                          ? 'Please be patient while departures from O Hare International Airport within the last 14 hours are being fetched...'
                           : departures.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1533,7 +1516,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {arrivals.length <= 0
-                          ? 'Please be patient while arrivals to Hong Kong International Airport within the last 12 hours are being fetched...'
+                          ? 'Please be patient while arrivals to Hong Kong International Airport within the last 14 hours are being fetched...'
                           : arrivals.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1583,7 +1566,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {departures.length <= 0
-                          ? 'Please be patient while departures from Hong Kong International Airport within the last 12 hours are being fetched...'
+                          ? 'Please be patient while departures from Hong Kong International Airport within the last 14 hours are being fetched...'
                           : departures.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1661,7 +1644,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {arrivals.length <= 0
-                          ? 'Please be patient while arrivals to Amsterdam Airport Schiphol within the last 12 hours are being fetched...'
+                          ? 'Please be patient while arrivals to Amsterdam Airport Schiphol within the last 14 hours are being fetched...'
                           : arrivals.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1711,7 +1694,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {departures.length <= 0
-                          ? 'Please be patient while departures from Amsterdam Airport Schiphol within the last 12 hours are being fetched...'
+                          ? 'Please be patient while departures from Amsterdam Airport Schiphol within the last 14 hours are being fetched...'
                           : departures.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1789,7 +1772,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {arrivals.length <= 0
-                          ? 'Please be patient while arrivals to Toronto Pearson International Airport within the last 12 hours are being fetched...'
+                          ? 'Please be patient while arrivals to Toronto Pearson International Airport within the last 14 hours are being fetched...'
                           : arrivals.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1839,7 +1822,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {departures.length <= 0
-                          ? 'Please be patient while departures from Toronto Pearson International Airport within the last 12 hours are being fetched...'
+                          ? 'Please be patient while departures from Toronto Pearson International Airport within the last 14 hours are being fetched...'
                           : departures.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
