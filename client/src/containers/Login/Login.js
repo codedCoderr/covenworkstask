@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {connect} from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,7 +13,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {login } from '../../actions/auth'
+import { login } from '../../actions/auth';
 function Copyright() {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
@@ -47,12 +47,20 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
- const Login=({login,history})=> {
+const Login = ({ login, history, loginAuth }) => {
+  useEffect(() => {
+    setFormData({
+      username: document.getElementById('username').value,
+      password: document.getElementById('password').value,
+      loading: !1
+    });
+  }, [loginAuth.authData]);
   const [formData, setFormData] = useState({
     username: '',
-    password: ''
+    password: '',
+    loading: !1
   });
-  const { username, password } = formData;
+  const { username, password, loading } = formData;
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -62,13 +70,16 @@ const useStyles = makeStyles(theme => ({
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}><LockOutlinedIcon /></Avatar>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
         <Typography component='h1' variant='h5'>
           Sign in
         </Typography>
         <form
           onSubmit={e => {
             e.preventDefault();
+            setFormData({ loading: !0 });
             login(username, password, history);
           }}
           className={classes.form}
@@ -103,14 +114,24 @@ const useStyles = makeStyles(theme => ({
             control={<Checkbox value='remember' color='primary' />}
             label='Remember me'
           />
-          <Button
-            type='submit'
-            fullWidth
-            variant='contained'
-            color='primary'
-            className={classes.submit}>
-            Sign In
-          </Button>
+
+          {loading ? (
+            <Button
+              disabled
+              type='submit'
+              fullWidth
+              variant='contained'
+              className={classes.submit}></Button>
+          ) : (
+            <Button
+              type='submit'
+              fullWidth
+              variant='contained'
+              color='primary'
+              className={classes.submit}>
+              Sign In
+            </Button>
+          )}
         </form>
       </div>
       <Box mt={8}>
@@ -118,9 +139,10 @@ const useStyles = makeStyles(theme => ({
       </Box>
     </Container>
   );
-}
+};
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  loginAuth: state.authError
 });
 export default connect(
   mapStateToProps,
