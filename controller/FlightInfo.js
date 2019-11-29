@@ -13,7 +13,6 @@ const flightInfo = {
         data: response.data
       });
     } catch (error) {
-      console.log(error);
       return res.json({
         success: false,
         message: 'No values found for the specified time frame'

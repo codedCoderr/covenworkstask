@@ -382,7 +382,7 @@ const Dashboard = ({
   const handleModalClose3 = () => {
     setOpenModal3(false);
   };
-  
+
   const handleModalOpen4 = () => {
     setOpenModal4(true);
     fetchArrivals(
