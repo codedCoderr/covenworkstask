@@ -1,7 +1,23 @@
 import React from 'react';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import { makeStyles, useTheme, withStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import uuid from 'uuid/v4';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+// import TableFooter from '@material-ui/core/TableFooter';
+// import TablePagination from '@material-ui/core/TablePagination';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import FirstPageIcon from '@material-ui/icons/FirstPage';
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import LastPageIcon from '@material-ui/icons/LastPage';
+import TableHead from '@material-ui/core/TableHead';
+import moment from 'moment';
+
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
@@ -43,12 +59,109 @@ const Copyright = () => {
     </Typography>
   );
 };
-const rand = () => {
-  return Math.round(Math.random() * 20) - 10;
+const StyledTableCell = withStyles(theme => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white
+  },
+  body: {
+    fontSize: 14
+  }
+}))(TableCell);
+const useStyles1 = makeStyles(theme => ({
+  root: {
+    flexShrink: 0,
+    marginLeft: theme.spacing(2.5)
+  }
+}));
+
+function TablePaginationActions(props) {
+  const classes = useStyles1();
+  const theme = useTheme();
+  const { count, page, rowsPerPage, onChangePage } = props;
+
+  const handleFirstPageButtonClick = event => {
+    onChangePage(event, 0);
+  };
+
+  const handleBackButtonClick = event => {
+    onChangePage(event, page - 1);
+  };
+
+  const handleNextButtonClick = event => {
+    onChangePage(event, page + 1);
+  };
+
+  const handleLastPageButtonClick = event => {
+    onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+  };
+
+  return (
+    <div className={classes.root}>
+      <IconButton
+        onClick={handleFirstPageButtonClick}
+        disabled={page === 0}
+        aria-label='first page'>
+        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+      </IconButton>
+      <IconButton
+        onClick={handleBackButtonClick}
+        disabled={page === 0}
+        aria-label='previous page'>
+        {theme.direction === 'rtl' ? (
+          <KeyboardArrowRight />
+        ) : (
+          <KeyboardArrowLeft />
+        )}
+      </IconButton>
+      <IconButton
+        onClick={handleNextButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label='next page'>
+        {theme.direction === 'rtl' ? (
+          <KeyboardArrowLeft />
+        ) : (
+          <KeyboardArrowRight />
+        )}
+      </IconButton>
+      <IconButton
+        onClick={handleLastPageButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label='last page'>
+        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+      </IconButton>
+    </div>
+  );
+}
+
+TablePaginationActions.propTypes = {
+  count: PropTypes.number.isRequired,
+  onChangePage: PropTypes.func.isRequired,
+  page: PropTypes.number.isRequired,
+  rowsPerPage: PropTypes.number.isRequired
 };
+
+const useStyles2 = makeStyles(theme => ({
+  root: {
+    width: '100%',
+    marginTop: theme.spacing(3)
+  },
+  table: {
+    minWidth: 500
+  },
+  tableWrapper: {
+    // overflowX: 'auto',
+    maxHeight: 400,
+    overflow: 'auto'
+  }
+}));
+
+// const rand = () => {
+//   return Math.round(Math.random() * 20) - 10;
+// };
 const getModalStyle = () => {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const top = 50;
+  const left = 50;
   return {
     top: `${top}%`,
     left: `${left}%`,
@@ -155,60 +268,260 @@ const useStyles = makeStyles(theme => ({
   },
   paper2: {
     position: 'absolute',
-    width: 400,
-    height: 400,
+    width: 460,
+    height: 'auto',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3)
   }
 }));
 
-const Dashboard = ({ logout, fetchArrivals, fetchDepartures }) => {
+const Dashboard = ({
+  logout,
+  arrivals,
+  departures,
+  fetchArrivals,
+  fetchDepartures
+}) => {
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
+  const classes2 = useStyles2();
+  // const [page, setPage] = React.useState(0);
+  // const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+  // const emptyRows =
+  //   rowsPerPage -
+  //   Math.min(
+  //     rowsPerPage,
+  //     arrivals.length === undefined ? 0 : arrivals - page * rowsPerPage
+  //   );
+
+  // const handleChangePage = (event, newPage) => {
+  //   setPage(newPage);
+  // };
+
+  // const handleChangeRowsPerPage = event => {
+  //   setRowsPerPage(parseInt(event.target.value, 10));
+  //   setPage(0);
+  // };
   const [open, setOpen] = React.useState(false);
   const [openModal1, setOpenModal1] = React.useState(false);
   const [openModal2, setOpenModal2] = React.useState(false);
   const [openModal3, setOpenModal3] = React.useState(false);
   const [openModal4, setOpenModal4] = React.useState(false);
+  const [openModal5, setOpenModal5] = React.useState(false);
+  const [openModal6, setOpenModal6] = React.useState(false);
+  const [openModal7, setOpenModal7] = React.useState(false);
+  const [openModal8, setOpenModal8] = React.useState(false);
+  const [openModal9, setOpenModal9] = React.useState(false);
+  const [openModal10, setOpenModal10] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
   const handleModalOpen1 = () => {
     setOpenModal1(true);
-    fetchArrivals('KATL', '1574859599', '1574924852');
-    fetchDepartures('KATL', '1574859599', '1574924852');
+    fetchArrivals(
+      'KATL',
+      moment()
+        .subtract(12, 'hours')
+        .unix(),
+      moment().unix()
+    );
+    fetchDepartures(
+      'KATL',
+      moment()
+        .subtract(12, 'hours')
+        .unix(),
+      moment().unix()
+    );
   };
   const handleModalClose1 = () => {
     setOpenModal1(false);
   };
   const handleModalOpen2 = () => {
     setOpenModal2(true);
-    fetchArrivals('ZBAA', '1574859599', '1574924852');
-    fetchDepartures('ZBAA', '1574859599', '1574924852');
+    fetchArrivals(
+      'KDEN',
+      moment()
+        .subtract(12, 'hours')
+        .unix(),
+      moment().unix()
+    );
+    fetchDepartures(
+      'KDEN',
+      moment()
+        .subtract(12, 'hours')
+        .unix(),
+      moment().unix()
+    );
   };
   const handleModalClose2 = () => {
     setOpenModal2(false);
   };
   const handleModalOpen3 = () => {
     setOpenModal3(true);
-    fetchArrivals('OMDB', '1574859599', '1574924852');
-    fetchDepartures('OMDB', '1574859599', '1574924852');
+    fetchArrivals(
+      'OMDB',
+      moment()
+        .subtract(12, 'hours')
+        .unix(),
+      moment().unix()
+    );
+    fetchDepartures(
+      'OMDB',
+      moment()
+        .subtract(12, 'hours')
+        .unix(),
+      moment().unix()
+    );
   };
   const handleModalClose3 = () => {
     setOpenModal3(false);
   };
+  
   const handleModalOpen4 = () => {
     setOpenModal4(true);
-    fetchArrivals('KLAX', '1574859599', '1574924852');
-    fetchDepartures('KLAX', '1574859599', '1574924852');
+    fetchArrivals(
+      'KLAX',
+      moment()
+        .subtract(12, 'hours')
+        .unix(),
+      moment().unix()
+    );
+    fetchDepartures(
+      'KLAX',
+      moment()
+        .subtract(12, 'hours')
+        .unix(),
+      moment().unix()
+    );
   };
   const handleModalClose4 = () => {
     setOpenModal4(false);
+  };
+  const handleModalOpen5 = () => {
+    setOpenModal5(true);
+    fetchArrivals(
+      'RJTT',
+      moment()
+        .subtract(12, 'hours')
+        .unix(),
+      moment().unix()
+    );
+    fetchDepartures(
+      'RJTT',
+      moment()
+        .subtract(12, 'hours')
+        .unix(),
+      moment().unix()
+    );
+  };
+  const handleModalClose5 = () => {
+    setOpenModal5(false);
+  };
+  const handleModalOpen6 = () => {
+    setOpenModal6(true);
+    fetchArrivals(
+      'EGLL',
+      moment()
+        .subtract(12, 'hours')
+        .unix(),
+      moment().unix()
+    );
+    fetchDepartures(
+      'EGLL',
+      moment()
+        .subtract(12, 'hours')
+        .unix(),
+      moment().unix()
+    );
+  };
+  const handleModalClose6 = () => {
+    setOpenModal6(false);
+  };
+  const handleModalOpen7 = () => {
+    setOpenModal7(true);
+    fetchArrivals(
+      'KORD',
+      moment()
+        .subtract(12, 'hours')
+        .unix(),
+      moment().unix()
+    );
+    fetchDepartures(
+      'KORD',
+      moment()
+        .subtract(12, 'hours')
+        .unix(),
+      moment().unix()
+    );
+  };
+  const handleModalClose7 = () => {
+    setOpenModal7(false);
+  };
+  const handleModalOpen8 = () => {
+    setOpenModal8(true);
+    fetchArrivals(
+      'VHHH',
+      moment()
+        .subtract(12, 'hours')
+        .unix(),
+      moment().unix()
+    );
+    fetchDepartures(
+      'VHHH',
+      moment()
+        .subtract(12, 'hours')
+        .unix(),
+      moment().unix()
+    );
+  };
+  const handleModalClose8 = () => {
+    setOpenModal8(false);
+  };
+  const handleModalOpen9 = () => {
+    setOpenModal9(true);
+    fetchArrivals(
+      'EHAM',
+      moment()
+        .subtract(12, 'hours')
+        .unix(),
+      moment().unix()
+    );
+    fetchDepartures(
+      'EHAM',
+      moment()
+        .subtract(12, 'hours')
+        .unix(),
+      moment().unix()
+    );
+  };
+  const handleModalClose9 = () => {
+    setOpenModal9(false);
+  };
+  const handleModalOpen10 = () => {
+    setOpenModal10(true);
+    fetchArrivals(
+      'CYYZ',
+      moment()
+        .subtract(12, 'hours')
+        .unix(),
+      moment().unix()
+    );
+    fetchDepartures(
+      'CYYZ',
+      moment()
+        .subtract(12, 'hours')
+        .unix(),
+      moment().unix()
+    );
+  };
+  const handleModalClose10 = () => {
+    setOpenModal10(false);
   };
 
   return (
@@ -299,10 +612,110 @@ const Dashboard = ({ logout, fetchArrivals, fetchDepartures }) => {
                 onClose={handleModalClose1}>
                 <div style={modalStyle} className={classes.paper2}>
                   <h2>Hartsfield–Jackson Atlanta International Airport</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Morbi accumsan odio enim, non pharetra est ultrices et.
-                  </p>
+                  <Paper className={classes2.root}>
+                    <div className={classes2.tableWrapper}>
+                      <Table
+                        stickyHeader
+                        className={classes2.table}
+                        aria-label='custom pagination sticky table'>
+                        <TableHead>
+                          <TableRow>
+                            <StyledTableCell>Arrivals</StyledTableCell>
+                            <StyledTableCell>icao24</StyledTableCell>
+
+                            <StyledTableCell align='right'>
+                              Departure Airport
+                            </StyledTableCell>
+                            <StyledTableCell align='right'>
+                              Time of Departure
+                            </StyledTableCell>
+                            <StyledTableCell align='right'>
+                              Time of Arrival
+                            </StyledTableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {arrivals.length <= 0
+                            ? 'Please be patient while arrivals to Hartsfield-Jackson Atlanta International Airport within the last 12 hours are being fetched...'
+                            : arrivals.data.map(row => (
+                                <TableRow key={uuid()}>
+                                  <TableCell
+                                    component='th'
+                                    scope='row'></TableCell>
+                                  <TableCell component='th' scope='row'>
+                                    {row.icao24}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {row.estDepartureAirport === null
+                                      ? 'N/A'
+                                      : row.estDepartureAirport}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.firstSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.lastSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                        </TableBody>
+                      </Table>
+                      <Table
+                        stickyHeader
+                        className={classes2.table}
+                        aria-label='custom pagination sticky table'>
+                        <TableHead>
+                          <TableRow>
+                            <StyledTableCell>Departures</StyledTableCell>
+                            <StyledTableCell>icao24</StyledTableCell>
+
+                            <StyledTableCell align='right'>
+                              Arrival Airport
+                            </StyledTableCell>
+                            <StyledTableCell align='right'>
+                              Time of Arrival
+                            </StyledTableCell>
+                            <StyledTableCell align='right'>
+                              Time of Departure
+                            </StyledTableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {departures.length <= 0
+                            ? 'Please be patient while departures from Hartsfield-Jackson Atlanta International Airport within the last 20 hours are being fetched...'
+                            : departures.data.map(row => (
+                                <TableRow key={uuid()}>
+                                  <TableCell
+                                    component='th'
+                                    scope='row'></TableCell>
+                                  <TableCell component='th' scope='row'>
+                                    {row.icao24}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {row.estArrivalAirport === null
+                                      ? 'N/A'
+                                      : row.estArrivalAirport}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.firstSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.lastSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  </Paper>
                 </div>
               </Modal>
               <GridListTileBar
@@ -320,7 +733,7 @@ const Dashboard = ({ logout, fetchArrivals, fetchDepartures }) => {
             <GridListTile key='2'>
               <img
                 src='https://image.shutterstock.com/image-photo/new-york-city-skyline-cityscape-260nw-57571180.jpg'
-                alt='Beijing Capital International Airport'
+                alt='Denver International Airport'
               />
               <Modal
                 aria-labelledby='simple-modal-title'
@@ -328,19 +741,117 @@ const Dashboard = ({ logout, fetchArrivals, fetchDepartures }) => {
                 open={openModal2}
                 onClose={handleModalClose2}>
                 <div style={modalStyle} className={classes.paper2}>
-                  <h2>Beijing Capital International Airport</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Morbi accumsan odio enim, non pharetra est ultrices et.
-                  </p>
+                  <h2>Denver International Airport</h2>
+                  <div className={classes2.tableWrapper}>
+                    <Table
+                      stickyHeader
+                      className={classes2.table}
+                      aria-label='custom pagination sticky table'>
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Arrivals</StyledTableCell>
+                          <StyledTableCell>icao24</StyledTableCell>
+
+                          <StyledTableCell align='right'>
+                            Departure Airport
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Departure
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Arrival
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {arrivals.length <= 0
+                          ? 'Please be patient while arrivals to Denver International Airport within the last 12 hours are being fetched...'
+                          : arrivals.data.map(row => (
+                              <TableRow key={uuid()}>
+                                <TableCell
+                                  component='th'
+                                  scope='row'></TableCell>
+                                <TableCell component='th' scope='row'>
+                                  {row.icao24}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {row.estDepartureAirport === null
+                                    ? 'N/A'
+                                    : row.estDepartureAirport}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.firstSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.lastSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                      </TableBody>
+                    </Table>
+                    <Table
+                      stickyHeader
+                      className={classes2.table}
+                      aria-label='custom pagination sticky table'>
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Departures</StyledTableCell>
+                          <StyledTableCell>icao24</StyledTableCell>
+
+                          <StyledTableCell align='right'>
+                            Arrival Airport
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Arrival
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Departure
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {departures.length <= 0
+                          ? 'Please be patient while departures from Denver International Airport within the last 12 hours are being fetched...'
+                          : departures.data.map(row => (
+                              <TableRow key={uuid()}>
+                                <TableCell
+                                  component='th'
+                                  scope='row'></TableCell>
+                                <TableCell component='th' scope='row'>
+                                  {row.icao24}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {row.estArrivalAirport === null
+                                    ? 'N/A'
+                                    : row.estArrivalAirport}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.firstSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.lastSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                      </TableBody>
+                    </Table>
+                  </div>
                 </div>
               </Modal>
               <GridListTileBar
-                title='Beijing Capital International Airport'
+                title='Denver International Airport'
                 actionIcon={
                   <IconButton
                     onClick={handleModalOpen2}
-                    aria-label={`info about Beijing Capital International Airport`}
+                    aria-label={`info about Denver International Airport`}
                     className={classes.icon}>
                     <InfoIcon />
                   </IconButton>
@@ -359,10 +870,108 @@ const Dashboard = ({ logout, fetchArrivals, fetchDepartures }) => {
                 onClose={handleModalClose3}>
                 <div style={modalStyle} className={classes.paper2}>
                   <h2>Dubai International Airport</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Morbi accumsan odio enim, non pharetra est ultrices et.
-                  </p>
+                  <div className={classes2.tableWrapper}>
+                    <Table
+                      stickyHeader
+                      className={classes2.table}
+                      aria-label='custom pagination sticky table'>
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Arrivals</StyledTableCell>
+                          <StyledTableCell>icao24</StyledTableCell>
+
+                          <StyledTableCell align='right'>
+                            Departure Airport
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Departure
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Arrival
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {arrivals.length <= 0
+                          ? 'Please be patient while arrivals to Dubai International Airport within the last 12 hours are being fetched...'
+                          : arrivals.data.map(row => (
+                              <TableRow key={uuid()}>
+                                <TableCell
+                                  component='th'
+                                  scope='row'></TableCell>
+                                <TableCell component='th' scope='row'>
+                                  {row.icao24}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {row.estDepartureAirport === null
+                                    ? 'N/A'
+                                    : row.estDepartureAirport}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.firstSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.lastSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                      </TableBody>
+                    </Table>
+                    <Table
+                      stickyHeader
+                      className={classes2.table}
+                      aria-label='custom pagination sticky table'>
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Departures</StyledTableCell>
+                          <StyledTableCell>icao24</StyledTableCell>
+
+                          <StyledTableCell align='right'>
+                            Arrival Airport
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Arrival
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Departure
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {departures.length <= 0
+                          ? 'Please be patient while departures from Dubai International Airport within the last 12 hours are being fetched...'
+                          : departures.data.map(row => (
+                              <TableRow key={uuid()}>
+                                <TableCell
+                                  component='th'
+                                  scope='row'></TableCell>
+                                <TableCell component='th' scope='row'>
+                                  {row.icao24}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {row.estArrivalAirport === null
+                                    ? 'N/A'
+                                    : row.estArrivalAirport}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.firstSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.lastSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                      </TableBody>
+                    </Table>
+                  </div>
                 </div>
               </Modal>
               <GridListTileBar
@@ -389,10 +998,108 @@ const Dashboard = ({ logout, fetchArrivals, fetchDepartures }) => {
                 onClose={handleModalClose4}>
                 <div style={modalStyle} className={classes.paper2}>
                   <h2>Los Angeles International Airport</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Morbi accumsan odio enim, non pharetra est ultrices et.
-                  </p>
+                  <div className={classes2.tableWrapper}>
+                    <Table
+                      stickyHeader
+                      className={classes2.table}
+                      aria-label='custom pagination sticky table'>
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Arrivals</StyledTableCell>
+                          <StyledTableCell>icao24</StyledTableCell>
+
+                          <StyledTableCell align='right'>
+                            Departure Airport
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Departure
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Arrival
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {arrivals.length <= 0
+                          ? 'Please be patient while arrivals to Los Angeles International Airport within the last 12 hours are being fetched...'
+                          : arrivals.data.map(row => (
+                              <TableRow key={uuid()}>
+                                <TableCell
+                                  component='th'
+                                  scope='row'></TableCell>
+                                <TableCell component='th' scope='row'>
+                                  {row.icao24}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {row.estDepartureAirport === null
+                                    ? 'N/A'
+                                    : row.estDepartureAirport}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.firstSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.lastSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                      </TableBody>
+                    </Table>
+                    <Table
+                      stickyHeader
+                      className={classes2.table}
+                      aria-label='custom pagination sticky table'>
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Departures</StyledTableCell>
+                          <StyledTableCell>icao24</StyledTableCell>
+
+                          <StyledTableCell align='right'>
+                            Arrival Airport
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Arrival
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Departure
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {departures.length <= 0
+                          ? 'Please be patient while departures from Los Angeles International Airport within the last 12 hours are being fetched...'
+                          : departures.data.map(row => (
+                              <TableRow key={uuid()}>
+                                <TableCell
+                                  component='th'
+                                  scope='row'></TableCell>
+                                <TableCell component='th' scope='row'>
+                                  {row.icao24}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {row.estArrivalAirport === null
+                                    ? 'N/A'
+                                    : row.estArrivalAirport}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.firstSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.lastSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                      </TableBody>
+                    </Table>
+                  </div>
                 </div>
               </Modal>
               <GridListTileBar
@@ -401,6 +1108,774 @@ const Dashboard = ({ logout, fetchArrivals, fetchDepartures }) => {
                   <IconButton
                     onClick={handleModalOpen4}
                     aria-label={`info about Los Angeles International Airport`}
+                    className={classes.icon}>
+                    <InfoIcon />
+                  </IconButton>
+                }
+              />
+            </GridListTile>
+            <GridListTile key='5'>
+              <img
+                src='https://image.shutterstock.com/image-photo/tokyo-november-13-billboards-shinjukus-600w-1012724596.jpg'
+                alt='Tokyo Haneda Airport'
+              />
+              <Modal
+                aria-labelledby='simple-modal-title'
+                aria-describedby='simple-modal-description'
+                open={openModal5}
+                onClose={handleModalClose5}>
+                <div style={modalStyle} className={classes.paper2}>
+                  <h2>Tokyo Haneda Airport</h2>
+                  <div className={classes2.tableWrapper}>
+                    <Table
+                      stickyHeader
+                      className={classes2.table}
+                      aria-label='custom pagination sticky table'>
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Arrivals</StyledTableCell>
+                          <StyledTableCell>icao24</StyledTableCell>
+
+                          <StyledTableCell align='right'>
+                            Departure Airport
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Departure
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Arrival
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {arrivals.length <= 0
+                          ? 'Please be patient while arrivals to Tokyo Haneda Airport within the last 12 hours are being fetched...'
+                          : arrivals.data.map(row => (
+                              <TableRow key={uuid()}>
+                                <TableCell
+                                  component='th'
+                                  scope='row'></TableCell>
+                                <TableCell component='th' scope='row'>
+                                  {row.icao24}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {row.estDepartureAirport === null
+                                    ? 'N/A'
+                                    : row.estDepartureAirport}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.firstSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.lastSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                      </TableBody>
+                    </Table>
+                    <Table
+                      stickyHeader
+                      className={classes2.table}
+                      aria-label='custom pagination sticky table'>
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Departures</StyledTableCell>
+                          <StyledTableCell>icao24</StyledTableCell>
+
+                          <StyledTableCell align='right'>
+                            Arrival Airport
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Arrival
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Departure
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {departures.length <= 0
+                          ? 'Please be patient while departures from Tokyo Haneda Airport within the last 12 hours are being fetched...'
+                          : departures.data.map(row => (
+                              <TableRow key={uuid()}>
+                                <TableCell
+                                  component='th'
+                                  scope='row'></TableCell>
+                                <TableCell component='th' scope='row'>
+                                  {row.icao24}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {row.estArrivalAirport === null
+                                    ? 'N/A'
+                                    : row.estArrivalAirport}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.firstSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.lastSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </div>
+              </Modal>
+              <GridListTileBar
+                title='Tokyo Haneda Airport'
+                actionIcon={
+                  <IconButton
+                    onClick={handleModalOpen5}
+                    aria-label={`info about Tokyo Haneda Airport`}
+                    className={classes.icon}>
+                    <InfoIcon />
+                  </IconButton>
+                }
+              />
+            </GridListTile>
+            <GridListTile key='6'>
+              <img
+                src='https://image.shutterstock.com/image-photo/tower-bridge-london-uk-sunset-600w-651736369.jpg'
+                alt='Heathrow Airport'
+              />
+              <Modal
+                aria-labelledby='simple-modal-title'
+                aria-describedby='simple-modal-description'
+                open={openModal6}
+                onClose={handleModalClose6}>
+                <div style={modalStyle} className={classes.paper2}>
+                  <h2>Heathrow Airport</h2>
+                  <div className={classes2.tableWrapper}>
+                    <Table
+                      stickyHeader
+                      className={classes2.table}
+                      aria-label='custom pagination sticky table'>
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Arrivals</StyledTableCell>
+                          <StyledTableCell>icao24</StyledTableCell>
+
+                          <StyledTableCell align='right'>
+                            Departure Airport
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Departure
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Arrival
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {arrivals.length <= 0
+                          ? 'Please be patient while arrivals to Heathrow Airport within the last 12 hours are being fetched...'
+                          : arrivals.data.map(row => (
+                              <TableRow key={uuid()}>
+                                <TableCell
+                                  component='th'
+                                  scope='row'></TableCell>
+                                <TableCell component='th' scope='row'>
+                                  {row.icao24}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {row.estDepartureAirport === null
+                                    ? 'N/A'
+                                    : row.estDepartureAirport}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.firstSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.lastSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                      </TableBody>
+                    </Table>
+                    <Table
+                      stickyHeader
+                      className={classes2.table}
+                      aria-label='custom pagination sticky table'>
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Departures</StyledTableCell>
+                          <StyledTableCell>icao24</StyledTableCell>
+
+                          <StyledTableCell align='right'>
+                            Arrival Airport
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Arrival
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Departure
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {departures.length <= 0
+                          ? 'Please be patient while departures from Heathrow Airport within the last 12 hours are being fetched...'
+                          : departures.data.map(row => (
+                              <TableRow key={uuid()}>
+                                <TableCell
+                                  component='th'
+                                  scope='row'></TableCell>
+                                <TableCell component='th' scope='row'>
+                                  {row.icao24}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {row.estArrivalAirport === null
+                                    ? 'N/A'
+                                    : row.estArrivalAirport}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.firstSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.lastSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </div>
+              </Modal>
+              <GridListTileBar
+                title='Heathrow Airport'
+                actionIcon={
+                  <IconButton
+                    onClick={handleModalOpen6}
+                    aria-label={`info about Heathrow Airport`}
+                    className={classes.icon}>
+                    <InfoIcon />
+                  </IconButton>
+                }
+              />
+            </GridListTile>
+            <GridListTile key='7'>
+              <img
+                src='https://image.shutterstock.com/image-photo/chicago-river-downtown-skyline-usa-600w-478361827.jpg'
+                alt='O Hare International Airport'
+              />
+              <Modal
+                aria-labelledby='simple-modal-title'
+                aria-describedby='simple-modal-description'
+                open={openModal7}
+                onClose={handleModalClose7}>
+                <div style={modalStyle} className={classes.paper2}>
+                  <h2>Heathrow Airport</h2>
+                  <div className={classes2.tableWrapper}>
+                    <Table
+                      stickyHeader
+                      className={classes2.table}
+                      aria-label='custom pagination sticky table'>
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Arrivals</StyledTableCell>
+                          <StyledTableCell>icao24</StyledTableCell>
+
+                          <StyledTableCell align='right'>
+                            Departure Airport
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Departure
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Arrival
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {arrivals.length <= 0
+                          ? 'Please be patient while arrivals to O Hare International Airport within the last 12 hours are being fetched...'
+                          : arrivals.data.map(row => (
+                              <TableRow key={uuid()}>
+                                <TableCell
+                                  component='th'
+                                  scope='row'></TableCell>
+                                <TableCell component='th' scope='row'>
+                                  {row.icao24}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {row.estDepartureAirport === null
+                                    ? 'N/A'
+                                    : row.estDepartureAirport}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.firstSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.lastSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                      </TableBody>
+                    </Table>
+                    <Table
+                      stickyHeader
+                      className={classes2.table}
+                      aria-label='custom pagination sticky table'>
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Departures</StyledTableCell>
+                          <StyledTableCell>icao24</StyledTableCell>
+
+                          <StyledTableCell align='right'>
+                            Arrival Airport
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Arrival
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Departure
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {departures.length <= 0
+                          ? 'Please be patient while departures from O Hare International Airport within the last 12 hours are being fetched...'
+                          : departures.data.map(row => (
+                              <TableRow key={uuid()}>
+                                <TableCell
+                                  component='th'
+                                  scope='row'></TableCell>
+                                <TableCell component='th' scope='row'>
+                                  {row.icao24}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {row.estArrivalAirport === null
+                                    ? 'N/A'
+                                    : row.estArrivalAirport}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.firstSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.lastSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </div>
+              </Modal>
+              <GridListTileBar
+                title='O Hare International Airport'
+                actionIcon={
+                  <IconButton
+                    onClick={handleModalOpen7}
+                    aria-label={`info about O Hare International Airport`}
+                    className={classes.icon}>
+                    <InfoIcon />
+                  </IconButton>
+                }
+              />
+            </GridListTile>
+            <GridListTile key='8'>
+              <img
+                src='https://image.shutterstock.com/image-photo/golden-pagoda-nan-lian-garden-600w-521749765.jpg'
+                alt='Hong Kong International Airport'
+              />
+              <Modal
+                aria-labelledby='simple-modal-title'
+                aria-describedby='simple-modal-description'
+                open={openModal8}
+                onClose={handleModalClose8}>
+                <div style={modalStyle} className={classes.paper2}>
+                  <h2>Hong Kong International Airport</h2>
+                  <div className={classes2.tableWrapper}>
+                    <Table
+                      stickyHeader
+                      className={classes2.table}
+                      aria-label='custom pagination sticky table'>
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Arrivals</StyledTableCell>
+                          <StyledTableCell>icao24</StyledTableCell>
+
+                          <StyledTableCell align='right'>
+                            Departure Airport
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Departure
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Arrival
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {arrivals.length <= 0
+                          ? 'Please be patient while arrivals to Hong Kong International Airport within the last 12 hours are being fetched...'
+                          : arrivals.data.map(row => (
+                              <TableRow key={uuid()}>
+                                <TableCell
+                                  component='th'
+                                  scope='row'></TableCell>
+                                <TableCell component='th' scope='row'>
+                                  {row.icao24}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {row.estDepartureAirport === null
+                                    ? 'N/A'
+                                    : row.estDepartureAirport}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.firstSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.lastSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                      </TableBody>
+                    </Table>
+                    <Table
+                      stickyHeader
+                      className={classes2.table}
+                      aria-label='custom pagination sticky table'>
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Departures</StyledTableCell>
+                          <StyledTableCell>icao24</StyledTableCell>
+
+                          <StyledTableCell align='right'>
+                            Arrival Airport
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Arrival
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Departure
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {departures.length <= 0
+                          ? 'Please be patient while departures from Hong Kong International Airport within the last 12 hours are being fetched...'
+                          : departures.data.map(row => (
+                              <TableRow key={uuid()}>
+                                <TableCell
+                                  component='th'
+                                  scope='row'></TableCell>
+                                <TableCell component='th' scope='row'>
+                                  {row.icao24}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {row.estArrivalAirport === null
+                                    ? 'N/A'
+                                    : row.estArrivalAirport}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.firstSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.lastSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </div>
+              </Modal>
+              <GridListTileBar
+                title='Hong Kong International Airport'
+                actionIcon={
+                  <IconButton
+                    onClick={handleModalOpen8}
+                    aria-label={`info about Hong Kong International Airport`}
+                    className={classes.icon}>
+                    <InfoIcon />
+                  </IconButton>
+                }
+              />
+            </GridListTile>
+            <GridListTile key='9'>
+              <img
+                src='https://image.shutterstock.com/image-photo/amsterdam-canal-singel-typical-dutch-600w-534783616.jpg'
+                alt='Amsterdam Airport Schiphol'
+              />
+              <Modal
+                aria-labelledby='simple-modal-title'
+                aria-describedby='simple-modal-description'
+                open={openModal9}
+                onClose={handleModalClose9}>
+                <div style={modalStyle} className={classes.paper2}>
+                  <h2>Amsterdam Airport Schiphol</h2>
+                  <div className={classes2.tableWrapper}>
+                    <Table
+                      stickyHeader
+                      className={classes2.table}
+                      aria-label='custom pagination sticky table'>
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Arrivals</StyledTableCell>
+                          <StyledTableCell>icao24</StyledTableCell>
+
+                          <StyledTableCell align='right'>
+                            Departure Airport
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Departure
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Arrival
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {arrivals.length <= 0
+                          ? 'Please be patient while arrivals to Amsterdam Airport Schiphol within the last 12 hours are being fetched...'
+                          : arrivals.data.map(row => (
+                              <TableRow key={uuid()}>
+                                <TableCell
+                                  component='th'
+                                  scope='row'></TableCell>
+                                <TableCell component='th' scope='row'>
+                                  {row.icao24}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {row.estDepartureAirport === null
+                                    ? 'N/A'
+                                    : row.estDepartureAirport}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.firstSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.lastSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                      </TableBody>
+                    </Table>
+                    <Table
+                      stickyHeader
+                      className={classes2.table}
+                      aria-label='custom pagination sticky table'>
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Departures</StyledTableCell>
+                          <StyledTableCell>icao24</StyledTableCell>
+
+                          <StyledTableCell align='right'>
+                            Arrival Airport
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Arrival
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Departure
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {departures.length <= 0
+                          ? 'Please be patient while departures from Amsterdam Airport Schiphol within the last 12 hours are being fetched...'
+                          : departures.data.map(row => (
+                              <TableRow key={uuid()}>
+                                <TableCell
+                                  component='th'
+                                  scope='row'></TableCell>
+                                <TableCell component='th' scope='row'>
+                                  {row.icao24}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {row.estArrivalAirport === null
+                                    ? 'N/A'
+                                    : row.estArrivalAirport}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.firstSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.lastSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </div>
+              </Modal>
+              <GridListTileBar
+                title='Amsterdam Airport Schiphol'
+                actionIcon={
+                  <IconButton
+                    onClick={handleModalOpen9}
+                    aria-label={`info about Amsterdam Airport Schiphol`}
+                    className={classes.icon}>
+                    <InfoIcon />
+                  </IconButton>
+                }
+              />
+            </GridListTile>
+            <GridListTile key='10'>
+              <img
+                src='https://image.shutterstock.com/image-photo/beautiful-toronto-islands-formerly-island-600w-293980604.jpg'
+                alt='Toronto Pearson International Airport'
+              />
+              <Modal
+                aria-labelledby='simple-modal-title'
+                aria-describedby='simple-modal-description'
+                open={openModal10}
+                onClose={handleModalClose10}>
+                <div style={modalStyle} className={classes.paper2}>
+                  <h2>Toronto Pearson International Airport</h2>
+                  <div className={classes2.tableWrapper}>
+                    <Table
+                      stickyHeader
+                      className={classes2.table}
+                      aria-label='custom pagination sticky table'>
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Arrivals</StyledTableCell>
+                          <StyledTableCell>icao24</StyledTableCell>
+
+                          <StyledTableCell align='right'>
+                            Departure Airport
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Departure
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Arrival
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {arrivals.length <= 0
+                          ? 'Please be patient while arrivals to Toronto Pearson International Airport within the last 12 hours are being fetched...'
+                          : arrivals.data.map(row => (
+                              <TableRow key={uuid()}>
+                                <TableCell
+                                  component='th'
+                                  scope='row'></TableCell>
+                                <TableCell component='th' scope='row'>
+                                  {row.icao24}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {row.estDepartureAirport === null
+                                    ? 'N/A'
+                                    : row.estDepartureAirport}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.firstSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.lastSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                      </TableBody>
+                    </Table>
+                    <Table
+                      stickyHeader
+                      className={classes2.table}
+                      aria-label='custom pagination sticky table'>
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Departures</StyledTableCell>
+                          <StyledTableCell>icao24</StyledTableCell>
+
+                          <StyledTableCell align='right'>
+                            Arrival Airport
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Arrival
+                          </StyledTableCell>
+                          <StyledTableCell align='right'>
+                            Time of Departure
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {departures.length <= 0
+                          ? 'Please be patient while departures from Toronto Pearson International Airport within the last 12 hours are being fetched...'
+                          : departures.data.map(row => (
+                              <TableRow key={uuid()}>
+                                <TableCell
+                                  component='th'
+                                  scope='row'></TableCell>
+                                <TableCell component='th' scope='row'>
+                                  {row.icao24}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {row.estArrivalAirport === null
+                                    ? 'N/A'
+                                    : row.estArrivalAirport}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.firstSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                                <TableCell align='right'>
+                                  {moment
+                                    .unix(row.lastSeen)
+                                    .format('MMMM Do YYYY, hh:mm:ss a')}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </div>
+              </Modal>
+              <GridListTileBar
+                title='Toronto Pearson International Airport'
+                actionIcon={
+                  <IconButton
+                    onClick={handleModalOpen10}
+                    aria-label={`info about Toronto Pearson International Airport`}
                     className={classes.icon}>
                     <InfoIcon />
                   </IconButton>
@@ -419,7 +1894,11 @@ const Dashboard = ({ logout, fetchArrivals, fetchDepartures }) => {
     </div>
   );
 };
+const mapStateToProps = state => ({
+  arrivals: state.flightInfo.arrivals,
+  departures: state.flightInfo.departure
+});
 export default connect(
-  null,
+  mapStateToProps,
   { logout, fetchArrivals, fetchDepartures }
 )(Dashboard);

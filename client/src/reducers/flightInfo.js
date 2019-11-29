@@ -20,17 +20,19 @@ export default function(state = initialState, action) {
     case FETCH_ARRIVALS_FAIL:
       return {
         ...state,
-        error: payload
+        error: payload,
+        arrivals:[]
       };
     case FETCH_DEPARTURES_SUCCESS:
       return {
         ...state,
-        arrivals: payload
+        departure: payload
       };
     case FETCH_DEPARTURES_FAIL:
       return {
         ...state,
-        error: payload
+        error: payload,
+        departure:[]
       };
 
     default:

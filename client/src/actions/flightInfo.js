@@ -11,7 +11,6 @@ const base_url = 'https://covenworks.herokuapp.com';
 
 export const fetchArrivals = (airport, begin, end) => async dispatch => {
   const body = JSON.stringify({ airport, begin, end });
-  console.log(body);
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -24,7 +23,7 @@ export const fetchArrivals = (airport, begin, end) => async dispatch => {
       body,
       config
     );
-    console.log(response);
+    console.log(response.data);
     if (response.data.success) {
       dispatch({ type: FETCH_ARRIVALS_SUCCESS, payload: response.data });
     } else {
