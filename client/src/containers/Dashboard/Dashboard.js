@@ -1,23 +1,16 @@
 import React from 'react';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { makeStyles, useTheme, withStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import uuid from 'uuid/v4';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 // import TableFooter from '@material-ui/core/TableFooter';
-// import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import LastPageIcon from '@material-ui/icons/LastPage';
 import TableHead from '@material-ui/core/TableHead';
 import moment from 'moment';
-
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
@@ -30,8 +23,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Modal from '@material-ui/core/Modal';
 import { fetchArrivals, fetchDepartures } from '../../actions/flightInfo';
 import Container from '@material-ui/core/Container';
-// import Grid from '@material-ui/core/Grid';
-// import Paper from '@material-ui/core/Paper';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/auth';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -44,7 +35,6 @@ import ExitToApp from '@material-ui/icons/ExitToApp';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-// import ListSubheader from '@material-ui/core/ListSubheader';
 import InfoIcon from '@material-ui/icons/Info';
 
 const Copyright = () => {
@@ -68,79 +58,12 @@ const StyledTableCell = withStyles(theme => ({
     fontSize: 14
   }
 }))(TableCell);
-const useStyles1 = makeStyles(theme => ({
-  root: {
-    flexShrink: 0,
-    marginLeft: theme.spacing(2.5)
-  }
-}));
-
-function TablePaginationActions(props) {
-  const classes = useStyles1();
-  const theme = useTheme();
-  const { count, page, rowsPerPage, onChangePage } = props;
-
-  const handleFirstPageButtonClick = event => {
-    onChangePage(event, 0);
-  };
-
-  const handleBackButtonClick = event => {
-    onChangePage(event, page - 1);
-  };
-
-  const handleNextButtonClick = event => {
-    onChangePage(event, page + 1);
-  };
-
-  const handleLastPageButtonClick = event => {
-    onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-  };
-
-  return (
-    <div className={classes.root}>
-      <IconButton
-        onClick={handleFirstPageButtonClick}
-        disabled={page === 0}
-        aria-label='first page'>
-        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
-      </IconButton>
-      <IconButton
-        onClick={handleBackButtonClick}
-        disabled={page === 0}
-        aria-label='previous page'>
-        {theme.direction === 'rtl' ? (
-          <KeyboardArrowRight />
-        ) : (
-          <KeyboardArrowLeft />
-        )}
-      </IconButton>
-      <IconButton
-        onClick={handleNextButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label='next page'>
-        {theme.direction === 'rtl' ? (
-          <KeyboardArrowLeft />
-        ) : (
-          <KeyboardArrowRight />
-        )}
-      </IconButton>
-      <IconButton
-        onClick={handleLastPageButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label='last page'>
-        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
-      </IconButton>
-    </div>
-  );
-}
-
-TablePaginationActions.propTypes = {
-  count: PropTypes.number.isRequired,
-  onChangePage: PropTypes.func.isRequired,
-  page: PropTypes.number.isRequired,
-  rowsPerPage: PropTypes.number.isRequired
-};
-
+// const useStyles1 = makeStyles(theme => ({
+//   root: {
+//     flexShrink: 0,
+//     marginLeft: theme.spacing(2.5)
+//   }
+// }));
 const useStyles2 = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -310,14 +233,14 @@ const Dashboard = ({
     fetchArrivals(
       'KATL',
       moment()
-        .subtract(14, 'hours')
+        .subtract(12, 'hours')
         .unix(),
       moment().unix()
     );
     fetchDepartures(
       'KATL',
       moment()
-        .subtract(14, 'hours')
+        .subtract(12, 'hours')
         .unix(),
       moment().unix()
     );
@@ -330,14 +253,14 @@ const Dashboard = ({
     fetchArrivals(
       'KDEN',
       moment()
-        .subtract(14, 'hours')
+        .subtract(12, 'hours')
         .unix(),
       moment().unix()
     );
     fetchDepartures(
       'KDEN',
       moment()
-        .subtract(14, 'hours')
+        .subtract(12, 'hours')
         .unix(),
       moment().unix()
     );
@@ -350,14 +273,14 @@ const Dashboard = ({
     fetchArrivals(
       'OMDB',
       moment()
-        .subtract(14, 'hours')
+        .subtract(12, 'hours')
         .unix(),
       moment().unix()
     );
     fetchDepartures(
       'OMDB',
       moment()
-        .subtract(14, 'hours')
+        .subtract(12, 'hours')
         .unix(),
       moment().unix()
     );
@@ -371,14 +294,14 @@ const Dashboard = ({
     fetchArrivals(
       'KLAX',
       moment()
-        .subtract(14, 'hours')
+        .subtract(12, 'hours')
         .unix(),
       moment().unix()
     );
     fetchDepartures(
       'KLAX',
       moment()
-        .subtract(14, 'hours')
+        .subtract(12, 'hours')
         .unix(),
       moment().unix()
     );
@@ -391,14 +314,14 @@ const Dashboard = ({
     fetchArrivals(
       'RJTT',
       moment()
-        .subtract(14, 'hours')
+        .subtract(12, 'hours')
         .unix(),
       moment().unix()
     );
     fetchDepartures(
       'RJTT',
       moment()
-        .subtract(14, 'hours')
+        .subtract(12, 'hours')
         .unix(),
       moment().unix()
     );
@@ -411,14 +334,14 @@ const Dashboard = ({
     fetchArrivals(
       'EGLL',
       moment()
-        .subtract(14, 'hours')
+        .subtract(12, 'hours')
         .unix(),
       moment().unix()
     );
     fetchDepartures(
       'EGLL',
       moment()
-        .subtract(14, 'hours')
+        .subtract(12, 'hours')
         .unix(),
       moment().unix()
     );
@@ -431,14 +354,14 @@ const Dashboard = ({
     fetchArrivals(
       'KORD',
       moment()
-        .subtract(14, 'hours')
+        .subtract(12, 'hours')
         .unix(),
       moment().unix()
     );
     fetchDepartures(
       'KORD',
       moment()
-        .subtract(14, 'hours')
+        .subtract(12, 'hours')
         .unix(),
       moment().unix()
     );
@@ -451,14 +374,14 @@ const Dashboard = ({
     fetchArrivals(
       'VHHH',
       moment()
-        .subtract(14, 'hours')
+        .subtract(12, 'hours')
         .unix(),
       moment().unix()
     );
     fetchDepartures(
       'VHHH',
       moment()
-        .subtract(14, 'hours')
+        .subtract(12, 'hours')
         .unix(),
       moment().unix()
     );
@@ -471,14 +394,14 @@ const Dashboard = ({
     fetchArrivals(
       'EHAM',
       moment()
-        .subtract(14, 'hours')
+        .subtract(12, 'hours')
         .unix(),
       moment().unix()
     );
     fetchDepartures(
       'EHAM',
       moment()
-        .subtract(14, 'hours')
+        .subtract(12, 'hours')
         .unix(),
       moment().unix()
     );
@@ -491,14 +414,14 @@ const Dashboard = ({
     fetchArrivals(
       'CYYZ',
       moment()
-        .subtract(14, 'hours')
+        .subtract(12, 'hours')
         .unix(),
       moment().unix()
     );
     fetchDepartures(
       'CYYZ',
       moment()
-        .subtract(14, 'hours')
+        .subtract(12, 'hours')
         .unix(),
       moment().unix()
     );
@@ -619,7 +542,7 @@ const Dashboard = ({
                         </TableHead>
                         <TableBody>
                           {arrivals.length <= 0
-                            ? 'Please be patient while arrivals to Hartsfield-Jackson Atlanta International Airport within the last 14 hours are being fetched...'
+                            ? 'No records found'
                             : arrivals.data.map(row => (
                                 <TableRow key={uuid()}>
                                   <TableCell
@@ -669,7 +592,7 @@ const Dashboard = ({
                         </TableHead>
                         <TableBody>
                           {departures.length <= 0
-                            ? 'Please be patient while departures from Hartsfield-Jackson Atlanta International Airport within the last 14 hours are being fetched...'
+                            ? 'No records found'
                             : departures.data.map(row => (
                                 <TableRow key={uuid()}>
                                   <TableCell
@@ -748,7 +671,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {arrivals.length <= 0
-                          ? 'Please be patient while arrivals to Denver International Airport within the last 14 hours are being fetched...'
+                          ? 'No records found'
                           : arrivals.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -798,7 +721,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {departures.length <= 0
-                          ? 'Please be patient while departures from Denver International Airport within the last 14 hours are being fetched...'
+                          ? 'No records found'
                           : departures.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -876,7 +799,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {arrivals.length <= 0
-                          ? 'Please be patient while arrivals to Dubai International Airport within the last 14 hours are being fetched...'
+                          ? 'No records found'
                           : arrivals.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -926,7 +849,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {departures.length <= 0
-                          ? 'Please be patient while departures from Dubai International Airport within the last 14 hours are being fetched...'
+                          ? 'No records found'
                           : departures.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1004,7 +927,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {arrivals.length <= 0
-                          ? 'Please be patient while arrivals to Los Angeles International Airport within the last 14 hours are being fetched...'
+                          ? 'No records found'
                           : arrivals.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1054,7 +977,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {departures.length <= 0
-                          ? 'Please be patient while departures from Los Angeles International Airport within the last 14 hours are being fetched...'
+                          ? 'No records found'
                           : departures.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1132,7 +1055,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {arrivals.length <= 0
-                          ? 'Please be patient while arrivals to Tokyo Haneda Airport within the last 14 hours are being fetched...'
+                          ? 'No records found'
                           : arrivals.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1182,7 +1105,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {departures.length <= 0
-                          ? 'Please be patient while departures from Tokyo Haneda Airport within the last 14 hours are being fetched...'
+                          ? 'No records found'
                           : departures.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1260,7 +1183,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {arrivals.length <= 0
-                          ? 'Please be patient while arrivals to Heathrow Airport within the last 14 hours are being fetched...'
+                          ? 'No records found'
                           : arrivals.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1310,7 +1233,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {departures.length <= 0
-                          ? 'Please be patient while departures from Heathrow Airport within the last 14 hours are being fetched...'
+                          ? 'No records found'
                           : departures.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1388,7 +1311,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {arrivals.length <= 0
-                          ? 'Please be patient while arrivals to O Hare International Airport within the last 14 hours are being fetched...'
+                          ? 'No records found'
                           : arrivals.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1438,7 +1361,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {departures.length <= 0
-                          ? 'Please be patient while departures from O Hare International Airport within the last 14 hours are being fetched...'
+                          ? 'No records found'
                           : departures.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1516,7 +1439,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {arrivals.length <= 0
-                          ? 'Please be patient while arrivals to Hong Kong International Airport within the last 14 hours are being fetched...'
+                          ? 'No records found'
                           : arrivals.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1566,7 +1489,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {departures.length <= 0
-                          ? 'Please be patient while departures from Hong Kong International Airport within the last 14 hours are being fetched...'
+                          ? 'No records found'
                           : departures.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1644,7 +1567,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {arrivals.length <= 0
-                          ? 'Please be patient while arrivals to Amsterdam Airport Schiphol within the last 14 hours are being fetched...'
+                          ? 'No records found'
                           : arrivals.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1694,7 +1617,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {departures.length <= 0
-                          ? 'Please be patient while departures from Amsterdam Airport Schiphol within the last 14 hours are being fetched...'
+                          ? 'No records found'
                           : departures.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1772,7 +1695,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {arrivals.length <= 0
-                          ? 'Please be patient while arrivals to Toronto Pearson International Airport within the last 14 hours are being fetched...'
+                          ? 'No records found'
                           : arrivals.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell
@@ -1822,7 +1745,7 @@ const Dashboard = ({
                       </TableHead>
                       <TableBody>
                         {departures.length <= 0
-                          ? 'Please be patient while departures from Toronto Pearson International Airport within the last 14 hours are being fetched...'
+                          ? 'No records found'
                           : departures.data.map(row => (
                               <TableRow key={uuid()}>
                                 <TableCell

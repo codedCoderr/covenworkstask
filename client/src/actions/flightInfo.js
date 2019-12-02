@@ -23,6 +23,7 @@ export const fetchArrivals = (airport, begin, end) => async dispatch => {
       body,
       config
     );
+
     if (response.data.success) {
       dispatch({ type: FETCH_ARRIVALS_SUCCESS, payload: response.data });
     } else {
@@ -46,7 +47,6 @@ export const fetchDepartures = (airport, begin, end) => async dispatch => {
       body,
       config
     );
-    console.log(response.data)
     if (response.data.success) {
       dispatch({ type: FETCH_DEPARTURES_SUCCESS, payload: response.data });
     } else {
