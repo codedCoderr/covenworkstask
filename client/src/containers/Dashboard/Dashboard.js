@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -203,7 +203,8 @@ const Dashboard = ({
   arrivals,
   departures,
   fetchArrivals,
-  fetchDepartures,loading
+  fetchDepartures,
+  loading
 }) => {
   const [formData, setFormData] = useState({
     begin1: '',
@@ -253,7 +254,6 @@ const Dashboard = ({
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const classes2 = useStyles2();
@@ -279,18 +279,23 @@ const Dashboard = ({
     setOpenModal1(true);
   };
   const handleModalClose1 = () => {
+    window.location.reload();
     setOpenModal1(false);
   };
   const handleModalOpen2 = () => {
     setOpenModal2(true);
   };
   const handleModalClose2 = () => {
+    window.location.reload();
+
     setOpenModal2(false);
   };
   const handleModalOpen3 = () => {
     setOpenModal3(true);
   };
   const handleModalClose3 = () => {
+    window.location.reload();
+
     setOpenModal3(false);
   };
 
@@ -298,42 +303,49 @@ const Dashboard = ({
     setOpenModal4(true);
   };
   const handleModalClose4 = () => {
+    window.location.reload();
     setOpenModal4(false);
   };
   const handleModalOpen5 = () => {
     setOpenModal5(true);
   };
   const handleModalClose5 = () => {
+    window.location.reload();
     setOpenModal5(false);
   };
   const handleModalOpen6 = () => {
     setOpenModal6(true);
   };
   const handleModalClose6 = () => {
+    window.location.reload();
     setOpenModal6(false);
   };
   const handleModalOpen7 = () => {
     setOpenModal7(true);
   };
   const handleModalClose7 = () => {
+    window.location.reload();
     setOpenModal7(false);
   };
   const handleModalOpen8 = () => {
     setOpenModal8(true);
   };
   const handleModalClose8 = () => {
+    window.location.reload();
     setOpenModal8(false);
   };
   const handleModalOpen9 = () => {
     setOpenModal9(true);
   };
   const handleModalClose9 = () => {
+    window.location.reload();
     setOpenModal9(false);
   };
   const handleModalOpen10 = () => {
     setOpenModal10(true);
   };
   const handleModalClose10 = () => {
+    window.location.reload();
     setOpenModal10(false);
   };
 
@@ -2204,7 +2216,7 @@ const Dashboard = ({
 const mapStateToProps = state => ({
   arrivals: state.flightInfo.arrivals,
   departures: state.flightInfo.departure,
-  loading:state.flightInfo.loading
+  loading: state.flightInfo.loading
 });
 export default connect(
   mapStateToProps,
