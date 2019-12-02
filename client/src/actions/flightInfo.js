@@ -2,7 +2,8 @@ import {
   FETCH_DEPARTURES_SUCCESS,
   FETCH_DEPARTURES_FAIL,
   FETCH_ARRIVALS_SUCCESS,
-  FETCH_ARRIVALS_FAIL
+  FETCH_ARRIVALS_FAIL,
+  LOADING
 } from './types';
 
 import axios from 'axios';
@@ -11,6 +12,8 @@ const base_url = 'https://covenworks.herokuapp.com';
 
 export const fetchArrivals = (airport, begin, end) => async dispatch => {
   const body = JSON.stringify({ airport, begin, end });
+    dispatch({ type: LOADING });
+
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -35,6 +38,8 @@ export const fetchArrivals = (airport, begin, end) => async dispatch => {
 };
 export const fetchDepartures = (airport, begin, end) => async dispatch => {
   const body = JSON.stringify({ airport, begin, end });
+    dispatch({ type: LOADING });
+
   const config = {
     headers: {
       'Content-Type': 'application/json',

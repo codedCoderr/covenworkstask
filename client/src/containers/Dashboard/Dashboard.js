@@ -60,12 +60,7 @@ const StyledTableCell = withStyles(theme => ({
     fontSize: 14
   }
 }))(TableCell);
-// const useStyles1 = makeStyles(theme => ({
-//   root: {
-//     flexShrink: 0,
-//     marginLeft: theme.spacing(2.5)
-//   }
-// }));
+
 const useStyles2 = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -81,9 +76,6 @@ const useStyles2 = makeStyles(theme => ({
   }
 }));
 
-// const rand = () => {
-//   return Math.round(Math.random() * 20) - 10;
-// };
 const getModalStyle = () => {
   const top = 50;
   const left = 50;
@@ -211,14 +203,13 @@ const Dashboard = ({
   arrivals,
   departures,
   fetchArrivals,
-  fetchDepartures
+  fetchDepartures,loading
 }) => {
-  const [formData,setFormData]=React.useState({begin:'',end:''})
-  const {begin,end}=formData;
-   const onChange = e => {
-     setFormData({ ...formData, [e.target.name]: e.target.value });
-     console.log(formData);
-   };
+  const [formData, setFormData] = React.useState({ begin: '', end: '' });
+  const { begin, end } = formData;
+  const onChange = e => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
   const classes2 = useStyles2();
@@ -239,24 +230,21 @@ const Dashboard = ({
   const handleDrawerClose = () => {
     setOpen(false);
   };
-// console.log(moment(begin).format('x'));
+
   const handleModalOpen1 = () => {
     setOpenModal1(true);
-    
   };
   const handleModalClose1 = () => {
     setOpenModal1(false);
   };
   const handleModalOpen2 = () => {
     setOpenModal2(true);
-    
   };
   const handleModalClose2 = () => {
     setOpenModal2(false);
   };
   const handleModalOpen3 = () => {
     setOpenModal3(true);
-    
   };
   const handleModalClose3 = () => {
     setOpenModal3(false);
@@ -264,42 +252,36 @@ const Dashboard = ({
 
   const handleModalOpen4 = () => {
     setOpenModal4(true);
-    
   };
   const handleModalClose4 = () => {
     setOpenModal4(false);
   };
   const handleModalOpen5 = () => {
     setOpenModal5(true);
-    
   };
   const handleModalClose5 = () => {
     setOpenModal5(false);
   };
   const handleModalOpen6 = () => {
     setOpenModal6(true);
-    
   };
   const handleModalClose6 = () => {
     setOpenModal6(false);
   };
   const handleModalOpen7 = () => {
     setOpenModal7(true);
-    
   };
   const handleModalClose7 = () => {
     setOpenModal7(false);
   };
   const handleModalOpen8 = () => {
     setOpenModal8(true);
-    
   };
   const handleModalClose8 = () => {
     setOpenModal8(false);
   };
   const handleModalOpen9 = () => {
     setOpenModal9(true);
-    
   };
   const handleModalClose9 = () => {
     setOpenModal9(false);
@@ -413,7 +395,6 @@ const Dashboard = ({
                           onChange={e => onChange(e)}
                           label='Begin'
                           type='datetime-local'
-                          // defaultValue='2019-01-29T12:00'
                           className={classes.textField}
                           InputLabelProps={{
                             shrink: true
@@ -426,7 +407,6 @@ const Dashboard = ({
                           onChange={e => onChange(e)}
                           label='End'
                           type='datetime-local'
-                          // defaultValue='2019-01-29T13:00'
                           className={classes.textField}
                           InputLabelProps={{
                             shrink: true
@@ -449,7 +429,7 @@ const Dashboard = ({
                           }}
                           variant='contained'
                           className={classes.submit}>
-                          Search
+                          {!loading ? 'Search' : 'Searching'}
                         </Button>
                       </form>
 
@@ -594,7 +574,6 @@ const Dashboard = ({
                         onChange={e => onChange(e)}
                         label='Begin'
                         type='datetime-local'
-                        // defaultValue='2019-01-29T12:00'
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true
@@ -607,7 +586,6 @@ const Dashboard = ({
                         onChange={e => onChange(e)}
                         label='End'
                         type='datetime-local'
-                        // defaultValue='2019-01-29T13:00'
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true
@@ -630,7 +608,7 @@ const Dashboard = ({
                         }}
                         variant='contained'
                         className={classes.submit}>
-                        Search
+                        {!loading ? 'Search' : 'Searching'}
                       </Button>
                     </form>
                     <Table
@@ -774,7 +752,6 @@ const Dashboard = ({
                         onChange={e => onChange(e)}
                         label='Begin'
                         type='datetime-local'
-                        // defaultValue='2019-01-29T12:00'
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true
@@ -787,7 +764,6 @@ const Dashboard = ({
                         onChange={e => onChange(e)}
                         label='End'
                         type='datetime-local'
-                        // defaultValue='2019-01-29T13:00'
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true
@@ -810,7 +786,7 @@ const Dashboard = ({
                         }}
                         variant='contained'
                         className={classes.submit}>
-                        Search
+                        {!loading ? 'Search' : 'Searching'}
                       </Button>
                     </form>
                     <Table
@@ -953,7 +929,6 @@ const Dashboard = ({
                         onChange={e => onChange(e)}
                         label='Begin'
                         type='datetime-local'
-                        // defaultValue='2019-01-29T12:00'
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true
@@ -966,7 +941,6 @@ const Dashboard = ({
                         onChange={e => onChange(e)}
                         label='End'
                         type='datetime-local'
-                        // defaultValue='2019-01-29T13:00'
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true
@@ -989,7 +963,7 @@ const Dashboard = ({
                         }}
                         variant='contained'
                         className={classes.submit}>
-                        Search
+                        {!loading ? 'Search' : 'Searching'}
                       </Button>
                     </form>
                     <Table
@@ -1132,7 +1106,6 @@ const Dashboard = ({
                         onChange={e => onChange(e)}
                         label='Begin'
                         type='datetime-local'
-                        // defaultValue='2019-01-29T12:00'
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true
@@ -1145,7 +1118,6 @@ const Dashboard = ({
                         onChange={e => onChange(e)}
                         label='End'
                         type='datetime-local'
-                        // defaultValue='2019-01-29T13:00'
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true
@@ -1168,7 +1140,7 @@ const Dashboard = ({
                         }}
                         variant='contained'
                         className={classes.submit}>
-                        Search
+                        {!loading ? 'Search' : 'Searching'}
                       </Button>
                     </form>
                     <Table
@@ -1311,7 +1283,6 @@ const Dashboard = ({
                         onChange={e => onChange(e)}
                         label='Begin'
                         type='datetime-local'
-                        // defaultValue='2019-01-29T12:00'
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true
@@ -1324,7 +1295,6 @@ const Dashboard = ({
                         onChange={e => onChange(e)}
                         label='End'
                         type='datetime-local'
-                        // defaultValue='2019-01-29T13:00'
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true
@@ -1347,7 +1317,7 @@ const Dashboard = ({
                         }}
                         variant='contained'
                         className={classes.submit}>
-                        Search
+                        {!loading ? 'Search' : 'Searching'}
                       </Button>
                     </form>
                     <Table
@@ -1490,7 +1460,6 @@ const Dashboard = ({
                         onChange={e => onChange(e)}
                         label='Begin'
                         type='datetime-local'
-                        // defaultValue='2019-01-29T12:00'
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true
@@ -1503,7 +1472,6 @@ const Dashboard = ({
                         onChange={e => onChange(e)}
                         label='End'
                         type='datetime-local'
-                        // defaultValue='2019-01-29T13:00'
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true
@@ -1526,7 +1494,7 @@ const Dashboard = ({
                         }}
                         variant='contained'
                         className={classes.submit}>
-                        Search
+                        {!loading ? 'Search' : 'Searching'}
                       </Button>
                     </form>
                     <Table
@@ -1669,7 +1637,6 @@ const Dashboard = ({
                         onChange={e => onChange(e)}
                         label='Begin'
                         type='datetime-local'
-                        // defaultValue='2019-01-29T12:00'
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true
@@ -1682,7 +1649,6 @@ const Dashboard = ({
                         onChange={e => onChange(e)}
                         label='End'
                         type='datetime-local'
-                        // defaultValue='2019-01-29T13:00'
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true
@@ -1705,7 +1671,7 @@ const Dashboard = ({
                         }}
                         variant='contained'
                         className={classes.submit}>
-                        Search
+                        {!loading ? 'Search' : 'Searching'}
                       </Button>
                     </form>
                     <Table
@@ -1848,7 +1814,6 @@ const Dashboard = ({
                         onChange={e => onChange(e)}
                         label='Begin'
                         type='datetime-local'
-                        // defaultValue='2019-01-29T12:00'
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true
@@ -1861,7 +1826,6 @@ const Dashboard = ({
                         onChange={e => onChange(e)}
                         label='End'
                         type='datetime-local'
-                        // defaultValue='2019-01-29T13:00'
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true
@@ -1884,7 +1848,7 @@ const Dashboard = ({
                         }}
                         variant='contained'
                         className={classes.submit}>
-                        Search
+                        {!loading ? 'Search' : 'Searching'}
                       </Button>
                     </form>
                     <Table
@@ -2027,7 +1991,6 @@ const Dashboard = ({
                         onChange={e => onChange(e)}
                         label='Begin'
                         type='datetime-local'
-                        // defaultValue='2019-01-29T12:00'
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true
@@ -2040,7 +2003,6 @@ const Dashboard = ({
                         onChange={e => onChange(e)}
                         label='End'
                         type='datetime-local'
-                        // defaultValue='2019-01-29T13:00'
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true
@@ -2063,7 +2025,7 @@ const Dashboard = ({
                         }}
                         variant='contained'
                         className={classes.submit}>
-                        Search
+                        {!loading ? 'Search' : 'Searching'}
                       </Button>
                     </form>
                     <Table
@@ -2195,7 +2157,8 @@ const Dashboard = ({
 };
 const mapStateToProps = state => ({
   arrivals: state.flightInfo.arrivals,
-  departures: state.flightInfo.departure
+  departures: state.flightInfo.departure,
+  loading:state.flightInfo.loading
 });
 export default connect(
   mapStateToProps,
