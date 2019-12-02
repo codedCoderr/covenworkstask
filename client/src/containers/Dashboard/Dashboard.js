@@ -3,10 +3,12 @@ import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
+import Button from '@material-ui/core/Button';
+
 import uuid from 'uuid/v4';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-// import TableFooter from '@material-ui/core/TableFooter';
+import TextField from '@material-ui/core/TextField';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TableHead from '@material-ui/core/TableHead';
@@ -196,6 +198,11 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3)
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200
   }
 }));
 
@@ -206,10 +213,15 @@ const Dashboard = ({
   fetchArrivals,
   fetchDepartures
 }) => {
+  const [formData,setFormData]=React.useState({begin:'',end:''})
+  const {begin,end}=formData;
+   const onChange = e => {
+     setFormData({ ...formData, [e.target.name]: e.target.value });
+     console.log(formData);
+   };
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
   const classes2 = useStyles2();
-
   const [open, setOpen] = React.useState(false);
   const [openModal1, setOpenModal1] = React.useState(false);
   const [openModal2, setOpenModal2] = React.useState(false);
@@ -227,63 +239,24 @@ const Dashboard = ({
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
+// console.log(moment(begin).format('x'));
   const handleModalOpen1 = () => {
     setOpenModal1(true);
-    fetchArrivals(
-      'KATL',
-      moment()
-        .subtract(12, 'hours')
-        .unix(),
-      moment().unix()
-    );
-    fetchDepartures(
-      'KATL',
-      moment()
-        .subtract(12, 'hours')
-        .unix(),
-      moment().unix()
-    );
+    
   };
   const handleModalClose1 = () => {
     setOpenModal1(false);
   };
   const handleModalOpen2 = () => {
     setOpenModal2(true);
-    fetchArrivals(
-      'KDEN',
-      moment()
-        .subtract(12, 'hours')
-        .unix(),
-      moment().unix()
-    );
-    fetchDepartures(
-      'KDEN',
-      moment()
-        .subtract(12, 'hours')
-        .unix(),
-      moment().unix()
-    );
+    
   };
   const handleModalClose2 = () => {
     setOpenModal2(false);
   };
   const handleModalOpen3 = () => {
     setOpenModal3(true);
-    fetchArrivals(
-      'OMDB',
-      moment()
-        .subtract(12, 'hours')
-        .unix(),
-      moment().unix()
-    );
-    fetchDepartures(
-      'OMDB',
-      moment()
-        .subtract(12, 'hours')
-        .unix(),
-      moment().unix()
-    );
+    
   };
   const handleModalClose3 = () => {
     setOpenModal3(false);
@@ -291,140 +264,48 @@ const Dashboard = ({
 
   const handleModalOpen4 = () => {
     setOpenModal4(true);
-    fetchArrivals(
-      'KLAX',
-      moment()
-        .subtract(12, 'hours')
-        .unix(),
-      moment().unix()
-    );
-    fetchDepartures(
-      'KLAX',
-      moment()
-        .subtract(12, 'hours')
-        .unix(),
-      moment().unix()
-    );
+    
   };
   const handleModalClose4 = () => {
     setOpenModal4(false);
   };
   const handleModalOpen5 = () => {
     setOpenModal5(true);
-    fetchArrivals(
-      'RJTT',
-      moment()
-        .subtract(12, 'hours')
-        .unix(),
-      moment().unix()
-    );
-    fetchDepartures(
-      'RJTT',
-      moment()
-        .subtract(12, 'hours')
-        .unix(),
-      moment().unix()
-    );
+    
   };
   const handleModalClose5 = () => {
     setOpenModal5(false);
   };
   const handleModalOpen6 = () => {
     setOpenModal6(true);
-    fetchArrivals(
-      'EGLL',
-      moment()
-        .subtract(12, 'hours')
-        .unix(),
-      moment().unix()
-    );
-    fetchDepartures(
-      'EGLL',
-      moment()
-        .subtract(12, 'hours')
-        .unix(),
-      moment().unix()
-    );
+    
   };
   const handleModalClose6 = () => {
     setOpenModal6(false);
   };
   const handleModalOpen7 = () => {
     setOpenModal7(true);
-    fetchArrivals(
-      'KORD',
-      moment()
-        .subtract(12, 'hours')
-        .unix(),
-      moment().unix()
-    );
-    fetchDepartures(
-      'KORD',
-      moment()
-        .subtract(12, 'hours')
-        .unix(),
-      moment().unix()
-    );
+    
   };
   const handleModalClose7 = () => {
     setOpenModal7(false);
   };
   const handleModalOpen8 = () => {
     setOpenModal8(true);
-    fetchArrivals(
-      'VHHH',
-      moment()
-        .subtract(12, 'hours')
-        .unix(),
-      moment().unix()
-    );
-    fetchDepartures(
-      'VHHH',
-      moment()
-        .subtract(12, 'hours')
-        .unix(),
-      moment().unix()
-    );
+    
   };
   const handleModalClose8 = () => {
     setOpenModal8(false);
   };
   const handleModalOpen9 = () => {
     setOpenModal9(true);
-    fetchArrivals(
-      'EHAM',
-      moment()
-        .subtract(12, 'hours')
-        .unix(),
-      moment().unix()
-    );
-    fetchDepartures(
-      'EHAM',
-      moment()
-        .subtract(12, 'hours')
-        .unix(),
-      moment().unix()
-    );
+    
   };
   const handleModalClose9 = () => {
     setOpenModal9(false);
   };
   const handleModalOpen10 = () => {
     setOpenModal10(true);
-    fetchArrivals(
-      'CYYZ',
-      moment()
-        .subtract(12, 'hours')
-        .unix(),
-      moment().unix()
-    );
-    fetchDepartures(
-      'CYYZ',
-      moment()
-        .subtract(12, 'hours')
-        .unix(),
-      moment().unix()
-    );
   };
   const handleModalClose10 = () => {
     setOpenModal10(false);
@@ -520,6 +401,58 @@ const Dashboard = ({
                   <h2>Hartsfield–Jackson Atlanta International Airport</h2>
                   <Paper className={classes2.root}>
                     <div className={classes2.tableWrapper}>
+                      <h6>
+                        Choose a range to search from. Test date is 29 Jan 2018,
+                        12noon - 29 Jan 2018, 1pm
+                      </h6>
+                      <form className={classes.container} noValidate>
+                        <TextField
+                          name='begin'
+                          value={begin}
+                          id='begin'
+                          onChange={e => onChange(e)}
+                          label='Begin'
+                          type='datetime-local'
+                          // defaultValue='2019-01-29T12:00'
+                          className={classes.textField}
+                          InputLabelProps={{
+                            shrink: true
+                          }}
+                        />
+                        <TextField
+                          name='end'
+                          value={end}
+                          id='end'
+                          onChange={e => onChange(e)}
+                          label='End'
+                          type='datetime-local'
+                          // defaultValue='2019-01-29T13:00'
+                          className={classes.textField}
+                          InputLabelProps={{
+                            shrink: true
+                          }}
+                        />
+                        <Button
+                          type='submit'
+                          onClick={e => {
+                            e.preventDefault();
+                            fetchArrivals(
+                              'KATL',
+                              moment(begin).format('X'),
+                              moment(end).format('X')
+                            );
+                            fetchDepartures(
+                              'KATL',
+                              moment(begin).format('X'),
+                              moment(end).format('X')
+                            );
+                          }}
+                          variant='contained'
+                          className={classes.submit}>
+                          Search
+                        </Button>
+                      </form>
+
                       <Table
                         stickyHeader
                         className={classes2.table}
@@ -649,6 +582,57 @@ const Dashboard = ({
                 <div style={modalStyle} className={classes.paper2}>
                   <h2>Denver International Airport</h2>
                   <div className={classes2.tableWrapper}>
+                    <h6>
+                      Choose a range to search from. Test date is 29 Jan 2018,
+                      12noon - 29 Jan 2018, 1pm
+                    </h6>
+                    <form className={classes.container} noValidate>
+                      <TextField
+                        name='begin'
+                        value={begin}
+                        id='begin'
+                        onChange={e => onChange(e)}
+                        label='Begin'
+                        type='datetime-local'
+                        // defaultValue='2019-01-29T12:00'
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                      />
+                      <TextField
+                        name='end'
+                        value={end}
+                        id='end'
+                        onChange={e => onChange(e)}
+                        label='End'
+                        type='datetime-local'
+                        // defaultValue='2019-01-29T13:00'
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                      />
+                      <Button
+                        type='submit'
+                        onClick={e => {
+                          e.preventDefault();
+                          fetchArrivals(
+                            'KDEN',
+                            moment(begin).format('X'),
+                            moment(end).format('X')
+                          );
+                          fetchDepartures(
+                            'KDEN',
+                            moment(begin).format('X'),
+                            moment(end).format('X')
+                          );
+                        }}
+                        variant='contained'
+                        className={classes.submit}>
+                        Search
+                      </Button>
+                    </form>
                     <Table
                       stickyHeader
                       className={classes2.table}
@@ -776,7 +760,59 @@ const Dashboard = ({
                 onClose={handleModalClose3}>
                 <div style={modalStyle} className={classes.paper2}>
                   <h2>Dubai International Airport</h2>
+
                   <div className={classes2.tableWrapper}>
+                    <h6>
+                      Choose a range to search from. Test date is 29 Jan 2018,
+                      12noon - 29 Jan 2018, 1pm
+                    </h6>
+                    <form className={classes.container} noValidate>
+                      <TextField
+                        name='begin'
+                        value={begin}
+                        id='begin'
+                        onChange={e => onChange(e)}
+                        label='Begin'
+                        type='datetime-local'
+                        // defaultValue='2019-01-29T12:00'
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                      />
+                      <TextField
+                        name='end'
+                        value={end}
+                        id='end'
+                        onChange={e => onChange(e)}
+                        label='End'
+                        type='datetime-local'
+                        // defaultValue='2019-01-29T13:00'
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                      />
+                      <Button
+                        type='submit'
+                        onClick={e => {
+                          e.preventDefault();
+                          fetchArrivals(
+                            'OMDB',
+                            moment(begin).format('X'),
+                            moment(end).format('X')
+                          );
+                          fetchDepartures(
+                            'OMDB',
+                            moment(begin).format('X'),
+                            moment(end).format('X')
+                          );
+                        }}
+                        variant='contained'
+                        className={classes.submit}>
+                        Search
+                      </Button>
+                    </form>
                     <Table
                       stickyHeader
                       className={classes2.table}
@@ -905,6 +941,57 @@ const Dashboard = ({
                 <div style={modalStyle} className={classes.paper2}>
                   <h2>Los Angeles International Airport</h2>
                   <div className={classes2.tableWrapper}>
+                    <h6>
+                      Choose a range to search from. Test date is 29 Jan 2018,
+                      12noon - 29 Jan 2018, 1pm
+                    </h6>
+                    <form className={classes.container} noValidate>
+                      <TextField
+                        name='begin'
+                        value={begin}
+                        id='begin'
+                        onChange={e => onChange(e)}
+                        label='Begin'
+                        type='datetime-local'
+                        // defaultValue='2019-01-29T12:00'
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                      />
+                      <TextField
+                        name='end'
+                        value={end}
+                        id='end'
+                        onChange={e => onChange(e)}
+                        label='End'
+                        type='datetime-local'
+                        // defaultValue='2019-01-29T13:00'
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                      />
+                      <Button
+                        type='submit'
+                        onClick={e => {
+                          e.preventDefault();
+                          fetchArrivals(
+                            'KLAX',
+                            moment(begin).format('X'),
+                            moment(end).format('X')
+                          );
+                          fetchDepartures(
+                            'KLAX',
+                            moment(begin).format('X'),
+                            moment(end).format('X')
+                          );
+                        }}
+                        variant='contained'
+                        className={classes.submit}>
+                        Search
+                      </Button>
+                    </form>
                     <Table
                       stickyHeader
                       className={classes2.table}
@@ -1033,6 +1120,57 @@ const Dashboard = ({
                 <div style={modalStyle} className={classes.paper2}>
                   <h2>Tokyo Haneda Airport</h2>
                   <div className={classes2.tableWrapper}>
+                    <h6>
+                      Choose a range to search from. Test date is 29 Jan 2018,
+                      12noon - 29 Jan 2018, 1pm
+                    </h6>
+                    <form className={classes.container} noValidate>
+                      <TextField
+                        name='begin'
+                        value={begin}
+                        id='begin'
+                        onChange={e => onChange(e)}
+                        label='Begin'
+                        type='datetime-local'
+                        // defaultValue='2019-01-29T12:00'
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                      />
+                      <TextField
+                        name='end'
+                        value={end}
+                        id='end'
+                        onChange={e => onChange(e)}
+                        label='End'
+                        type='datetime-local'
+                        // defaultValue='2019-01-29T13:00'
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                      />
+                      <Button
+                        type='submit'
+                        onClick={e => {
+                          e.preventDefault();
+                          fetchArrivals(
+                            'RJTT',
+                            moment(begin).format('X'),
+                            moment(end).format('X')
+                          );
+                          fetchDepartures(
+                            'RJTT',
+                            moment(begin).format('X'),
+                            moment(end).format('X')
+                          );
+                        }}
+                        variant='contained'
+                        className={classes.submit}>
+                        Search
+                      </Button>
+                    </form>
                     <Table
                       stickyHeader
                       className={classes2.table}
@@ -1161,6 +1299,57 @@ const Dashboard = ({
                 <div style={modalStyle} className={classes.paper2}>
                   <h2>Heathrow Airport</h2>
                   <div className={classes2.tableWrapper}>
+                    <h6>
+                      Choose a range to search from. Test date is 29 Jan 2018,
+                      12noon - 29 Jan 2018, 1pm
+                    </h6>
+                    <form className={classes.container} noValidate>
+                      <TextField
+                        name='begin'
+                        value={begin}
+                        id='begin'
+                        onChange={e => onChange(e)}
+                        label='Begin'
+                        type='datetime-local'
+                        // defaultValue='2019-01-29T12:00'
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                      />
+                      <TextField
+                        name='end'
+                        value={end}
+                        id='end'
+                        onChange={e => onChange(e)}
+                        label='End'
+                        type='datetime-local'
+                        // defaultValue='2019-01-29T13:00'
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                      />
+                      <Button
+                        type='submit'
+                        onClick={e => {
+                          e.preventDefault();
+                          fetchArrivals(
+                            'EGLL',
+                            moment(begin).format('X'),
+                            moment(end).format('X')
+                          );
+                          fetchDepartures(
+                            'EGLL',
+                            moment(begin).format('X'),
+                            moment(end).format('X')
+                          );
+                        }}
+                        variant='contained'
+                        className={classes.submit}>
+                        Search
+                      </Button>
+                    </form>
                     <Table
                       stickyHeader
                       className={classes2.table}
@@ -1289,6 +1478,57 @@ const Dashboard = ({
                 <div style={modalStyle} className={classes.paper2}>
                   <h2>O Hare International Airport</h2>
                   <div className={classes2.tableWrapper}>
+                    <h6>
+                      Choose a range to search from. Test date is 29 Jan 2018,
+                      12noon - 29 Jan 2018, 1pm
+                    </h6>
+                    <form className={classes.container} noValidate>
+                      <TextField
+                        name='begin'
+                        value={begin}
+                        id='begin'
+                        onChange={e => onChange(e)}
+                        label='Begin'
+                        type='datetime-local'
+                        // defaultValue='2019-01-29T12:00'
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                      />
+                      <TextField
+                        name='end'
+                        value={end}
+                        id='end'
+                        onChange={e => onChange(e)}
+                        label='End'
+                        type='datetime-local'
+                        // defaultValue='2019-01-29T13:00'
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                      />
+                      <Button
+                        type='submit'
+                        onClick={e => {
+                          e.preventDefault();
+                          fetchArrivals(
+                            'KORD',
+                            moment(begin).format('X'),
+                            moment(end).format('X')
+                          );
+                          fetchDepartures(
+                            'KORD',
+                            moment(begin).format('X'),
+                            moment(end).format('X')
+                          );
+                        }}
+                        variant='contained'
+                        className={classes.submit}>
+                        Search
+                      </Button>
+                    </form>
                     <Table
                       stickyHeader
                       className={classes2.table}
@@ -1417,6 +1657,57 @@ const Dashboard = ({
                 <div style={modalStyle} className={classes.paper2}>
                   <h2>Hong Kong International Airport</h2>
                   <div className={classes2.tableWrapper}>
+                    <h6>
+                      Choose a range to search from. Test date is 29 Jan 2018,
+                      12noon - 29 Jan 2018, 1pm
+                    </h6>
+                    <form className={classes.container} noValidate>
+                      <TextField
+                        name='begin'
+                        value={begin}
+                        id='begin'
+                        onChange={e => onChange(e)}
+                        label='Begin'
+                        type='datetime-local'
+                        // defaultValue='2019-01-29T12:00'
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                      />
+                      <TextField
+                        name='end'
+                        value={end}
+                        id='end'
+                        onChange={e => onChange(e)}
+                        label='End'
+                        type='datetime-local'
+                        // defaultValue='2019-01-29T13:00'
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                      />
+                      <Button
+                        type='submit'
+                        onClick={e => {
+                          e.preventDefault();
+                          fetchArrivals(
+                            'VHHH',
+                            moment(begin).format('X'),
+                            moment(end).format('X')
+                          );
+                          fetchDepartures(
+                            'VHHH',
+                            moment(begin).format('X'),
+                            moment(end).format('X')
+                          );
+                        }}
+                        variant='contained'
+                        className={classes.submit}>
+                        Search
+                      </Button>
+                    </form>
                     <Table
                       stickyHeader
                       className={classes2.table}
@@ -1545,6 +1836,57 @@ const Dashboard = ({
                 <div style={modalStyle} className={classes.paper2}>
                   <h2>Amsterdam Airport Schiphol</h2>
                   <div className={classes2.tableWrapper}>
+                    <h6>
+                      Choose a range to search from. Test date is 29 Jan 2018,
+                      12noon - 29 Jan 2018, 1pm
+                    </h6>
+                    <form className={classes.container} noValidate>
+                      <TextField
+                        name='begin'
+                        value={begin}
+                        id='begin'
+                        onChange={e => onChange(e)}
+                        label='Begin'
+                        type='datetime-local'
+                        // defaultValue='2019-01-29T12:00'
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                      />
+                      <TextField
+                        name='end'
+                        value={end}
+                        id='end'
+                        onChange={e => onChange(e)}
+                        label='End'
+                        type='datetime-local'
+                        // defaultValue='2019-01-29T13:00'
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                      />
+                      <Button
+                        type='submit'
+                        onClick={e => {
+                          e.preventDefault();
+                          fetchArrivals(
+                            'EHAM',
+                            moment(begin).format('X'),
+                            moment(end).format('X')
+                          );
+                          fetchDepartures(
+                            'EHAM',
+                            moment(begin).format('X'),
+                            moment(end).format('X')
+                          );
+                        }}
+                        variant='contained'
+                        className={classes.submit}>
+                        Search
+                      </Button>
+                    </form>
                     <Table
                       stickyHeader
                       className={classes2.table}
@@ -1673,6 +2015,57 @@ const Dashboard = ({
                 <div style={modalStyle} className={classes.paper2}>
                   <h2>Toronto Pearson International Airport</h2>
                   <div className={classes2.tableWrapper}>
+                    <h6>
+                      Choose a range to search from. Test date is 29 Jan 2018,
+                      12noon - 29 Jan 2018, 1pm
+                    </h6>
+                    <form className={classes.container} noValidate>
+                      <TextField
+                        name='begin'
+                        value={begin}
+                        id='begin'
+                        onChange={e => onChange(e)}
+                        label='Begin'
+                        type='datetime-local'
+                        // defaultValue='2019-01-29T12:00'
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                      />
+                      <TextField
+                        name='end'
+                        value={end}
+                        id='end'
+                        onChange={e => onChange(e)}
+                        label='End'
+                        type='datetime-local'
+                        // defaultValue='2019-01-29T13:00'
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true
+                        }}
+                      />
+                      <Button
+                        type='submit'
+                        onClick={e => {
+                          e.preventDefault();
+                          fetchArrivals(
+                            'CYYZ',
+                            moment(begin).format('X'),
+                            moment(end).format('X')
+                          );
+                          fetchDepartures(
+                            'CYZZ',
+                            moment(begin).format('X'),
+                            moment(end).format('X')
+                          );
+                        }}
+                        variant='contained'
+                        className={classes.submit}>
+                        Search
+                      </Button>
+                    </form>
                     <Table
                       stickyHeader
                       className={classes2.table}
