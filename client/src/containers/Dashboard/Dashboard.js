@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -205,25 +205,69 @@ const Dashboard = ({
   fetchArrivals,
   fetchDepartures,loading
 }) => {
-  const [formData, setFormData] = React.useState({ begin: '', end: '' });
-  const { begin, end } = formData;
+  const [formData, setFormData] = useState({
+    begin1: '',
+    end1: '',
+    begin2: '',
+    end2: '',
+    begin3: '',
+    end3: '',
+    begin4: '',
+    end4: '',
+    begin5: '',
+    end5: '',
+    begin6: '',
+    end6: '',
+    begin7: '',
+    end7: '',
+    begin8: '',
+    end8: '',
+    begin9: '',
+    end9: '',
+    begin10: '',
+    end10: ''
+  });
+  const {
+    begin1,
+    end1,
+    begin2,
+    end2,
+    begin3,
+    end3,
+    begin4,
+    end4,
+    begin5,
+    end5,
+    begin6,
+    end6,
+    begin7,
+    end7,
+    begin8,
+    end8,
+    begin9,
+    end9,
+    begin10,
+    end10
+  } = formData;
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  
   const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle);
+  const [modalStyle] = useState(getModalStyle);
   const classes2 = useStyles2();
-  const [open, setOpen] = React.useState(false);
-  const [openModal1, setOpenModal1] = React.useState(false);
-  const [openModal2, setOpenModal2] = React.useState(false);
-  const [openModal3, setOpenModal3] = React.useState(false);
-  const [openModal4, setOpenModal4] = React.useState(false);
-  const [openModal5, setOpenModal5] = React.useState(false);
-  const [openModal6, setOpenModal6] = React.useState(false);
-  const [openModal7, setOpenModal7] = React.useState(false);
-  const [openModal8, setOpenModal8] = React.useState(false);
-  const [openModal9, setOpenModal9] = React.useState(false);
-  const [openModal10, setOpenModal10] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [openModal1, setOpenModal1] = useState(false);
+  const [openModal2, setOpenModal2] = useState(false);
+  const [openModal3, setOpenModal3] = useState(false);
+  const [openModal4, setOpenModal4] = useState(false);
+  const [openModal5, setOpenModal5] = useState(false);
+  const [openModal6, setOpenModal6] = useState(false);
+  const [openModal7, setOpenModal7] = useState(false);
+  const [openModal8, setOpenModal8] = useState(false);
+  const [openModal9, setOpenModal9] = useState(false);
+  const [openModal10, setOpenModal10] = useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -368,7 +412,6 @@ const Dashboard = ({
               key='Subheader'
               cols={2}
               style={{ height: 'auto' }}></GridListTile>
-
             <GridListTile key='1'>
               <img
                 src='https://image.shutterstock.com/image-photo/atlanta-georgia-usa-downtown-skyline-260nw-1031967217.jpg'
@@ -387,11 +430,27 @@ const Dashboard = ({
                         Choose a range to search from. Test date is 29 Jan 2018,
                         12noon - 29 Jan 2018, 1pm
                       </h6>
-                      <form className={classes.container} noValidate>
+                      <form
+                        onSubmit={e => {
+                          e.preventDefault();
+                          // setFormData({loading:true})
+                          fetchArrivals(
+                            'KATL',
+                            moment(begin1).format('X'),
+                            moment(end1).format('X')
+                          );
+                          fetchDepartures(
+                            'KATL',
+                            moment(begin1).format('X'),
+                            moment(end1).format('X')
+                          );
+                        }}
+                        className={classes.container}
+                        noValidate>
                         <TextField
-                          name='begin'
-                          value={begin}
-                          id='begin'
+                          name='begin1'
+                          value={begin1}
+                          id='begin1'
                           onChange={e => onChange(e)}
                           label='Begin'
                           type='datetime-local'
@@ -401,9 +460,9 @@ const Dashboard = ({
                           }}
                         />
                         <TextField
-                          name='end'
-                          value={end}
-                          id='end'
+                          name='end1'
+                          value={end1}
+                          id='end1'
                           onChange={e => onChange(e)}
                           label='End'
                           type='datetime-local'
@@ -414,19 +473,6 @@ const Dashboard = ({
                         />
                         <Button
                           type='submit'
-                          onClick={e => {
-                            e.preventDefault();
-                            fetchArrivals(
-                              'KATL',
-                              moment(begin).format('X'),
-                              moment(end).format('X')
-                            );
-                            fetchDepartures(
-                              'KATL',
-                              moment(begin).format('X'),
-                              moment(end).format('X')
-                            );
-                          }}
                           variant='contained'
                           className={classes.submit}>
                           {!loading ? 'Search' : 'Searching'}
@@ -568,9 +614,9 @@ const Dashboard = ({
                     </h6>
                     <form className={classes.container} noValidate>
                       <TextField
-                        name='begin'
-                        value={begin}
-                        id='begin'
+                        name='begin2'
+                        value={begin2}
+                        id='begin2'
                         onChange={e => onChange(e)}
                         label='Begin'
                         type='datetime-local'
@@ -580,9 +626,9 @@ const Dashboard = ({
                         }}
                       />
                       <TextField
-                        name='end'
-                        value={end}
-                        id='end'
+                        name='end2'
+                        value={end2}
+                        id='end2'
                         onChange={e => onChange(e)}
                         label='End'
                         type='datetime-local'
@@ -597,13 +643,13 @@ const Dashboard = ({
                           e.preventDefault();
                           fetchArrivals(
                             'KDEN',
-                            moment(begin).format('X'),
-                            moment(end).format('X')
+                            moment(begin2).format('X'),
+                            moment(end2).format('X')
                           );
                           fetchDepartures(
                             'KDEN',
-                            moment(begin).format('X'),
-                            moment(end).format('X')
+                            moment(begin2).format('X'),
+                            moment(end2).format('X')
                           );
                         }}
                         variant='contained'
@@ -746,9 +792,9 @@ const Dashboard = ({
                     </h6>
                     <form className={classes.container} noValidate>
                       <TextField
-                        name='begin'
-                        value={begin}
-                        id='begin'
+                        name='begin3'
+                        value={begin3}
+                        id='begin3'
                         onChange={e => onChange(e)}
                         label='Begin'
                         type='datetime-local'
@@ -758,9 +804,9 @@ const Dashboard = ({
                         }}
                       />
                       <TextField
-                        name='end'
-                        value={end}
-                        id='end'
+                        name='end3'
+                        value={end3}
+                        id='end3'
                         onChange={e => onChange(e)}
                         label='End'
                         type='datetime-local'
@@ -775,13 +821,13 @@ const Dashboard = ({
                           e.preventDefault();
                           fetchArrivals(
                             'OMDB',
-                            moment(begin).format('X'),
-                            moment(end).format('X')
+                            moment(begin3).format('X'),
+                            moment(end3).format('X')
                           );
                           fetchDepartures(
                             'OMDB',
-                            moment(begin).format('X'),
-                            moment(end).format('X')
+                            moment(begin3).format('X'),
+                            moment(end3).format('X')
                           );
                         }}
                         variant='contained'
@@ -923,9 +969,9 @@ const Dashboard = ({
                     </h6>
                     <form className={classes.container} noValidate>
                       <TextField
-                        name='begin'
-                        value={begin}
-                        id='begin'
+                        name='begin4'
+                        value={begin4}
+                        id='begin4'
                         onChange={e => onChange(e)}
                         label='Begin'
                         type='datetime-local'
@@ -935,9 +981,9 @@ const Dashboard = ({
                         }}
                       />
                       <TextField
-                        name='end'
-                        value={end}
-                        id='end'
+                        name='end4'
+                        value={end4}
+                        id='end4'
                         onChange={e => onChange(e)}
                         label='End'
                         type='datetime-local'
@@ -952,13 +998,13 @@ const Dashboard = ({
                           e.preventDefault();
                           fetchArrivals(
                             'KLAX',
-                            moment(begin).format('X'),
-                            moment(end).format('X')
+                            moment(begin4).format('X'),
+                            moment(end4).format('X')
                           );
                           fetchDepartures(
                             'KLAX',
-                            moment(begin).format('X'),
-                            moment(end).format('X')
+                            moment(begin4).format('X'),
+                            moment(end4).format('X')
                           );
                         }}
                         variant='contained'
@@ -1100,9 +1146,9 @@ const Dashboard = ({
                     </h6>
                     <form className={classes.container} noValidate>
                       <TextField
-                        name='begin'
-                        value={begin}
-                        id='begin'
+                        name='begin5'
+                        value={begin5}
+                        id='begin5'
                         onChange={e => onChange(e)}
                         label='Begin'
                         type='datetime-local'
@@ -1112,9 +1158,9 @@ const Dashboard = ({
                         }}
                       />
                       <TextField
-                        name='end'
-                        value={end}
-                        id='end'
+                        name='end5'
+                        value={end5}
+                        id='end5'
                         onChange={e => onChange(e)}
                         label='End'
                         type='datetime-local'
@@ -1129,13 +1175,13 @@ const Dashboard = ({
                           e.preventDefault();
                           fetchArrivals(
                             'RJTT',
-                            moment(begin).format('X'),
-                            moment(end).format('X')
+                            moment(begin5).format('X'),
+                            moment(end5).format('X')
                           );
                           fetchDepartures(
                             'RJTT',
-                            moment(begin).format('X'),
-                            moment(end).format('X')
+                            moment(begin5).format('X'),
+                            moment(end5).format('X')
                           );
                         }}
                         variant='contained'
@@ -1277,9 +1323,9 @@ const Dashboard = ({
                     </h6>
                     <form className={classes.container} noValidate>
                       <TextField
-                        name='begin'
-                        value={begin}
-                        id='begin'
+                        name='begin6'
+                        value={begin6}
+                        id='begin6'
                         onChange={e => onChange(e)}
                         label='Begin'
                         type='datetime-local'
@@ -1289,9 +1335,9 @@ const Dashboard = ({
                         }}
                       />
                       <TextField
-                        name='end'
-                        value={end}
-                        id='end'
+                        name='end6'
+                        value={end6}
+                        id='end6'
                         onChange={e => onChange(e)}
                         label='End'
                         type='datetime-local'
@@ -1306,13 +1352,13 @@ const Dashboard = ({
                           e.preventDefault();
                           fetchArrivals(
                             'EGLL',
-                            moment(begin).format('X'),
-                            moment(end).format('X')
+                            moment(begin6).format('X'),
+                            moment(end6).format('X')
                           );
                           fetchDepartures(
                             'EGLL',
-                            moment(begin).format('X'),
-                            moment(end).format('X')
+                            moment(begin6).format('X'),
+                            moment(end6).format('X')
                           );
                         }}
                         variant='contained'
@@ -1454,9 +1500,9 @@ const Dashboard = ({
                     </h6>
                     <form className={classes.container} noValidate>
                       <TextField
-                        name='begin'
-                        value={begin}
-                        id='begin'
+                        name='begin7'
+                        value={begin7}
+                        id='begin7'
                         onChange={e => onChange(e)}
                         label='Begin'
                         type='datetime-local'
@@ -1466,9 +1512,9 @@ const Dashboard = ({
                         }}
                       />
                       <TextField
-                        name='end'
-                        value={end}
-                        id='end'
+                        name='end7'
+                        value={end7}
+                        id='end7'
                         onChange={e => onChange(e)}
                         label='End'
                         type='datetime-local'
@@ -1483,13 +1529,13 @@ const Dashboard = ({
                           e.preventDefault();
                           fetchArrivals(
                             'KORD',
-                            moment(begin).format('X'),
-                            moment(end).format('X')
+                            moment(begin7).format('X'),
+                            moment(end7).format('X')
                           );
                           fetchDepartures(
                             'KORD',
-                            moment(begin).format('X'),
-                            moment(end).format('X')
+                            moment(begin7).format('X'),
+                            moment(end7).format('X')
                           );
                         }}
                         variant='contained'
@@ -1631,9 +1677,9 @@ const Dashboard = ({
                     </h6>
                     <form className={classes.container} noValidate>
                       <TextField
-                        name='begin'
-                        value={begin}
-                        id='begin'
+                        name='begin8'
+                        value={begin8}
+                        id='begin8'
                         onChange={e => onChange(e)}
                         label='Begin'
                         type='datetime-local'
@@ -1643,9 +1689,9 @@ const Dashboard = ({
                         }}
                       />
                       <TextField
-                        name='end'
-                        value={end}
-                        id='end'
+                        name='en8'
+                        value={end8}
+                        id='end8'
                         onChange={e => onChange(e)}
                         label='End'
                         type='datetime-local'
@@ -1660,13 +1706,13 @@ const Dashboard = ({
                           e.preventDefault();
                           fetchArrivals(
                             'VHHH',
-                            moment(begin).format('X'),
-                            moment(end).format('X')
+                            moment(begin8).format('X'),
+                            moment(end8).format('X')
                           );
                           fetchDepartures(
                             'VHHH',
-                            moment(begin).format('X'),
-                            moment(end).format('X')
+                            moment(begin8).format('X'),
+                            moment(end8).format('X')
                           );
                         }}
                         variant='contained'
@@ -1808,9 +1854,9 @@ const Dashboard = ({
                     </h6>
                     <form className={classes.container} noValidate>
                       <TextField
-                        name='begin'
-                        value={begin}
-                        id='begin'
+                        name='begin9'
+                        value={begin9}
+                        id='begin9'
                         onChange={e => onChange(e)}
                         label='Begin'
                         type='datetime-local'
@@ -1820,9 +1866,9 @@ const Dashboard = ({
                         }}
                       />
                       <TextField
-                        name='end'
-                        value={end}
-                        id='end'
+                        name='end9'
+                        value={end9}
+                        id='end9'
                         onChange={e => onChange(e)}
                         label='End'
                         type='datetime-local'
@@ -1837,13 +1883,13 @@ const Dashboard = ({
                           e.preventDefault();
                           fetchArrivals(
                             'EHAM',
-                            moment(begin).format('X'),
-                            moment(end).format('X')
+                            moment(begin9).format('X'),
+                            moment(end9).format('X')
                           );
                           fetchDepartures(
                             'EHAM',
-                            moment(begin).format('X'),
-                            moment(end).format('X')
+                            moment(begin9).format('X'),
+                            moment(end9).format('X')
                           );
                         }}
                         variant='contained'
@@ -1985,9 +2031,9 @@ const Dashboard = ({
                     </h6>
                     <form className={classes.container} noValidate>
                       <TextField
-                        name='begin'
-                        value={begin}
-                        id='begin'
+                        name='begin10'
+                        value={begin10}
+                        id='begin10'
                         onChange={e => onChange(e)}
                         label='Begin'
                         type='datetime-local'
@@ -1997,9 +2043,9 @@ const Dashboard = ({
                         }}
                       />
                       <TextField
-                        name='end'
-                        value={end}
-                        id='end'
+                        name='end10'
+                        value={end10}
+                        id='end10'
                         onChange={e => onChange(e)}
                         label='End'
                         type='datetime-local'
@@ -2014,13 +2060,13 @@ const Dashboard = ({
                           e.preventDefault();
                           fetchArrivals(
                             'CYYZ',
-                            moment(begin).format('X'),
-                            moment(end).format('X')
+                            moment(begin10).format('X'),
+                            moment(end10).format('X')
                           );
                           fetchDepartures(
                             'CYZZ',
-                            moment(begin).format('X'),
-                            moment(end).format('X')
+                            moment(begin10).format('X'),
+                            moment(end10).format('X')
                           );
                         }}
                         variant='contained'
