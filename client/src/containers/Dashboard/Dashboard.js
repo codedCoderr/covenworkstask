@@ -424,7 +424,7 @@ const Dashboard = ({
               key='Subheader'
               cols={2}
               style={{ height: 'auto' }}></GridListTile>
-            <GridListTile key='1'>
+            <GridListTile style={{cursor:'pointer'}} onClick={handleModalOpen1}key='1'>
               <img
                 src='https://image.shutterstock.com/image-photo/atlanta-georgia-usa-downtown-skyline-260nw-1031967217.jpg'
                 alt='Hartsfield–Jackson Atlanta International Airport'
@@ -445,7 +445,6 @@ const Dashboard = ({
                       <form
                         onSubmit={e => {
                           e.preventDefault();
-                          // setFormData({loading:true})
                           fetchArrivals(
                             'KATL',
                             moment(begin1).format('X'),
@@ -607,7 +606,7 @@ const Dashboard = ({
                 }
               />
             </GridListTile>
-            <GridListTile key='2'>
+            <GridListTile style={{cursor:'pointer'}} onClick={handleModalOpen2}key='2'>
               <img
                 src='https://image.shutterstock.com/image-photo/new-york-city-skyline-cityscape-260nw-57571180.jpg'
                 alt='Denver International Airport'
@@ -624,7 +623,22 @@ const Dashboard = ({
                       Choose a range to search from. Test date is 29 Jan 2018,
                       12noon - 29 Jan 2018, 1pm
                     </h6>
-                    <form className={classes.container} noValidate>
+                    <form
+                      onSubmit={e => {
+                        e.preventDefault();
+                        fetchArrivals(
+                          'KDEN',
+                          moment(begin2).format('X'),
+                          moment(end2).format('X')
+                        );
+                        fetchDepartures(
+                          'KDEN',
+                          moment(begin2).format('X'),
+                          moment(end2).format('X')
+                        );
+                      }}
+                      className={classes.container}
+                      noValidate>
                       <TextField
                         name='begin2'
                         value={begin2}
@@ -651,19 +665,6 @@ const Dashboard = ({
                       />
                       <Button
                         type='submit'
-                        onClick={e => {
-                          e.preventDefault();
-                          fetchArrivals(
-                            'KDEN',
-                            moment(begin2).format('X'),
-                            moment(end2).format('X')
-                          );
-                          fetchDepartures(
-                            'KDEN',
-                            moment(begin2).format('X'),
-                            moment(end2).format('X')
-                          );
-                        }}
                         variant='contained'
                         className={classes.submit}>
                         {!loading ? 'Search' : 'Searching'}
@@ -784,7 +785,7 @@ const Dashboard = ({
                 }
               />
             </GridListTile>
-            <GridListTile key='3'>
+            <GridListTile style={{cursor:'pointer'}} onClick={handleModalOpen3}key='3'>
               <img
                 src='https://image.shutterstock.com/image-photo/amsterdam-skyline-shortly-after-sunset-260nw-128463995.jpg'
                 alt='Dubai International Airport'
@@ -802,7 +803,22 @@ const Dashboard = ({
                       Choose a range to search from. Test date is 29 Jan 2018,
                       12noon - 29 Jan 2018, 1pm
                     </h6>
-                    <form className={classes.container} noValidate>
+                    <form
+                      onSubmit={e => {
+                        e.preventDefault();
+                        fetchArrivals(
+                          'OMDB',
+                          moment(begin3).format('X'),
+                          moment(end3).format('X')
+                        );
+                        fetchDepartures(
+                          'OMDB',
+                          moment(begin3).format('X'),
+                          moment(end3).format('X')
+                        );
+                      }}
+                      className={classes.container}
+                      noValidate>
                       <TextField
                         name='begin3'
                         value={begin3}
@@ -829,19 +845,6 @@ const Dashboard = ({
                       />
                       <Button
                         type='submit'
-                        onClick={e => {
-                          e.preventDefault();
-                          fetchArrivals(
-                            'OMDB',
-                            moment(begin3).format('X'),
-                            moment(end3).format('X')
-                          );
-                          fetchDepartures(
-                            'OMDB',
-                            moment(begin3).format('X'),
-                            moment(end3).format('X')
-                          );
-                        }}
                         variant='contained'
                         className={classes.submit}>
                         {!loading ? 'Search' : 'Searching'}
@@ -962,7 +965,7 @@ const Dashboard = ({
                 }
               />
             </GridListTile>
-            <GridListTile key='4'>
+            <GridListTile style={{cursor:'pointer'}} onClick={handleModalOpen4}key='4'>
               <img
                 src='https://image.shutterstock.com/image-photo/big-ben-houses-parliament-london-260nw-107597459.jpg'
                 alt='Los Angeles International Airport'
@@ -979,7 +982,22 @@ const Dashboard = ({
                       Choose a range to search from. Test date is 29 Jan 2018,
                       12noon - 29 Jan 2018, 1pm
                     </h6>
-                    <form className={classes.container} noValidate>
+                    <form
+                      onSubmit={e => {
+                        e.preventDefault();
+                        fetchArrivals(
+                          'KLAX',
+                          moment(begin4).format('X'),
+                          moment(end4).format('X')
+                        );
+                        fetchDepartures(
+                          'KLAX',
+                          moment(begin4).format('X'),
+                          moment(end4).format('X')
+                        );
+                      }}
+                      className={classes.container}
+                      noValidate>
                       <TextField
                         name='begin4'
                         value={begin4}
@@ -1006,19 +1024,6 @@ const Dashboard = ({
                       />
                       <Button
                         type='submit'
-                        onClick={e => {
-                          e.preventDefault();
-                          fetchArrivals(
-                            'KLAX',
-                            moment(begin4).format('X'),
-                            moment(end4).format('X')
-                          );
-                          fetchDepartures(
-                            'KLAX',
-                            moment(begin4).format('X'),
-                            moment(end4).format('X')
-                          );
-                        }}
                         variant='contained'
                         className={classes.submit}>
                         {!loading ? 'Search' : 'Searching'}
@@ -1139,7 +1144,7 @@ const Dashboard = ({
                 }
               />
             </GridListTile>
-            <GridListTile key='5'>
+            <GridListTile style={{cursor:'pointer'}} onClick={handleModalOpen5}key='5'>
               <img
                 src='https://image.shutterstock.com/image-photo/tokyo-november-13-billboards-shinjukus-600w-1012724596.jpg'
                 alt='Tokyo Haneda Airport'
@@ -1156,7 +1161,22 @@ const Dashboard = ({
                       Choose a range to search from. Test date is 29 Jan 2018,
                       12noon - 29 Jan 2018, 1pm
                     </h6>
-                    <form className={classes.container} noValidate>
+                    <form
+                      onSubmit={e => {
+                        e.preventDefault();
+                        fetchArrivals(
+                          'RJTT',
+                          moment(begin5).format('X'),
+                          moment(end5).format('X')
+                        );
+                        fetchDepartures(
+                          'RJTT',
+                          moment(begin5).format('X'),
+                          moment(end5).format('X')
+                        );
+                      }}
+                      className={classes.container}
+                      noValidate>
                       <TextField
                         name='begin5'
                         value={begin5}
@@ -1183,19 +1203,6 @@ const Dashboard = ({
                       />
                       <Button
                         type='submit'
-                        onClick={e => {
-                          e.preventDefault();
-                          fetchArrivals(
-                            'RJTT',
-                            moment(begin5).format('X'),
-                            moment(end5).format('X')
-                          );
-                          fetchDepartures(
-                            'RJTT',
-                            moment(begin5).format('X'),
-                            moment(end5).format('X')
-                          );
-                        }}
                         variant='contained'
                         className={classes.submit}>
                         {!loading ? 'Search' : 'Searching'}
@@ -1316,7 +1323,7 @@ const Dashboard = ({
                 }
               />
             </GridListTile>
-            <GridListTile key='6'>
+            <GridListTile style={{cursor:'pointer'}} onClick={handleModalOpen6}key='6'>
               <img
                 src='https://image.shutterstock.com/image-photo/tower-bridge-london-uk-sunset-600w-651736369.jpg'
                 alt='Heathrow Airport'
@@ -1333,7 +1340,22 @@ const Dashboard = ({
                       Choose a range to search from. Test date is 29 Jan 2018,
                       12noon - 29 Jan 2018, 1pm
                     </h6>
-                    <form className={classes.container} noValidate>
+                    <form
+                      onSubmit={e => {
+                        e.preventDefault();
+                        fetchArrivals(
+                          'EGLL',
+                          moment(begin6).format('X'),
+                          moment(end6).format('X')
+                        );
+                        fetchDepartures(
+                          'EGLL',
+                          moment(begin6).format('X'),
+                          moment(end6).format('X')
+                        );
+                      }}
+                      className={classes.container}
+                      noValidate>
                       <TextField
                         name='begin6'
                         value={begin6}
@@ -1360,19 +1382,6 @@ const Dashboard = ({
                       />
                       <Button
                         type='submit'
-                        onClick={e => {
-                          e.preventDefault();
-                          fetchArrivals(
-                            'EGLL',
-                            moment(begin6).format('X'),
-                            moment(end6).format('X')
-                          );
-                          fetchDepartures(
-                            'EGLL',
-                            moment(begin6).format('X'),
-                            moment(end6).format('X')
-                          );
-                        }}
                         variant='contained'
                         className={classes.submit}>
                         {!loading ? 'Search' : 'Searching'}
@@ -1493,7 +1502,7 @@ const Dashboard = ({
                 }
               />
             </GridListTile>
-            <GridListTile key='7'>
+            <GridListTile style={{cursor:'pointer'}} onClick={handleModalOpen7}key='7'>
               <img
                 src='https://image.shutterstock.com/image-photo/chicago-river-downtown-skyline-usa-600w-478361827.jpg'
                 alt='O Hare International Airport'
@@ -1510,7 +1519,22 @@ const Dashboard = ({
                       Choose a range to search from. Test date is 29 Jan 2018,
                       12noon - 29 Jan 2018, 1pm
                     </h6>
-                    <form className={classes.container} noValidate>
+                    <form
+                      onSubmit={e => {
+                        e.preventDefault();
+                        fetchArrivals(
+                          'KORD',
+                          moment(begin7).format('X'),
+                          moment(end7).format('X')
+                        );
+                        fetchDepartures(
+                          'KORD',
+                          moment(begin7).format('X'),
+                          moment(end7).format('X')
+                        );
+                      }}
+                      className={classes.container}
+                      noValidate>
                       <TextField
                         name='begin7'
                         value={begin7}
@@ -1537,19 +1561,6 @@ const Dashboard = ({
                       />
                       <Button
                         type='submit'
-                        onClick={e => {
-                          e.preventDefault();
-                          fetchArrivals(
-                            'KORD',
-                            moment(begin7).format('X'),
-                            moment(end7).format('X')
-                          );
-                          fetchDepartures(
-                            'KORD',
-                            moment(begin7).format('X'),
-                            moment(end7).format('X')
-                          );
-                        }}
                         variant='contained'
                         className={classes.submit}>
                         {!loading ? 'Search' : 'Searching'}
@@ -1670,7 +1681,7 @@ const Dashboard = ({
                 }
               />
             </GridListTile>
-            <GridListTile key='8'>
+            <GridListTile style={{cursor:'pointer'}} onClick={handleModalOpen8}key='8'>
               <img
                 src='https://image.shutterstock.com/image-photo/golden-pagoda-nan-lian-garden-600w-521749765.jpg'
                 alt='Hong Kong International Airport'
@@ -1687,7 +1698,22 @@ const Dashboard = ({
                       Choose a range to search from. Test date is 29 Jan 2018,
                       12noon - 29 Jan 2018, 1pm
                     </h6>
-                    <form className={classes.container} noValidate>
+                    <form
+                      onSubmit={e => {
+                        e.preventDefault();
+                        fetchArrivals(
+                          'VHHH',
+                          moment(begin8).format('X'),
+                          moment(end8).format('X')
+                        );
+                        fetchDepartures(
+                          'VHHH',
+                          moment(begin8).format('X'),
+                          moment(end8).format('X')
+                        );
+                      }}
+                      className={classes.container}
+                      noValidate>
                       <TextField
                         name='begin8'
                         value={begin8}
@@ -1714,19 +1740,6 @@ const Dashboard = ({
                       />
                       <Button
                         type='submit'
-                        onClick={e => {
-                          e.preventDefault();
-                          fetchArrivals(
-                            'VHHH',
-                            moment(begin8).format('X'),
-                            moment(end8).format('X')
-                          );
-                          fetchDepartures(
-                            'VHHH',
-                            moment(begin8).format('X'),
-                            moment(end8).format('X')
-                          );
-                        }}
                         variant='contained'
                         className={classes.submit}>
                         {!loading ? 'Search' : 'Searching'}
@@ -1847,7 +1860,7 @@ const Dashboard = ({
                 }
               />
             </GridListTile>
-            <GridListTile key='9'>
+            <GridListTile style={{cursor:'pointer'}} onClick={handleModalOpen9}key='9'>
               <img
                 src='https://image.shutterstock.com/image-photo/amsterdam-canal-singel-typical-dutch-600w-534783616.jpg'
                 alt='Amsterdam Airport Schiphol'
@@ -1864,7 +1877,22 @@ const Dashboard = ({
                       Choose a range to search from. Test date is 29 Jan 2018,
                       12noon - 29 Jan 2018, 1pm
                     </h6>
-                    <form className={classes.container} noValidate>
+                    <form
+                      onSubmit={e => {
+                        e.preventDefault();
+                        fetchArrivals(
+                          'EHAM',
+                          moment(begin9).format('X'),
+                          moment(end9).format('X')
+                        );
+                        fetchDepartures(
+                          'EHAM',
+                          moment(begin9).format('X'),
+                          moment(end9).format('X')
+                        );
+                      }}
+                      className={classes.container}
+                      noValidate>
                       <TextField
                         name='begin9'
                         value={begin9}
@@ -1891,19 +1919,6 @@ const Dashboard = ({
                       />
                       <Button
                         type='submit'
-                        onClick={e => {
-                          e.preventDefault();
-                          fetchArrivals(
-                            'EHAM',
-                            moment(begin9).format('X'),
-                            moment(end9).format('X')
-                          );
-                          fetchDepartures(
-                            'EHAM',
-                            moment(begin9).format('X'),
-                            moment(end9).format('X')
-                          );
-                        }}
                         variant='contained'
                         className={classes.submit}>
                         {!loading ? 'Search' : 'Searching'}
@@ -2024,7 +2039,7 @@ const Dashboard = ({
                 }
               />
             </GridListTile>
-            <GridListTile key='10'>
+            <GridListTile style={{cursor:'pointer'}} onClick={handleModalOpen10} key='10'>
               <img
                 src='https://image.shutterstock.com/image-photo/beautiful-toronto-islands-formerly-island-600w-293980604.jpg'
                 alt='Toronto Pearson International Airport'
@@ -2041,7 +2056,22 @@ const Dashboard = ({
                       Choose a range to search from. Test date is 29 Jan 2018,
                       12noon - 29 Jan 2018, 1pm
                     </h6>
-                    <form className={classes.container} noValidate>
+                    <form
+                      onSubmit={e => {
+                        e.preventDefault();
+                        fetchArrivals(
+                          'CYYZ',
+                          moment(begin10).format('X'),
+                          moment(end10).format('X')
+                        );
+                        fetchDepartures(
+                          'CYZZ',
+                          moment(begin10).format('X'),
+                          moment(end10).format('X')
+                        );
+                      }}
+                      className={classes.container}
+                      noValidate>
                       <TextField
                         name='begin10'
                         value={begin10}
@@ -2068,19 +2098,6 @@ const Dashboard = ({
                       />
                       <Button
                         type='submit'
-                        onClick={e => {
-                          e.preventDefault();
-                          fetchArrivals(
-                            'CYYZ',
-                            moment(begin10).format('X'),
-                            moment(end10).format('X')
-                          );
-                          fetchDepartures(
-                            'CYZZ',
-                            moment(begin10).format('X'),
-                            moment(end10).format('X')
-                          );
-                        }}
                         variant='contained'
                         className={classes.submit}>
                         {!loading ? 'Search' : 'Searching'}
