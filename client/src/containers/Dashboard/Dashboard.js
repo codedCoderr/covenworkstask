@@ -107,7 +107,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper
   },
   gridList: {
-    width: 500,
+    width: '90vw',
     height: 450
   },
   icon: {
@@ -193,7 +193,7 @@ const useStyles = makeStyles(theme => ({
   },
   paper2: {
     position: 'absolute',
-    width: 460,
+    width: '90vw',
     height: 'auto',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
