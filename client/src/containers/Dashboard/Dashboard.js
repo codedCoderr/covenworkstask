@@ -70,7 +70,7 @@ const useStyles2 = makeStyles(theme => ({
     minWidth: 500
   },
   tableWrapper: {
-    // overflowX: 'auto',
+    overflowX: 'auto',
     maxHeight: 400,
     overflow: 'auto'
   }
@@ -95,12 +95,12 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-    overflow: 'hidden',
+    // overflow: 'hidden',
     backgroundColor: theme.palette.background.paper
   },
   gridList: {
-    width: '90vw',
-    height: 450
+    width: '85vw',
+    height: 557
   },
   icon: {
     color: 'rgba(255, 255, 255, 0.54)'
@@ -163,7 +163,7 @@ const useStyles = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     height: '100vh',
-    overflow: 'auto'
+    // overflow: 'auto'
   },
   container: {
     paddingTop: theme.spacing(4),
@@ -419,12 +419,15 @@ const Dashboard = ({
 
       <main style={{ marginTop: '80px' }} className={classes.content}>
         <div className={classes.root2}>
-          <GridList cellHeight={180} className={classes.gridList}>
+          <GridList cols={4} cellHeight={180} className={classes.gridList}>
             <GridListTile
               key='Subheader'
-              cols={2}
+              cols={4}
               style={{ height: 'auto' }}></GridListTile>
-            <GridListTile style={{cursor:'pointer'}} onClick={handleModalOpen1}key='1'>
+            <GridListTile
+              style={{ cursor: 'pointer' }}
+              onClick={handleModalOpen1}
+              key='1'>
               <img
                 src='https://image.shutterstock.com/image-photo/atlanta-georgia-usa-downtown-skyline-260nw-1031967217.jpg'
                 alt='Hartsfield–Jackson Atlanta International Airport'
@@ -606,7 +609,10 @@ const Dashboard = ({
                 }
               />
             </GridListTile>
-            <GridListTile style={{cursor:'pointer'}} onClick={handleModalOpen2}key='2'>
+            <GridListTile
+              style={{ cursor: 'pointer' }}
+              onClick={handleModalOpen2}
+              key='2'>
               <img
                 src='https://image.shutterstock.com/image-photo/new-york-city-skyline-cityscape-260nw-57571180.jpg'
                 alt='Denver International Airport'
@@ -785,7 +791,10 @@ const Dashboard = ({
                 }
               />
             </GridListTile>
-            <GridListTile style={{cursor:'pointer'}} onClick={handleModalOpen3}key='3'>
+            <GridListTile
+              style={{ cursor: 'pointer' }}
+              onClick={handleModalOpen3}
+              key='3'>
               <img
                 src='https://image.shutterstock.com/image-photo/amsterdam-skyline-shortly-after-sunset-260nw-128463995.jpg'
                 alt='Dubai International Airport'
@@ -965,7 +974,10 @@ const Dashboard = ({
                 }
               />
             </GridListTile>
-            <GridListTile style={{cursor:'pointer'}} onClick={handleModalOpen4}key='4'>
+            <GridListTile
+              style={{ cursor: 'pointer' }}
+              onClick={handleModalOpen4}
+              key='4'>
               <img
                 src='https://image.shutterstock.com/image-photo/big-ben-houses-parliament-london-260nw-107597459.jpg'
                 alt='Los Angeles International Airport'
@@ -1144,7 +1156,10 @@ const Dashboard = ({
                 }
               />
             </GridListTile>
-            <GridListTile style={{cursor:'pointer'}} onClick={handleModalOpen5}key='5'>
+            <GridListTile
+              style={{ cursor: 'pointer' }}
+              onClick={handleModalOpen5}
+              key='5'>
               <img
                 src='https://image.shutterstock.com/image-photo/tokyo-november-13-billboards-shinjukus-600w-1012724596.jpg'
                 alt='Tokyo Haneda Airport'
@@ -1323,7 +1338,10 @@ const Dashboard = ({
                 }
               />
             </GridListTile>
-            <GridListTile style={{cursor:'pointer'}} onClick={handleModalOpen6}key='6'>
+            <GridListTile
+              style={{ cursor: 'pointer' }}
+              onClick={handleModalOpen6}
+              key='6'>
               <img
                 src='https://image.shutterstock.com/image-photo/tower-bridge-london-uk-sunset-600w-651736369.jpg'
                 alt='Heathrow Airport'
@@ -1502,7 +1520,10 @@ const Dashboard = ({
                 }
               />
             </GridListTile>
-            <GridListTile style={{cursor:'pointer'}} onClick={handleModalOpen7}key='7'>
+            <GridListTile
+              style={{ cursor: 'pointer' }}
+              onClick={handleModalOpen7}
+              key='7'>
               <img
                 src='https://image.shutterstock.com/image-photo/chicago-river-downtown-skyline-usa-600w-478361827.jpg'
                 alt='O Hare International Airport'
@@ -1681,7 +1702,10 @@ const Dashboard = ({
                 }
               />
             </GridListTile>
-            <GridListTile style={{cursor:'pointer'}} onClick={handleModalOpen8}key='8'>
+            <GridListTile
+              style={{ cursor: 'pointer' }}
+              onClick={handleModalOpen8}
+              key='8'>
               <img
                 src='https://image.shutterstock.com/image-photo/golden-pagoda-nan-lian-garden-600w-521749765.jpg'
                 alt='Hong Kong International Airport'
@@ -1860,7 +1884,10 @@ const Dashboard = ({
                 }
               />
             </GridListTile>
-            <GridListTile style={{cursor:'pointer'}} onClick={handleModalOpen9}key='9'>
+            <GridListTile
+              style={{ cursor: 'pointer' }}
+              onClick={handleModalOpen9}
+              key='9'>
               <img
                 src='https://image.shutterstock.com/image-photo/amsterdam-canal-singel-typical-dutch-600w-534783616.jpg'
                 alt='Amsterdam Airport Schiphol'
@@ -2039,7 +2066,10 @@ const Dashboard = ({
                 }
               />
             </GridListTile>
-            <GridListTile style={{cursor:'pointer'}} onClick={handleModalOpen10} key='10'>
+            <GridListTile
+              style={{ cursor: 'pointer' }}
+              onClick={handleModalOpen10}
+              key='10'>
               <img
                 src='https://image.shutterstock.com/image-photo/beautiful-toronto-islands-formerly-island-600w-293980604.jpg'
                 alt='Toronto Pearson International Airport'

@@ -34,6 +34,13 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'center'
   },
+  body: {
+    backgroundImage:
+      'url(https://aviation.report/images/Resources/5269c0fb-7d95-4794-8622-9f78fc486332_Which-New.jpg)',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat'
+  },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main
@@ -67,77 +74,79 @@ const Login = ({ login, history, loginAuth }) => {
   const classes = useStyles();
 
   return (
-    <Container component='main' maxWidth='xs'>
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component='h1' variant='h5'>
-          Sign in
-        </Typography>
-        <form
-          onSubmit={e => {
-            e.preventDefault();
-            setFormData({ loading: !0 });
-            login(username, password, history);
-          }}
-          className={classes.form}
-          noValidate>
-          <TextField
-            variant='outlined'
-            margin='normal'
-            required
-            fullWidth
-            id='username'
-            label='Username'
-            name='username'
-            onChange={e => onChange(e)}
-            value={username}
-            autoComplete='username'
-            autoFocus
-          />
-          <TextField
-            variant='outlined'
-            margin='normal'
-            required
-            fullWidth
-            name='password'
-            label='Password'
-            type='password'
-            id='password'
-            onChange={e => onChange(e)}
-            value={password}
-            autoComplete='current-password'
-          />
-          <FormControlLabel
-            control={<Checkbox value='remember' color='primary' />}
-            label='Remember me'
-          />
+    <div className={classes.body}>
+      <Container className={classes.paper} component='main' maxWidth='xs'>
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component='h1' variant='h5'>
+            Sign in
+          </Typography>
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              setFormData({ loading: !0 });
+              login(username, password, history);
+            }}
+            className={classes.form}
+            noValidate>
+            <TextField
+              variant='outlined'
+              margin='normal'
+              required
+              fullWidth
+              id='username'
+              label='Username'
+              name='username'
+              onChange={e => onChange(e)}
+              value={username}
+              autoComplete='username'
+              autoFocus
+            />
+            <TextField
+              variant='outlined'
+              margin='normal'
+              required
+              fullWidth
+              name='password'
+              label='Password'
+              type='password'
+              id='password'
+              onChange={e => onChange(e)}
+              value={password}
+              autoComplete='current-password'
+            />
+            <FormControlLabel
+              control={<Checkbox value='remember' color='primary' />}
+              label='Remember me'
+            />
 
-          {loading ? (
-            <Button
-              disabled
-              type='submit'
-              fullWidth
-              variant='contained'
-              className={classes.submit}></Button>
-          ) : (
-            <Button
-              type='submit'
-              fullWidth
-              variant='contained'
-              color='primary'
-              className={classes.submit}>
-              Sign In
-            </Button>
-          )}
-        </form>
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
+            {loading ? (
+              <Button
+                disabled
+                type='submit'
+                fullWidth
+                variant='contained'
+                className={classes.submit}></Button>
+            ) : (
+              <Button
+                type='submit'
+                fullWidth
+                variant='contained'
+                color='primary'
+                className={classes.submit}>
+                Sign In
+              </Button>
+            )}
+          </form>
+        </div>
+        <Box mt={8}>
+          <Copyright />
+        </Box>
+      </Container>
+    </div>
   );
 };
 const mapStateToProps = state => ({
