@@ -20,10 +20,7 @@ function Copyright() {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
       {'Copyright © '}
-      <Link color='inherit' href='https://codedcoder.com/'>
-        codedcoder
-      </Link>{' '}
-      {new Date().getFullYear()}
+      codedcoder {new Date().getFullYear()}
       {'.'}
     </Typography>
   );
@@ -31,7 +28,7 @@ function Copyright() {
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    padding:'50px',
+    padding: '50px',
     marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
@@ -68,7 +65,6 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2)
   }
-
 }));
 
 const Login = ({ login, history, loginAuth }) => {

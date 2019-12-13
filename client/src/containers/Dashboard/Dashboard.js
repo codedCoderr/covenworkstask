@@ -43,10 +43,7 @@ const Copyright = () => {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
       {'Copyright © '}
-      <Link color='inherit' to='https://codedcoder.com'>
-        codedcoder
-      </Link>{' '}
-      {new Date().getFullYear()}
+      codedcoder {new Date().getFullYear()}
       {'.'}
     </Typography>
   );
@@ -192,7 +189,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft: '10px'
   },
   submitt: {
-    cursor:'pointer',
+    cursor: 'pointer',
     marginLeft: '10px',
     border: '1px solid black',
     borderRadius: '10%',
@@ -471,9 +468,7 @@ const Dashboard = ({
                             onChange={e => {
                               onChange(e);
                             }}>
-                            <option  value='Select'>
-                              Select
-                            </option>
+                            <option value='Select'>Select</option>
                             <option value='1'>1 day</option>
                             <option value='3'> 3 days</option>
                             <option value='7'>7 days</option>
@@ -487,7 +482,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                      
+
                         {arrivals.length <= 0 ? (
                           'No records found'
                         ) : (
@@ -565,7 +560,6 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                      
                       </div>
 
                       {departures.length <= 0 ? (
@@ -678,7 +672,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                      
+
                         {arrivals.length <= 0 ? (
                           'No records found'
                         ) : (
@@ -756,7 +750,6 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                      
                       </div>
 
                       {departures.length <= 0 ? (
@@ -870,7 +863,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                      
+
                         {arrivals.length <= 0 ? (
                           'No records found'
                         ) : (
@@ -948,7 +941,6 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                      
                       </div>
 
                       {departures.length <= 0 ? (
@@ -1063,7 +1055,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                      
+
                         {arrivals.length <= 0 ? (
                           'No records found'
                         ) : (
@@ -1141,7 +1133,6 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                      
                       </div>
 
                       {departures.length <= 0 ? (
@@ -1219,7 +1210,6 @@ const Dashboard = ({
               <img
                 src='https://image.shutterstock.com/image-photo/tokyo-november-13-billboards-shinjukus-600w-1012724596.jpg'
                 alt='Tokyo Haneda Airport'
-                
               />
               <Modal
                 aria-labelledby='simple-modal-title'
@@ -1256,7 +1246,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                      
+
                         {arrivals.length <= 0 ? (
                           'No records found'
                         ) : (
@@ -1334,7 +1324,6 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                      
                       </div>
 
                       {departures.length <= 0 ? (
@@ -1448,7 +1437,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                      
+
                         {arrivals.length <= 0 ? (
                           'No records found'
                         ) : (
@@ -1526,7 +1515,6 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                      
                       </div>
 
                       {departures.length <= 0 ? (
@@ -1640,7 +1628,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                      
+
                         {arrivals.length <= 0 ? (
                           'No records found'
                         ) : (
@@ -1718,7 +1706,6 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                      
                       </div>
 
                       {departures.length <= 0 ? (
@@ -1832,7 +1819,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                      
+
                         {arrivals.length <= 0 ? (
                           'No records found'
                         ) : (
@@ -1910,7 +1897,6 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                      
                       </div>
 
                       {departures.length <= 0 ? (
@@ -2024,7 +2010,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                      
+
                         {arrivals.length <= 0 ? (
                           'No records found'
                         ) : (
@@ -2102,7 +2088,6 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                      
                       </div>
 
                       {departures.length <= 0 ? (
@@ -2216,7 +2201,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                      
+
                         {arrivals.length <= 0 ? (
                           'No records found'
                         ) : (
@@ -2294,7 +2279,6 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                      
                       </div>
 
                       {departures.length <= 0 ? (
