@@ -189,7 +189,17 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    marginLeft:"10px"
+    marginLeft: '10px'
+  },
+  submitt: {
+    cursor:'pointer',
+    marginLeft: '10px',
+    border: '1px solid black',
+    borderRadius: '10%',
+    backgroundColor: 'lightgrey'
+  },
+  submittt: {
+    margin: '10px'
   },
   paper2: {
     position: 'absolute',
@@ -454,13 +464,17 @@ const Dashboard = ({
                         <h6>
                           <strong>Arriving flights in the last</strong>{' '}
                           <select
-                            className='app-modal__dropdown'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submitt}
                             name='days1'
                             value={days1}
                             onChange={e => {
                               onChange(e);
                             }}>
-                            <option value='Select'>Select</option>
+                            <option  value='Select'>
+                              Select
+                            </option>
                             <option value='1'>1 day</option>
                             <option value='3'> 3 days</option>
                             <option value='7'>7 days</option>
@@ -532,7 +546,9 @@ const Dashboard = ({
                           {' '}
                           <strong>Departing flights in the last </strong>
                           <select
-                            className='app-modal__dropdown'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submitt}
                             name='days1b'
                             value={days1b}
                             onChange={e => {
@@ -645,7 +661,9 @@ const Dashboard = ({
                         <h6>
                           <strong>Arriving flights in the last</strong>{' '}
                           <select
-                            className='app-modal__dropdown'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submitt}
                             name='days2'
                             value={days2}
                             onChange={e => {
@@ -658,10 +676,10 @@ const Dashboard = ({
                           </select>{' '}
                           <Button
                             type='submit'
-                            
                             variant='contained'
                             color='primary'
-                            className={classes.submit} onClick={() => fetchArrivals('KDEN', days2)}>
+                            className={classes.submit}
+                            onClick={() => fetchArrivals('KDEN', days2)}>
                             Search
                           </Button>
                         </h6>
@@ -723,7 +741,9 @@ const Dashboard = ({
                           {' '}
                           <strong>Departing flights in the last </strong>
                           <select
-                            className='app-modal__dropdown'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submitt}
                             name='days2b'
                             value={days2b}
                             onChange={e => {
@@ -736,7 +756,6 @@ const Dashboard = ({
                           </select>
                           <Button
                             type='submit'
-                            
                             variant='contained'
                             color='primary'
                             className={classes.submit}
@@ -838,7 +857,9 @@ const Dashboard = ({
                         <h6>
                           <strong>Arriving flights in the last</strong>{' '}
                           <select
-                            className='app-modal__dropdown'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submitt}
                             name='days3'
                             value={days3}
                             onChange={e => {
@@ -851,10 +872,10 @@ const Dashboard = ({
                           </select>{' '}
                           <Button
                             type='submit'
-                            
                             variant='contained'
                             color='primary'
-                            className={classes.submit} onClick={() => fetchArrivals('OMDB', days3)}>
+                            className={classes.submit}
+                            onClick={() => fetchArrivals('OMDB', days3)}>
                             Search
                           </Button>
                         </h6>
@@ -916,7 +937,9 @@ const Dashboard = ({
                           {' '}
                           <strong>Departing flights in the last </strong>
                           <select
-                            className='app-modal__dropdown'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submitt}
                             name='days3b'
                             value={days3b}
                             onChange={e => {
@@ -929,7 +952,6 @@ const Dashboard = ({
                           </select>
                           <Button
                             type='submit'
-                            
                             variant='contained'
                             color='primary'
                             className={classes.submit}
@@ -1032,7 +1054,9 @@ const Dashboard = ({
                         <h6>
                           <strong>Arriving flights in the last</strong>{' '}
                           <select
-                            className='app-modal__dropdown'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submitt}
                             name='days4'
                             value={days4}
                             onChange={e => {
@@ -1045,10 +1069,10 @@ const Dashboard = ({
                           </select>{' '}
                           <Button
                             type='submit'
-                            
                             variant='contained'
                             color='primary'
-                            className={classes.submit} onClick={() => fetchArrivals('KLAX', days4)}>
+                            className={classes.submit}
+                            onClick={() => fetchArrivals('KLAX', days4)}>
                             Search
                           </Button>
                         </h6>
@@ -1110,7 +1134,9 @@ const Dashboard = ({
                           {' '}
                           <strong>Departing flights in the last </strong>
                           <select
-                            className='app-modal__dropdown'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submitt}
                             name='days4b'
                             value={days4b}
                             onChange={e => {
@@ -1123,7 +1149,6 @@ const Dashboard = ({
                           </select>
                           <Button
                             type='submit'
-                            
                             variant='contained'
                             color='primary'
                             className={classes.submit}
@@ -1230,7 +1255,9 @@ const Dashboard = ({
                         <h6>
                           <strong>Arriving flights in the last</strong>{' '}
                           <select
-                            className='app-modal__dropdown'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submitt}
                             name='days5'
                             value={days5}
                             onChange={e => {
@@ -1243,10 +1270,10 @@ const Dashboard = ({
                           </select>{' '}
                           <Button
                             type='submit'
-                            
                             variant='contained'
                             color='primary'
-                            className={classes.submit} onClick={() => fetchArrivals('RJTT', days5)}>
+                            className={classes.submit}
+                            onClick={() => fetchArrivals('RJTT', days5)}>
                             Search
                           </Button>
                         </h6>
@@ -1308,7 +1335,9 @@ const Dashboard = ({
                           {' '}
                           <strong>Departing flights in the last </strong>
                           <select
-                            className='app-modal__dropdown'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submitt}
                             name='days5b'
                             value={days5b}
                             onChange={e => {
@@ -1321,7 +1350,6 @@ const Dashboard = ({
                           </select>
                           <Button
                             type='submit'
-                            
                             variant='contained'
                             color='primary'
                             className={classes.submit}
@@ -1423,7 +1451,9 @@ const Dashboard = ({
                         <h6>
                           <strong>Arriving flights in the last</strong>{' '}
                           <select
-                            className='app-modal__dropdown'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submitt}
                             name='days6'
                             value={days6}
                             onChange={e => {
@@ -1436,10 +1466,10 @@ const Dashboard = ({
                           </select>{' '}
                           <Button
                             type='submit'
-                            
                             variant='contained'
                             color='primary'
-                            className={classes.submit} onClick={() => fetchArrivals('EGLL', days6)}>
+                            className={classes.submit}
+                            onClick={() => fetchArrivals('EGLL', days6)}>
                             Search
                           </Button>
                         </h6>
@@ -1501,7 +1531,9 @@ const Dashboard = ({
                           {' '}
                           <strong>Departing flights in the last </strong>
                           <select
-                            className='app-modal__dropdown'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submitt}
                             name='days6b'
                             value={days6b}
                             onChange={e => {
@@ -1514,7 +1546,6 @@ const Dashboard = ({
                           </select>
                           <Button
                             type='submit'
-                            
                             variant='contained'
                             color='primary'
                             className={classes.submit}
@@ -1616,7 +1647,9 @@ const Dashboard = ({
                         <h6>
                           <strong>Arriving flights in the last</strong>{' '}
                           <select
-                            className='app-modal__dropdown'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submitt}
                             name='days7'
                             value={days7}
                             onChange={e => {
@@ -1629,10 +1662,10 @@ const Dashboard = ({
                           </select>{' '}
                           <Button
                             type='submit'
-                            
                             variant='contained'
                             color='primary'
-                            className={classes.submit} onClick={() => fetchArrivals('KORD', days7)}>
+                            className={classes.submit}
+                            onClick={() => fetchArrivals('KORD', days7)}>
                             Search
                           </Button>
                         </h6>
@@ -1694,7 +1727,9 @@ const Dashboard = ({
                           {' '}
                           <strong>Departing flights in the last </strong>
                           <select
-                            className='app-modal__dropdown'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submitt}
                             name='days7b'
                             value={days7b}
                             onChange={e => {
@@ -1707,7 +1742,6 @@ const Dashboard = ({
                           </select>
                           <Button
                             type='submit'
-                            
                             variant='contained'
                             color='primary'
                             className={classes.submit}
@@ -1809,7 +1843,9 @@ const Dashboard = ({
                         <h6>
                           <strong>Arriving flights in the last</strong>{' '}
                           <select
-                            className='app-modal__dropdown'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submitt}
                             name='days8'
                             value={days8}
                             onChange={e => {
@@ -1822,10 +1858,10 @@ const Dashboard = ({
                           </select>{' '}
                           <Button
                             type='submit'
-                            
                             variant='contained'
                             color='primary'
-                            className={classes.submit} onClick={() => fetchArrivals('VHHH', days8)}>
+                            className={classes.submit}
+                            onClick={() => fetchArrivals('VHHH', days8)}>
                             Search
                           </Button>
                         </h6>
@@ -1887,7 +1923,9 @@ const Dashboard = ({
                           {' '}
                           <strong>Departing flights in the last </strong>
                           <select
-                            className='app-modal__dropdown'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submitt}
                             name='days8b'
                             value={days8b}
                             onChange={e => {
@@ -1900,7 +1938,6 @@ const Dashboard = ({
                           </select>
                           <Button
                             type='submit'
-                            
                             variant='contained'
                             color='primary'
                             className={classes.submit}
@@ -2002,7 +2039,9 @@ const Dashboard = ({
                         <h6>
                           <strong>Arriving flights in the last</strong>{' '}
                           <select
-                            className='app-modal__dropdown'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submitt}
                             name='days9'
                             value={days9}
                             onChange={e => {
@@ -2015,10 +2054,10 @@ const Dashboard = ({
                           </select>{' '}
                           <Button
                             type='submit'
-                            
                             variant='contained'
                             color='primary'
-                            className={classes.submit} onClick={() => fetchArrivals('EHAM', days9)}>
+                            className={classes.submit}
+                            onClick={() => fetchArrivals('EHAM', days9)}>
                             Search
                           </Button>
                         </h6>
@@ -2080,7 +2119,9 @@ const Dashboard = ({
                           {' '}
                           <strong>Departing flights in the last </strong>
                           <select
-                            className='app-modal__dropdown'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submitt}
                             name='days9b'
                             value={days9b}
                             onChange={e => {
@@ -2093,7 +2134,6 @@ const Dashboard = ({
                           </select>
                           <Button
                             type='submit'
-                            
                             variant='contained'
                             color='primary'
                             className={classes.submit}
@@ -2195,7 +2235,9 @@ const Dashboard = ({
                         <h6>
                           <strong>Arriving flights in the last</strong>{' '}
                           <select
-                            className='app-modal__dropdown'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submitt}
                             name='days10'
                             value={days10}
                             onChange={e => {
@@ -2208,10 +2250,10 @@ const Dashboard = ({
                           </select>{' '}
                           <Button
                             type='submit'
-                            
                             variant='contained'
                             color='primary'
-                            className={classes.submit} onClick={() => fetchArrivals('CYYZ', days10)}>
+                            className={classes.submit}
+                            onClick={() => fetchArrivals('CYYZ', days10)}>
                             Search
                           </Button>
                         </h6>
@@ -2273,7 +2315,9 @@ const Dashboard = ({
                           {' '}
                           <strong>Departing flights in the last </strong>
                           <select
-                            className='app-modal__dropdown'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submitt}
                             name='days10b'
                             value={days10b}
                             onChange={e => {
@@ -2286,7 +2330,6 @@ const Dashboard = ({
                           </select>
                           <Button
                             type='submit'
-                            
                             variant='contained'
                             color='primary'
                             className={classes.submit}
