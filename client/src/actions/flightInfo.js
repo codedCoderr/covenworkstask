@@ -7,8 +7,8 @@ import {
 } from './types';
 
 import axios from 'axios';
-// const base_url = 'https://covenworks.herokuapp.com';
-const base_url = 'http://localhost:3500';
+const base_url = 'https://covenworks.herokuapp.com';
+// const base_url = 'http://localhost:3500';
 
 export const fetchArrivals = (airport, days) => async dispatch => {
   const body = JSON.stringify({ airport, days});
