@@ -187,6 +187,10 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+    marginLeft:"10px"
+  },
   paper2: {
     position: 'absolute',
     width: '90vw',
@@ -461,7 +465,12 @@ const Dashboard = ({
                             <option value='3'> 3 days</option>
                             <option value='7'>7 days</option>
                           </select>{' '}
-                          <Button onClick={() => fetchArrivals('KATL', days1)}>
+                          <Button
+                            type='submit'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submit}
+                            onClick={() => fetchArrivals('KATL', days1)}>
                             Search
                           </Button>
                         </h6>
@@ -535,6 +544,10 @@ const Dashboard = ({
                             <option value='7'>7 days</option>
                           </select>
                           <Button
+                            type='submit'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submit}
                             onClick={() => fetchDepartures('KATL', days1b)}>
                             Search
                           </Button>
@@ -643,7 +656,12 @@ const Dashboard = ({
                             <option value='3'> 3 days</option>
                             <option value='7'>7 days</option>
                           </select>{' '}
-                          <Button onClick={() => fetchArrivals('KDEN', days2)}>
+                          <Button
+                            type='submit'
+                            
+                            variant='contained'
+                            color='primary'
+                            className={classes.submit} onClick={() => fetchArrivals('KDEN', days2)}>
                             Search
                           </Button>
                         </h6>
@@ -717,6 +735,11 @@ const Dashboard = ({
                             <option value='7'>7 days</option>
                           </select>
                           <Button
+                            type='submit'
+                            
+                            variant='contained'
+                            color='primary'
+                            className={classes.submit}
                             onClick={() => fetchDepartures('KDEN', days2b)}>
                             Search
                           </Button>
@@ -826,7 +849,12 @@ const Dashboard = ({
                             <option value='3'> 3 days</option>
                             <option value='7'>7 days</option>
                           </select>{' '}
-                          <Button onClick={() => fetchArrivals('OMDB', days3)}>
+                          <Button
+                            type='submit'
+                            
+                            variant='contained'
+                            color='primary'
+                            className={classes.submit} onClick={() => fetchArrivals('OMDB', days3)}>
                             Search
                           </Button>
                         </h6>
@@ -900,6 +928,11 @@ const Dashboard = ({
                             <option value='7'>7 days</option>
                           </select>
                           <Button
+                            type='submit'
+                            
+                            variant='contained'
+                            color='primary'
+                            className={classes.submit}
                             onClick={() => fetchDepartures('OMDB', days3b)}>
                             Search
                           </Button>
@@ -1010,7 +1043,12 @@ const Dashboard = ({
                             <option value='3'> 3 days</option>
                             <option value='7'>7 days</option>
                           </select>{' '}
-                          <Button onClick={() => fetchArrivals('KLAX', days4)}>
+                          <Button
+                            type='submit'
+                            
+                            variant='contained'
+                            color='primary'
+                            className={classes.submit} onClick={() => fetchArrivals('KLAX', days4)}>
                             Search
                           </Button>
                         </h6>
@@ -1084,6 +1122,15 @@ const Dashboard = ({
                             <option value='7'>7 days</option>
                           </select>
                           <Button
+                            type='submit'
+                            
+                            variant='contained'
+                            color='primary'
+                            className={classes.submit}
+                            type='submit'
+                            variant='contained'
+                            color='primary'
+                            className={classes.submit}
                             onClick={() => fetchDepartures('KLAX', days4b)}>
                             Search
                           </Button>
@@ -1194,7 +1241,12 @@ const Dashboard = ({
                             <option value='3'> 3 days</option>
                             <option value='7'>7 days</option>
                           </select>{' '}
-                          <Button onClick={() => fetchArrivals('RJTT', days5)}>
+                          <Button
+                            type='submit'
+                            
+                            variant='contained'
+                            color='primary'
+                            className={classes.submit} onClick={() => fetchArrivals('RJTT', days5)}>
                             Search
                           </Button>
                         </h6>
@@ -1268,6 +1320,11 @@ const Dashboard = ({
                             <option value='7'>7 days</option>
                           </select>
                           <Button
+                            type='submit'
+                            
+                            variant='contained'
+                            color='primary'
+                            className={classes.submit}
                             onClick={() => fetchDepartures('RJTT', days5b)}>
                             Search
                           </Button>
@@ -1377,7 +1434,12 @@ const Dashboard = ({
                             <option value='3'> 3 days</option>
                             <option value='7'>7 days</option>
                           </select>{' '}
-                          <Button onClick={() => fetchArrivals('EGLL', days6)}>
+                          <Button
+                            type='submit'
+                            
+                            variant='contained'
+                            color='primary'
+                            className={classes.submit} onClick={() => fetchArrivals('EGLL', days6)}>
                             Search
                           </Button>
                         </h6>
@@ -1451,6 +1513,11 @@ const Dashboard = ({
                             <option value='7'>7 days</option>
                           </select>
                           <Button
+                            type='submit'
+                            
+                            variant='contained'
+                            color='primary'
+                            className={classes.submit}
                             onClick={() => fetchDepartures('EGLL', days6b)}>
                             Search
                           </Button>
@@ -1560,7 +1627,12 @@ const Dashboard = ({
                             <option value='3'> 3 days</option>
                             <option value='7'>7 days</option>
                           </select>{' '}
-                          <Button onClick={() => fetchArrivals('KORD', days7)}>
+                          <Button
+                            type='submit'
+                            
+                            variant='contained'
+                            color='primary'
+                            className={classes.submit} onClick={() => fetchArrivals('KORD', days7)}>
                             Search
                           </Button>
                         </h6>
@@ -1634,6 +1706,11 @@ const Dashboard = ({
                             <option value='7'>7 days</option>
                           </select>
                           <Button
+                            type='submit'
+                            
+                            variant='contained'
+                            color='primary'
+                            className={classes.submit}
                             onClick={() => fetchDepartures('KORD', days7b)}>
                             Search
                           </Button>
@@ -1743,7 +1820,12 @@ const Dashboard = ({
                             <option value='3'> 3 days</option>
                             <option value='7'>7 days</option>
                           </select>{' '}
-                          <Button onClick={() => fetchArrivals('VHHH', days8)}>
+                          <Button
+                            type='submit'
+                            
+                            variant='contained'
+                            color='primary'
+                            className={classes.submit} onClick={() => fetchArrivals('VHHH', days8)}>
                             Search
                           </Button>
                         </h6>
@@ -1817,6 +1899,11 @@ const Dashboard = ({
                             <option value='7'>7 days</option>
                           </select>
                           <Button
+                            type='submit'
+                            
+                            variant='contained'
+                            color='primary'
+                            className={classes.submit}
                             onClick={() => fetchDepartures('VHHH', days8b)}>
                             Search
                           </Button>
@@ -1926,7 +2013,12 @@ const Dashboard = ({
                             <option value='3'> 3 days</option>
                             <option value='7'>7 days</option>
                           </select>{' '}
-                          <Button onClick={() => fetchArrivals('EHAM', days9)}>
+                          <Button
+                            type='submit'
+                            
+                            variant='contained'
+                            color='primary'
+                            className={classes.submit} onClick={() => fetchArrivals('EHAM', days9)}>
                             Search
                           </Button>
                         </h6>
@@ -2000,6 +2092,11 @@ const Dashboard = ({
                             <option value='7'>7 days</option>
                           </select>
                           <Button
+                            type='submit'
+                            
+                            variant='contained'
+                            color='primary'
+                            className={classes.submit}
                             onClick={() => fetchDepartures('EHAM', days9b)}>
                             Search
                           </Button>
@@ -2109,7 +2206,12 @@ const Dashboard = ({
                             <option value='3'> 3 days</option>
                             <option value='7'>7 days</option>
                           </select>{' '}
-                          <Button onClick={() => fetchArrivals('CYYZ', days10)}>
+                          <Button
+                            type='submit'
+                            
+                            variant='contained'
+                            color='primary'
+                            className={classes.submit} onClick={() => fetchArrivals('CYYZ', days10)}>
                             Search
                           </Button>
                         </h6>
@@ -2183,6 +2285,11 @@ const Dashboard = ({
                             <option value='7'>7 days</option>
                           </select>
                           <Button
+                            type='submit'
+                            
+                            variant='contained'
+                            color='primary'
+                            className={classes.submit}
                             onClick={() => fetchDepartures('CYYZ', days10b)}>
                             Search
                           </Button>
