@@ -487,9 +487,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
-                          
-                        </div> */}
+                      
                         {arrivals.length <= 0 ? (
                           'No records found'
                         ) : (
@@ -567,9 +565,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
-                          
-                        </div> */}
+                      
                       </div>
 
                       {departures.length <= 0 ? (
@@ -682,9 +678,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
-                          
-                        </div> */}
+                      
                         {arrivals.length <= 0 ? (
                           'No records found'
                         ) : (
@@ -762,9 +756,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
-                          
-                        </div> */}
+                      
                       </div>
 
                       {departures.length <= 0 ? (
@@ -878,9 +870,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
-                          
-                        </div> */}
+                      
                         {arrivals.length <= 0 ? (
                           'No records found'
                         ) : (
@@ -958,9 +948,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
-                          
-                        </div> */}
+                      
                       </div>
 
                       {departures.length <= 0 ? (
@@ -1075,9 +1063,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
-                          
-                        </div> */}
+                      
                         {arrivals.length <= 0 ? (
                           'No records found'
                         ) : (
@@ -1155,9 +1141,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
-                          
-                        </div> */}
+                      
                       </div>
 
                       {departures.length <= 0 ? (
@@ -1272,9 +1256,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
-                          
-                        </div> */}
+                      
                         {arrivals.length <= 0 ? (
                           'No records found'
                         ) : (
@@ -1352,9 +1334,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
-                          
-                        </div> */}
+                      
                       </div>
 
                       {departures.length <= 0 ? (
@@ -1468,9 +1448,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
-                          
-                        </div> */}
+                      
                         {arrivals.length <= 0 ? (
                           'No records found'
                         ) : (
@@ -1548,9 +1526,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
-                          
-                        </div> */}
+                      
                       </div>
 
                       {departures.length <= 0 ? (
@@ -1664,9 +1640,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
-                          
-                        </div> */}
+                      
                         {arrivals.length <= 0 ? (
                           'No records found'
                         ) : (
@@ -1744,9 +1718,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
-                          
-                        </div> */}
+                      
                       </div>
 
                       {departures.length <= 0 ? (
@@ -1860,9 +1832,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
-                          
-                        </div> */}
+                      
                         {arrivals.length <= 0 ? (
                           'No records found'
                         ) : (
@@ -1940,9 +1910,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
-                          
-                        </div> */}
+                      
                       </div>
 
                       {departures.length <= 0 ? (
@@ -2056,9 +2024,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
-                          
-                        </div> */}
+                      
                         {arrivals.length <= 0 ? (
                           'No records found'
                         ) : (
@@ -2136,9 +2102,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
-                          
-                        </div> */}
+                      
                       </div>
 
                       {departures.length <= 0 ? (
@@ -2252,9 +2216,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
-                          
-                        </div> */}
+                      
                         {arrivals.length <= 0 ? (
                           'No records found'
                         ) : (
@@ -2332,9 +2294,7 @@ const Dashboard = ({
                             Search
                           </Button>
                         </h6>
-                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
-                          
-                        </div> */}
+                      
                       </div>
 
                       {departures.length <= 0 ? (
