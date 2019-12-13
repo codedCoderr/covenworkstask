@@ -31,6 +31,7 @@ function Copyright() {
 
 const useStyles = makeStyles(theme => ({
   paper: {
+    padding:'50px',
     marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
