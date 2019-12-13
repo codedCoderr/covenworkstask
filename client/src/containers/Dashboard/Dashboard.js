@@ -574,9 +574,9 @@ const Dashboard = ({
                                     {row.icao24}
                                   </TableCell>
                                   <TableCell align='right'>
-                                    {row.estDepartureAirport === null
+                                    {row.estArrivalAirport === null
                                       ? 'N/A'
-                                      : row.estDepartureAirport}
+                                      : row.estArrivalAirport}
                                   </TableCell>
                                   <TableCell align='right'>
                                     {moment
@@ -756,9 +756,9 @@ const Dashboard = ({
                                     {row.icao24}
                                   </TableCell>
                                   <TableCell align='right'>
-                                    {row.estDepartureAirport === null
+                                    {row.estArrivalAirport === null
                                       ? 'N/A'
-                                      : row.estDepartureAirport}
+                                      : row.estArrivalAirport}
                                   </TableCell>
                                   <TableCell align='right'>
                                     {moment
@@ -939,9 +939,9 @@ const Dashboard = ({
                                     {row.icao24}
                                   </TableCell>
                                   <TableCell align='right'>
-                                    {row.estDepartureAirport === null
+                                    {row.estArrivalAirport === null
                                       ? 'N/A'
-                                      : row.estDepartureAirport}
+                                      : row.estArrivalAirport}
                                   </TableCell>
                                   <TableCell align='right'>
                                     {moment
@@ -1123,9 +1123,9 @@ const Dashboard = ({
                                     {row.icao24}
                                   </TableCell>
                                   <TableCell align='right'>
-                                    {row.estDepartureAirport === null
+                                    {row.estArrivalAirport === null
                                       ? 'N/A'
-                                      : row.estDepartureAirport}
+                                      : row.estArrivalAirport}
                                   </TableCell>
                                   <TableCell align='right'>
                                     {moment
@@ -1307,9 +1307,9 @@ const Dashboard = ({
                                     {row.icao24}
                                   </TableCell>
                                   <TableCell align='right'>
-                                    {row.estDepartureAirport === null
+                                    {row.estArrivalAirport === null
                                       ? 'N/A'
-                                      : row.estDepartureAirport}
+                                      : row.estArrivalAirport}
                                   </TableCell>
                                   <TableCell align='right'>
                                     {moment
@@ -1490,9 +1490,9 @@ const Dashboard = ({
                                     {row.icao24}
                                   </TableCell>
                                   <TableCell align='right'>
-                                    {row.estDepartureAirport === null
+                                    {row.estArrivalAirport === null
                                       ? 'N/A'
-                                      : row.estDepartureAirport}
+                                      : row.estArrivalAirport}
                                   </TableCell>
                                   <TableCell align='right'>
                                     {moment
@@ -1673,9 +1673,9 @@ const Dashboard = ({
                                     {row.icao24}
                                   </TableCell>
                                   <TableCell align='right'>
-                                    {row.estDepartureAirport === null
+                                    {row.estArrivalAirport === null
                                       ? 'N/A'
-                                      : row.estDepartureAirport}
+                                      : row.estArrivalAirport}
                                   </TableCell>
                                   <TableCell align='right'>
                                     {moment
@@ -1856,9 +1856,9 @@ const Dashboard = ({
                                     {row.icao24}
                                   </TableCell>
                                   <TableCell align='right'>
-                                    {row.estDepartureAirport === null
+                                    {row.estArrivalAirport === null
                                       ? 'N/A'
-                                      : row.estDepartureAirport}
+                                      : row.estArrivalAirport}
                                   </TableCell>
                                   <TableCell align='right'>
                                     {moment
@@ -2039,9 +2039,9 @@ const Dashboard = ({
                                     {row.icao24}
                                   </TableCell>
                                   <TableCell align='right'>
-                                    {row.estDepartureAirport === null
+                                    {row.estArrivalAirport === null
                                       ? 'N/A'
-                                      : row.estDepartureAirport}
+                                      : row.estArrivalAirport}
                                   </TableCell>
                                   <TableCell align='right'>
                                     {moment
@@ -2222,9 +2222,9 @@ const Dashboard = ({
                                     {row.icao24}
                                   </TableCell>
                                   <TableCell align='right'>
-                                    {row.estDepartureAirport === null
+                                    {row.estArrivalAirport === null
                                       ? 'N/A'
-                                      : row.estDepartureAirport}
+                                      : row.estArrivalAirport}
                                   </TableCell>
                                   <TableCell align='right'>
                                     {moment
