@@ -7,11 +7,11 @@ import {
 } from './types';
 
 import axios from 'axios';
-const base_url = 'https://covenworks.herokuapp.com';
-// const base_url = 'http://localhost:3500';
+// const base_url = 'https://covenworks.herokuapp.com';
+const base_url = 'http://localhost:3500';
 
-export const fetchArrivals = (airport, begin, end) => async dispatch => {
-  const body = JSON.stringify({ airport, begin, end });
+export const fetchArrivals = (airport, days) => async dispatch => {
+  const body = JSON.stringify({ airport, days});
     dispatch({ type: LOADING });
 
   const config = {
@@ -36,8 +36,8 @@ export const fetchArrivals = (airport, begin, end) => async dispatch => {
     dispatch({ type: FETCH_ARRIVALS_FAIL, payload: error.toString() });
   }
 };
-export const fetchDepartures = (airport, begin, end) => async dispatch => {
-  const body = JSON.stringify({ airport, begin, end });
+export const fetchDepartures = (airport,days) => async dispatch => {
+  const body = JSON.stringify({ airport,days });
     dispatch({ type: LOADING });
 
   const config = {
@@ -52,6 +52,7 @@ export const fetchDepartures = (airport, begin, end) => async dispatch => {
       body,
       config
     );
+    console.log(response.data)
     if (response.data.success) {
       dispatch({ type: FETCH_DEPARTURES_SUCCESS, payload: response.data });
     } else {

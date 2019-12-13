@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -162,12 +162,16 @@ const useStyles = makeStyles(theme => ({
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    height: '100vh',
+    height: '100vh'
     // overflow: 'auto'
   },
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4)
+  },
+  try: {
+    width: 'auto',
+    fontSize: '2px'
   },
   paper: {
     padding: theme.spacing(2),
@@ -207,51 +211,52 @@ const Dashboard = ({
   loading
 }) => {
   const [formData, setFormData] = useState({
-    begin1: '',
-    end1: '',
-    begin2: '',
-    end2: '',
-    begin3: '',
-    end3: '',
-    begin4: '',
-    end4: '',
-    begin5: '',
-    end5: '',
-    begin6: '',
-    end6: '',
-    begin7: '',
-    end7: '',
-    begin8: '',
-    end8: '',
-    begin9: '',
-    end9: '',
-    begin10: '',
-    end10: ''
+    days1: 'Select',
+    days1b: 'Select',
+    days2: 'Select',
+    days2b: 'Select',
+    days3: 'Select',
+    days3b: 'Select',
+    days4: 'Select',
+    days4b: 'Select',
+    days5: 'Select',
+    days5b: 'Select',
+    days6: 'Select',
+    days6b: 'Select',
+    days7: 'Select',
+    days7b: 'Select',
+    days8: 'Select',
+    days8b: 'Select',
+    days9: 'Select',
+    days9b: 'Select',
+    days10: 'Select',
+    days10b: 'Select'
   });
   const {
-    begin1,
-    end1,
-    begin2,
-    end2,
-    begin3,
-    end3,
-    begin4,
-    end4,
-    begin5,
-    end5,
-    begin6,
-    end6,
-    begin7,
-    end7,
-    begin8,
-    end8,
-    begin9,
-    end9,
-    begin10,
-    end10
+    days1,
+    days1b,
+    days2,
+    days2b,
+    days3,
+    days3b,
+    days4,
+    days4b,
+    days5,
+    days5b,
+    days6,
+    days6b,
+    days7,
+    days7b,
+    days8,
+    days8b,
+    days9,
+    days9b,
+    days10,
+    days10b
   } = formData;
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    console.log(formData.days1);
   };
 
   const classes = useStyles();
@@ -441,86 +446,130 @@ const Dashboard = ({
                   <h2>Hartsfield–Jackson Atlanta International Airport</h2>
                   <Paper className={classes2.root}>
                     <div className={classes2.tableWrapper}>
-                      <h6>
-                        Choose a range to search from. Test date is 29 Jan 2018,
-                        12noon - 29 Jan 2018, 1pm
-                      </h6>
-                      <form
-                        onSubmit={e => {
-                          e.preventDefault();
-                          fetchArrivals(
-                            'KATL',
-                            moment(begin1).format('X'),
-                            moment(end1).format('X')
-                          );
-                          fetchDepartures(
-                            'KATL',
-                            moment(begin1).format('X'),
-                            moment(end1).format('X')
-                          );
-                        }}
-                        className={classes.container}
-                        noValidate>
-                        <TextField
-                          name='begin1'
-                          value={begin1}
-                          id='begin1'
-                          onChange={e => onChange(e)}
-                          label='Begin'
-                          type='datetime-local'
-                          className={classes.textField}
-                          InputLabelProps={{
-                            shrink: true
-                          }}
-                        />
-                        <TextField
-                          name='end1'
-                          value={end1}
-                          id='end1'
-                          onChange={e => onChange(e)}
-                          label='End'
-                          type='datetime-local'
-                          className={classes.textField}
-                          InputLabelProps={{
-                            shrink: true
-                          }}
-                        />
-                        <Button
-                          type='submit'
-                          variant='contained'
-                          className={classes.submit}>
-                          {!loading ? 'Search' : 'Searching'}
-                        </Button>
-                      </form>
+                      <div className=''>
+                        <h6>
+                          <strong>Arriving flights in the last</strong>{' '}
+                          <select
+                            className='app-modal__dropdown'
+                            name='days1'
+                            value={days1}
+                            onChange={e => {
+                              onChange(e);
+                            }}>
+                            <option value='Select'>Select</option>
+                            <option value='1'>1 day</option>
+                            <option value='3'> 3 days</option>
+                            <option value='7'>7 days</option>
+                          </select>{' '}
+                          <Button onClick={() => fetchArrivals('KATL', days1)}>
+                            Search
+                          </Button>
+                        </h6>
+                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
+                          
+                        </div> */}
+                        {arrivals.length <= 0 ? (
+                          'No records found'
+                        ) : (
+                          <Fragment>
+                            <Table
+                              stickyHeader
+                              className={classes2.table}
+                              aria-label='custom pagination sticky table'>
+                              <TableHead>
+                                <TableRow>
+                                  <StyledTableCell>icao24</StyledTableCell>
 
-                      <Table
-                        stickyHeader
-                        className={classes2.table}
-                        aria-label='custom pagination sticky table'>
-                        <TableHead>
-                          <TableRow>
-                            <StyledTableCell>Arrivals</StyledTableCell>
-                            <StyledTableCell>icao24</StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Departure Airport
+                                  </StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Time of Arrival
+                                  </StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Time of Departure
+                                  </StyledTableCell>
+                                </TableRow>
+                              </TableHead>
+                              <TableBody>
+                                {arrivals.data.map(row => (
+                                  <TableRow key={uuid()}>
+                                    <TableCell component='th' scope='row'>
+                                      {row.icao24}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {row.estDepartureAirport === null
+                                        ? 'N/A'
+                                        : row.estDepartureAirport}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {moment
+                                        .unix(row.firstSeen)
+                                        .format('MMMM Do YYYY, hh:mm:ss a')}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {moment
+                                        .unix(row.lastSeen)
+                                        .format('MMMM Do YYYY, hh:mm:ss a')}
+                                    </TableCell>
+                                  </TableRow>
+                                ))}
+                                }
+                              </TableBody>
+                            </Table>
+                          </Fragment>
+                        )}
+                        <h6>
+                          {' '}
+                          <strong>Departing flights in the last </strong>
+                          <select
+                            className='app-modal__dropdown'
+                            name='days1b'
+                            value={days1b}
+                            onChange={e => {
+                              onChange(e);
+                            }}>
+                            <option value='Select'>Select</option>
+                            <option value='1'>1 day</option>
+                            <option value='3'> 3 days</option>
+                            <option value='7'>7 days</option>
+                          </select>
+                          <Button
+                            onClick={() => fetchDepartures('KATL', days1b)}>
+                            Search
+                          </Button>
+                        </h6>
+                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
+                          
+                        </div> */}
+                      </div>
 
-                            <StyledTableCell align='right'>
-                              Departure Airport
-                            </StyledTableCell>
-                            <StyledTableCell align='right'>
-                              Time of Departure
-                            </StyledTableCell>
-                            <StyledTableCell align='right'>
-                              Time of Arrival
-                            </StyledTableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {arrivals.length <= 0
-                            ? 'No records found'
-                            : arrivals.data.map(row => (
+                      {departures.length <= 0 ? (
+                        'No records found'
+                      ) : (
+                        <Fragment>
+                          <Table
+                            stickyHeader
+                            className={classes2.table}
+                            aria-label='custom pagination sticky table'>
+                            <TableHead>
+                              <TableRow>
+                                <StyledTableCell>icao24</StyledTableCell>
+
+                                <StyledTableCell align='right'>
+                                  Arrival Airport
+                                </StyledTableCell>
+                                <StyledTableCell align='right'>
+                                  Time of Departure
+                                </StyledTableCell>
+                                <StyledTableCell align='right'>
+                                  Time of Arrival
+                                </StyledTableCell>
+                              </TableRow>
+                            </TableHead>
+                            <TableBody>
+                              {departures.data.map(row => (
                                 <TableRow key={uuid()}>
-                                  <TableCell
-                                    component='th'
-                                    scope='row'></TableCell>
                                   <TableCell component='th' scope='row'>
                                     {row.icao24}
                                   </TableCell>
@@ -541,58 +590,11 @@ const Dashboard = ({
                                   </TableCell>
                                 </TableRow>
                               ))}
-                        </TableBody>
-                      </Table>
-                      <Table
-                        stickyHeader
-                        className={classes2.table}
-                        aria-label='custom pagination sticky table'>
-                        <TableHead>
-                          <TableRow>
-                            <StyledTableCell>Departures</StyledTableCell>
-                            <StyledTableCell>icao24</StyledTableCell>
-
-                            <StyledTableCell align='right'>
-                              Arrival Airport
-                            </StyledTableCell>
-                            <StyledTableCell align='right'>
-                              Time of Arrival
-                            </StyledTableCell>
-                            <StyledTableCell align='right'>
-                              Time of Departure
-                            </StyledTableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {departures.length <= 0
-                            ? 'No records found'
-                            : departures.data.map(row => (
-                                <TableRow key={uuid()}>
-                                  <TableCell
-                                    component='th'
-                                    scope='row'></TableCell>
-                                  <TableCell component='th' scope='row'>
-                                    {row.icao24}
-                                  </TableCell>
-                                  <TableCell align='right'>
-                                    {row.estArrivalAirport === null
-                                      ? 'N/A'
-                                      : row.estArrivalAirport}
-                                  </TableCell>
-                                  <TableCell align='right'>
-                                    {moment
-                                      .unix(row.firstSeen)
-                                      .format('MMMM Do YYYY, hh:mm:ss a')}
-                                  </TableCell>
-                                  <TableCell align='right'>
-                                    {moment
-                                      .unix(row.lastSeen)
-                                      .format('MMMM Do YYYY, hh:mm:ss a')}
-                                  </TableCell>
-                                </TableRow>
-                              ))}
-                        </TableBody>
-                      </Table>
+                              }
+                            </TableBody>
+                          </Table>
+                        </Fragment>
+                      )}
                     </div>
                   </Paper>
                 </div>
@@ -624,161 +626,162 @@ const Dashboard = ({
                 onClose={handleModalClose2}>
                 <div style={modalStyle} className={classes.paper2}>
                   <h2>Denver International Airport</h2>
-                  <div className={classes2.tableWrapper}>
-                    <h6>
-                      Choose a range to search from. Test date is 29 Jan 2018,
-                      12noon - 29 Jan 2018, 1pm
-                    </h6>
-                    <form
-                      onSubmit={e => {
-                        e.preventDefault();
-                        fetchArrivals(
-                          'KDEN',
-                          moment(begin2).format('X'),
-                          moment(end2).format('X')
-                        );
-                        fetchDepartures(
-                          'KDEN',
-                          moment(begin2).format('X'),
-                          moment(end2).format('X')
-                        );
-                      }}
-                      className={classes.container}
-                      noValidate>
-                      <TextField
-                        name='begin2'
-                        value={begin2}
-                        id='begin2'
-                        onChange={e => onChange(e)}
-                        label='Begin'
-                        type='datetime-local'
-                        className={classes.textField}
-                        InputLabelProps={{
-                          shrink: true
-                        }}
-                      />
-                      <TextField
-                        name='end2'
-                        value={end2}
-                        id='end2'
-                        onChange={e => onChange(e)}
-                        label='End'
-                        type='datetime-local'
-                        className={classes.textField}
-                        InputLabelProps={{
-                          shrink: true
-                        }}
-                      />
-                      <Button
-                        type='submit'
-                        variant='contained'
-                        className={classes.submit}>
-                        {!loading ? 'Search' : 'Searching'}
-                      </Button>
-                    </form>
-                    <Table
-                      stickyHeader
-                      className={classes2.table}
-                      aria-label='custom pagination sticky table'>
-                      <TableHead>
-                        <TableRow>
-                          <StyledTableCell>Arrivals</StyledTableCell>
-                          <StyledTableCell>icao24</StyledTableCell>
+                  <Paper className={classes2.root}>
+                    <div className={classes2.tableWrapper}>
+                      <div className=''>
+                        <h6>
+                          <strong>Arriving flights in the last</strong>{' '}
+                          <select
+                            className='app-modal__dropdown'
+                            name='days2'
+                            value={days2}
+                            onChange={e => {
+                              onChange(e);
+                            }}>
+                            <option value='Select'>Select</option>
+                            <option value='1'>1 day</option>
+                            <option value='3'> 3 days</option>
+                            <option value='7'>7 days</option>
+                          </select>{' '}
+                          <Button onClick={() => fetchArrivals('KDEN', days2)}>
+                            Search
+                          </Button>
+                        </h6>
+                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
+                          
+                        </div> */}
+                        {arrivals.length <= 0 ? (
+                          'No records found'
+                        ) : (
+                          <Fragment>
+                            <Table
+                              stickyHeader
+                              className={classes2.table}
+                              aria-label='custom pagination sticky table'>
+                              <TableHead>
+                                <TableRow>
+                                  <StyledTableCell>icao24</StyledTableCell>
 
-                          <StyledTableCell align='right'>
-                            Departure Airport
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Departure
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Arrival
-                          </StyledTableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {arrivals.length <= 0
-                          ? 'No records found'
-                          : arrivals.data.map(row => (
-                              <TableRow key={uuid()}>
-                                <TableCell
-                                  component='th'
-                                  scope='row'></TableCell>
-                                <TableCell component='th' scope='row'>
-                                  {row.icao24}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {row.estDepartureAirport === null
-                                    ? 'N/A'
-                                    : row.estDepartureAirport}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.firstSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.lastSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                              </TableRow>
-                            ))}
-                      </TableBody>
-                    </Table>
-                    <Table
-                      stickyHeader
-                      className={classes2.table}
-                      aria-label='custom pagination sticky table'>
-                      <TableHead>
-                        <TableRow>
-                          <StyledTableCell>Departures</StyledTableCell>
-                          <StyledTableCell>icao24</StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Departure Airport
+                                  </StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Time of Arrival
+                                  </StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Time of Departure
+                                  </StyledTableCell>
+                                </TableRow>
+                              </TableHead>
+                              <TableBody>
+                                {arrivals.data.map(row => (
+                                  <TableRow key={uuid()}>
+                                    <TableCell component='th' scope='row'>
+                                      {row.icao24}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {row.estDepartureAirport === null
+                                        ? 'N/A'
+                                        : row.estDepartureAirport}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {moment
+                                        .unix(row.firstSeen)
+                                        .format('MMMM Do YYYY, hh:mm:ss a')}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {moment
+                                        .unix(row.lastSeen)
+                                        .format('MMMM Do YYYY, hh:mm:ss a')}
+                                    </TableCell>
+                                  </TableRow>
+                                ))}
+                                }
+                              </TableBody>
+                            </Table>
+                          </Fragment>
+                        )}
+                        <h6>
+                          {' '}
+                          <strong>Departing flights in the last </strong>
+                          <select
+                            className='app-modal__dropdown'
+                            name='days2b'
+                            value={days2b}
+                            onChange={e => {
+                              onChange(e);
+                            }}>
+                            <option value='Select'>Select</option>
+                            <option value='1'>1 day</option>
+                            <option value='3'> 3 days</option>
+                            <option value='7'>7 days</option>
+                          </select>
+                          <Button
+                            onClick={() => fetchDepartures('KDEN', days2b)}>
+                            Search
+                          </Button>
+                        </h6>
+                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
+                          
+                        </div> */}
+                      </div>
 
-                          <StyledTableCell align='right'>
-                            Arrival Airport
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Arrival
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Departure
-                          </StyledTableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {departures.length <= 0
-                          ? 'No records found'
-                          : departures.data.map(row => (
-                              <TableRow key={uuid()}>
-                                <TableCell
-                                  component='th'
-                                  scope='row'></TableCell>
-                                <TableCell component='th' scope='row'>
-                                  {row.icao24}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {row.estArrivalAirport === null
-                                    ? 'N/A'
-                                    : row.estArrivalAirport}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.firstSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.lastSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
+                      {departures.length <= 0 ? (
+                        'No records found'
+                      ) : (
+                        <Fragment>
+                          <Table
+                            stickyHeader
+                            className={classes2.table}
+                            aria-label='custom pagination sticky table'>
+                            <TableHead>
+                              <TableRow>
+                                <StyledTableCell>icao24</StyledTableCell>
+
+                                <StyledTableCell align='right'>
+                                  Arrival Airport
+                                </StyledTableCell>
+                                <StyledTableCell align='right'>
+                                  Time of Departure
+                                </StyledTableCell>
+                                <StyledTableCell align='right'>
+                                  Time of Arrival
+                                </StyledTableCell>
                               </TableRow>
-                            ))}
-                      </TableBody>
-                    </Table>
-                  </div>
+                            </TableHead>
+                            <TableBody>
+                              {departures.data.map(row => (
+                                <TableRow key={uuid()}>
+                                  <TableCell component='th' scope='row'>
+                                    {row.icao24}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {row.estDepartureAirport === null
+                                      ? 'N/A'
+                                      : row.estDepartureAirport}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.firstSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.lastSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                              }
+                            </TableBody>
+                          </Table>
+                        </Fragment>
+                      )}
+                    </div>
+                  </Paper>
                 </div>
               </Modal>
+
               <GridListTileBar
                 title='Denver International Airport'
                 actionIcon={
@@ -806,162 +809,162 @@ const Dashboard = ({
                 onClose={handleModalClose3}>
                 <div style={modalStyle} className={classes.paper2}>
                   <h2>Dubai International Airport</h2>
+                  <Paper className={classes2.root}>
+                    <div className={classes2.tableWrapper}>
+                      <div className=''>
+                        <h6>
+                          <strong>Arriving flights in the last</strong>{' '}
+                          <select
+                            className='app-modal__dropdown'
+                            name='days3'
+                            value={days3}
+                            onChange={e => {
+                              onChange(e);
+                            }}>
+                            <option value='Select'>Select</option>
+                            <option value='1'>1 day</option>
+                            <option value='3'> 3 days</option>
+                            <option value='7'>7 days</option>
+                          </select>{' '}
+                          <Button onClick={() => fetchArrivals('OMDB', days3)}>
+                            Search
+                          </Button>
+                        </h6>
+                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
+                          
+                        </div> */}
+                        {arrivals.length <= 0 ? (
+                          'No records found'
+                        ) : (
+                          <Fragment>
+                            <Table
+                              stickyHeader
+                              className={classes2.table}
+                              aria-label='custom pagination sticky table'>
+                              <TableHead>
+                                <TableRow>
+                                  <StyledTableCell>icao24</StyledTableCell>
 
-                  <div className={classes2.tableWrapper}>
-                    <h6>
-                      Choose a range to search from. Test date is 29 Jan 2018,
-                      12noon - 29 Jan 2018, 1pm
-                    </h6>
-                    <form
-                      onSubmit={e => {
-                        e.preventDefault();
-                        fetchArrivals(
-                          'OMDB',
-                          moment(begin3).format('X'),
-                          moment(end3).format('X')
-                        );
-                        fetchDepartures(
-                          'OMDB',
-                          moment(begin3).format('X'),
-                          moment(end3).format('X')
-                        );
-                      }}
-                      className={classes.container}
-                      noValidate>
-                      <TextField
-                        name='begin3'
-                        value={begin3}
-                        id='begin3'
-                        onChange={e => onChange(e)}
-                        label='Begin'
-                        type='datetime-local'
-                        className={classes.textField}
-                        InputLabelProps={{
-                          shrink: true
-                        }}
-                      />
-                      <TextField
-                        name='end3'
-                        value={end3}
-                        id='end3'
-                        onChange={e => onChange(e)}
-                        label='End'
-                        type='datetime-local'
-                        className={classes.textField}
-                        InputLabelProps={{
-                          shrink: true
-                        }}
-                      />
-                      <Button
-                        type='submit'
-                        variant='contained'
-                        className={classes.submit}>
-                        {!loading ? 'Search' : 'Searching'}
-                      </Button>
-                    </form>
-                    <Table
-                      stickyHeader
-                      className={classes2.table}
-                      aria-label='custom pagination sticky table'>
-                      <TableHead>
-                        <TableRow>
-                          <StyledTableCell>Arrivals</StyledTableCell>
-                          <StyledTableCell>icao24</StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Departure Airport
+                                  </StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Time of Arrival
+                                  </StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Time of Departure
+                                  </StyledTableCell>
+                                </TableRow>
+                              </TableHead>
+                              <TableBody>
+                                {arrivals.data.map(row => (
+                                  <TableRow key={uuid()}>
+                                    <TableCell component='th' scope='row'>
+                                      {row.icao24}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {row.estDepartureAirport === null
+                                        ? 'N/A'
+                                        : row.estDepartureAirport}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {moment
+                                        .unix(row.firstSeen)
+                                        .format('MMMM Do YYYY, hh:mm:ss a')}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {moment
+                                        .unix(row.lastSeen)
+                                        .format('MMMM Do YYYY, hh:mm:ss a')}
+                                    </TableCell>
+                                  </TableRow>
+                                ))}
+                                }
+                              </TableBody>
+                            </Table>
+                          </Fragment>
+                        )}
+                        <h6>
+                          {' '}
+                          <strong>Departing flights in the last </strong>
+                          <select
+                            className='app-modal__dropdown'
+                            name='days3b'
+                            value={days3b}
+                            onChange={e => {
+                              onChange(e);
+                            }}>
+                            <option value='Select'>Select</option>
+                            <option value='1'>1 day</option>
+                            <option value='3'> 3 days</option>
+                            <option value='7'>7 days</option>
+                          </select>
+                          <Button
+                            onClick={() => fetchDepartures('OMDB', days3b)}>
+                            Search
+                          </Button>
+                        </h6>
+                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
+                          
+                        </div> */}
+                      </div>
 
-                          <StyledTableCell align='right'>
-                            Departure Airport
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Departure
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Arrival
-                          </StyledTableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {arrivals.length <= 0
-                          ? 'No records found'
-                          : arrivals.data.map(row => (
-                              <TableRow key={uuid()}>
-                                <TableCell
-                                  component='th'
-                                  scope='row'></TableCell>
-                                <TableCell component='th' scope='row'>
-                                  {row.icao24}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {row.estDepartureAirport === null
-                                    ? 'N/A'
-                                    : row.estDepartureAirport}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.firstSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.lastSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
+                      {departures.length <= 0 ? (
+                        'No records found'
+                      ) : (
+                        <Fragment>
+                          <Table
+                            stickyHeader
+                            className={classes2.table}
+                            aria-label='custom pagination sticky table'>
+                            <TableHead>
+                              <TableRow>
+                                <StyledTableCell>icao24</StyledTableCell>
+
+                                <StyledTableCell align='right'>
+                                  Arrival Airport
+                                </StyledTableCell>
+                                <StyledTableCell align='right'>
+                                  Time of Departure
+                                </StyledTableCell>
+                                <StyledTableCell align='right'>
+                                  Time of Arrival
+                                </StyledTableCell>
                               </TableRow>
-                            ))}
-                      </TableBody>
-                    </Table>
-                    <Table
-                      stickyHeader
-                      className={classes2.table}
-                      aria-label='custom pagination sticky table'>
-                      <TableHead>
-                        <TableRow>
-                          <StyledTableCell>Departures</StyledTableCell>
-                          <StyledTableCell>icao24</StyledTableCell>
-
-                          <StyledTableCell align='right'>
-                            Arrival Airport
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Arrival
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Departure
-                          </StyledTableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {departures.length <= 0
-                          ? 'No records found'
-                          : departures.data.map(row => (
-                              <TableRow key={uuid()}>
-                                <TableCell
-                                  component='th'
-                                  scope='row'></TableCell>
-                                <TableCell component='th' scope='row'>
-                                  {row.icao24}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {row.estArrivalAirport === null
-                                    ? 'N/A'
-                                    : row.estArrivalAirport}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.firstSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.lastSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                              </TableRow>
-                            ))}
-                      </TableBody>
-                    </Table>
-                  </div>
+                            </TableHead>
+                            <TableBody>
+                              {departures.data.map(row => (
+                                <TableRow key={uuid()}>
+                                  <TableCell component='th' scope='row'>
+                                    {row.icao24}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {row.estDepartureAirport === null
+                                      ? 'N/A'
+                                      : row.estDepartureAirport}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.firstSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.lastSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                              }
+                            </TableBody>
+                          </Table>
+                        </Fragment>
+                      )}
+                    </div>
+                  </Paper>
                 </div>
               </Modal>
+
               <GridListTileBar
                 title='Dubai International Airport'
                 actionIcon={
@@ -974,6 +977,7 @@ const Dashboard = ({
                 }
               />
             </GridListTile>
+
             <GridListTile
               style={{ cursor: 'pointer' }}
               onClick={handleModalOpen4}
@@ -989,161 +993,162 @@ const Dashboard = ({
                 onClose={handleModalClose4}>
                 <div style={modalStyle} className={classes.paper2}>
                   <h2>Los Angeles International Airport</h2>
-                  <div className={classes2.tableWrapper}>
-                    <h6>
-                      Choose a range to search from. Test date is 29 Jan 2018,
-                      12noon - 29 Jan 2018, 1pm
-                    </h6>
-                    <form
-                      onSubmit={e => {
-                        e.preventDefault();
-                        fetchArrivals(
-                          'KLAX',
-                          moment(begin4).format('X'),
-                          moment(end4).format('X')
-                        );
-                        fetchDepartures(
-                          'KLAX',
-                          moment(begin4).format('X'),
-                          moment(end4).format('X')
-                        );
-                      }}
-                      className={classes.container}
-                      noValidate>
-                      <TextField
-                        name='begin4'
-                        value={begin4}
-                        id='begin4'
-                        onChange={e => onChange(e)}
-                        label='Begin'
-                        type='datetime-local'
-                        className={classes.textField}
-                        InputLabelProps={{
-                          shrink: true
-                        }}
-                      />
-                      <TextField
-                        name='end4'
-                        value={end4}
-                        id='end4'
-                        onChange={e => onChange(e)}
-                        label='End'
-                        type='datetime-local'
-                        className={classes.textField}
-                        InputLabelProps={{
-                          shrink: true
-                        }}
-                      />
-                      <Button
-                        type='submit'
-                        variant='contained'
-                        className={classes.submit}>
-                        {!loading ? 'Search' : 'Searching'}
-                      </Button>
-                    </form>
-                    <Table
-                      stickyHeader
-                      className={classes2.table}
-                      aria-label='custom pagination sticky table'>
-                      <TableHead>
-                        <TableRow>
-                          <StyledTableCell>Arrivals</StyledTableCell>
-                          <StyledTableCell>icao24</StyledTableCell>
+                  <Paper className={classes2.root}>
+                    <div className={classes2.tableWrapper}>
+                      <div className=''>
+                        <h6>
+                          <strong>Arriving flights in the last</strong>{' '}
+                          <select
+                            className='app-modal__dropdown'
+                            name='days4'
+                            value={days4}
+                            onChange={e => {
+                              onChange(e);
+                            }}>
+                            <option value='Select'>Select</option>
+                            <option value='1'>1 day</option>
+                            <option value='3'> 3 days</option>
+                            <option value='7'>7 days</option>
+                          </select>{' '}
+                          <Button onClick={() => fetchArrivals('KLAX', days4)}>
+                            Search
+                          </Button>
+                        </h6>
+                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
+                          
+                        </div> */}
+                        {arrivals.length <= 0 ? (
+                          'No records found'
+                        ) : (
+                          <Fragment>
+                            <Table
+                              stickyHeader
+                              className={classes2.table}
+                              aria-label='custom pagination sticky table'>
+                              <TableHead>
+                                <TableRow>
+                                  <StyledTableCell>icao24</StyledTableCell>
 
-                          <StyledTableCell align='right'>
-                            Departure Airport
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Departure
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Arrival
-                          </StyledTableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {arrivals.length <= 0
-                          ? 'No records found'
-                          : arrivals.data.map(row => (
-                              <TableRow key={uuid()}>
-                                <TableCell
-                                  component='th'
-                                  scope='row'></TableCell>
-                                <TableCell component='th' scope='row'>
-                                  {row.icao24}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {row.estDepartureAirport === null
-                                    ? 'N/A'
-                                    : row.estDepartureAirport}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.firstSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.lastSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                              </TableRow>
-                            ))}
-                      </TableBody>
-                    </Table>
-                    <Table
-                      stickyHeader
-                      className={classes2.table}
-                      aria-label='custom pagination sticky table'>
-                      <TableHead>
-                        <TableRow>
-                          <StyledTableCell>Departures</StyledTableCell>
-                          <StyledTableCell>icao24</StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Departure Airport
+                                  </StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Time of Arrival
+                                  </StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Time of Departure
+                                  </StyledTableCell>
+                                </TableRow>
+                              </TableHead>
+                              <TableBody>
+                                {arrivals.data.map(row => (
+                                  <TableRow key={uuid()}>
+                                    <TableCell component='th' scope='row'>
+                                      {row.icao24}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {row.estDepartureAirport === null
+                                        ? 'N/A'
+                                        : row.estDepartureAirport}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {moment
+                                        .unix(row.firstSeen)
+                                        .format('MMMM Do YYYY, hh:mm:ss a')}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {moment
+                                        .unix(row.lastSeen)
+                                        .format('MMMM Do YYYY, hh:mm:ss a')}
+                                    </TableCell>
+                                  </TableRow>
+                                ))}
+                                }
+                              </TableBody>
+                            </Table>
+                          </Fragment>
+                        )}
+                        <h6>
+                          {' '}
+                          <strong>Departing flights in the last </strong>
+                          <select
+                            className='app-modal__dropdown'
+                            name='days4b'
+                            value={days4b}
+                            onChange={e => {
+                              onChange(e);
+                            }}>
+                            <option value='Select'>Select</option>
+                            <option value='1'>1 day</option>
+                            <option value='3'> 3 days</option>
+                            <option value='7'>7 days</option>
+                          </select>
+                          <Button
+                            onClick={() => fetchDepartures('KLAX', days4b)}>
+                            Search
+                          </Button>
+                        </h6>
+                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
+                          
+                        </div> */}
+                      </div>
 
-                          <StyledTableCell align='right'>
-                            Arrival Airport
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Arrival
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Departure
-                          </StyledTableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {departures.length <= 0
-                          ? 'No records found'
-                          : departures.data.map(row => (
-                              <TableRow key={uuid()}>
-                                <TableCell
-                                  component='th'
-                                  scope='row'></TableCell>
-                                <TableCell component='th' scope='row'>
-                                  {row.icao24}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {row.estArrivalAirport === null
-                                    ? 'N/A'
-                                    : row.estArrivalAirport}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.firstSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.lastSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
+                      {departures.length <= 0 ? (
+                        'No records found'
+                      ) : (
+                        <Fragment>
+                          <Table
+                            stickyHeader
+                            className={classes2.table}
+                            aria-label='custom pagination sticky table'>
+                            <TableHead>
+                              <TableRow>
+                                <StyledTableCell>icao24</StyledTableCell>
+
+                                <StyledTableCell align='right'>
+                                  Arrival Airport
+                                </StyledTableCell>
+                                <StyledTableCell align='right'>
+                                  Time of Departure
+                                </StyledTableCell>
+                                <StyledTableCell align='right'>
+                                  Time of Arrival
+                                </StyledTableCell>
                               </TableRow>
-                            ))}
-                      </TableBody>
-                    </Table>
-                  </div>
+                            </TableHead>
+                            <TableBody>
+                              {departures.data.map(row => (
+                                <TableRow key={uuid()}>
+                                  <TableCell component='th' scope='row'>
+                                    {row.icao24}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {row.estDepartureAirport === null
+                                      ? 'N/A'
+                                      : row.estDepartureAirport}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.firstSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.lastSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                              }
+                            </TableBody>
+                          </Table>
+                        </Fragment>
+                      )}
+                    </div>
+                  </Paper>
                 </div>
               </Modal>
+
               <GridListTileBar
                 title='Los Angeles International Airport'
                 actionIcon={
@@ -1162,7 +1167,8 @@ const Dashboard = ({
               key='5'>
               <img
                 src='https://image.shutterstock.com/image-photo/tokyo-november-13-billboards-shinjukus-600w-1012724596.jpg'
-                alt='Tokyo Haneda Airport'
+                alt='Tokyo Haneda Airpor'
+                t
               />
               <Modal
                 aria-labelledby='simple-modal-title'
@@ -1171,161 +1177,162 @@ const Dashboard = ({
                 onClose={handleModalClose5}>
                 <div style={modalStyle} className={classes.paper2}>
                   <h2>Tokyo Haneda Airport</h2>
-                  <div className={classes2.tableWrapper}>
-                    <h6>
-                      Choose a range to search from. Test date is 29 Jan 2018,
-                      12noon - 29 Jan 2018, 1pm
-                    </h6>
-                    <form
-                      onSubmit={e => {
-                        e.preventDefault();
-                        fetchArrivals(
-                          'RJTT',
-                          moment(begin5).format('X'),
-                          moment(end5).format('X')
-                        );
-                        fetchDepartures(
-                          'RJTT',
-                          moment(begin5).format('X'),
-                          moment(end5).format('X')
-                        );
-                      }}
-                      className={classes.container}
-                      noValidate>
-                      <TextField
-                        name='begin5'
-                        value={begin5}
-                        id='begin5'
-                        onChange={e => onChange(e)}
-                        label='Begin'
-                        type='datetime-local'
-                        className={classes.textField}
-                        InputLabelProps={{
-                          shrink: true
-                        }}
-                      />
-                      <TextField
-                        name='end5'
-                        value={end5}
-                        id='end5'
-                        onChange={e => onChange(e)}
-                        label='End'
-                        type='datetime-local'
-                        className={classes.textField}
-                        InputLabelProps={{
-                          shrink: true
-                        }}
-                      />
-                      <Button
-                        type='submit'
-                        variant='contained'
-                        className={classes.submit}>
-                        {!loading ? 'Search' : 'Searching'}
-                      </Button>
-                    </form>
-                    <Table
-                      stickyHeader
-                      className={classes2.table}
-                      aria-label='custom pagination sticky table'>
-                      <TableHead>
-                        <TableRow>
-                          <StyledTableCell>Arrivals</StyledTableCell>
-                          <StyledTableCell>icao24</StyledTableCell>
+                  <Paper className={classes2.root}>
+                    <div className={classes2.tableWrapper}>
+                      <div className=''>
+                        <h6>
+                          <strong>Arriving flights in the last</strong>{' '}
+                          <select
+                            className='app-modal__dropdown'
+                            name='days5'
+                            value={days5}
+                            onChange={e => {
+                              onChange(e);
+                            }}>
+                            <option value='Select'>Select</option>
+                            <option value='1'>1 day</option>
+                            <option value='3'> 3 days</option>
+                            <option value='7'>7 days</option>
+                          </select>{' '}
+                          <Button onClick={() => fetchArrivals('RJTT', days5)}>
+                            Search
+                          </Button>
+                        </h6>
+                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
+                          
+                        </div> */}
+                        {arrivals.length <= 0 ? (
+                          'No records found'
+                        ) : (
+                          <Fragment>
+                            <Table
+                              stickyHeader
+                              className={classes2.table}
+                              aria-label='custom pagination sticky table'>
+                              <TableHead>
+                                <TableRow>
+                                  <StyledTableCell>icao24</StyledTableCell>
 
-                          <StyledTableCell align='right'>
-                            Departure Airport
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Departure
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Arrival
-                          </StyledTableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {arrivals.length <= 0
-                          ? 'No records found'
-                          : arrivals.data.map(row => (
-                              <TableRow key={uuid()}>
-                                <TableCell
-                                  component='th'
-                                  scope='row'></TableCell>
-                                <TableCell component='th' scope='row'>
-                                  {row.icao24}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {row.estDepartureAirport === null
-                                    ? 'N/A'
-                                    : row.estDepartureAirport}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.firstSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.lastSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                              </TableRow>
-                            ))}
-                      </TableBody>
-                    </Table>
-                    <Table
-                      stickyHeader
-                      className={classes2.table}
-                      aria-label='custom pagination sticky table'>
-                      <TableHead>
-                        <TableRow>
-                          <StyledTableCell>Departures</StyledTableCell>
-                          <StyledTableCell>icao24</StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Departure Airport
+                                  </StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Time of Arrival
+                                  </StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Time of Departure
+                                  </StyledTableCell>
+                                </TableRow>
+                              </TableHead>
+                              <TableBody>
+                                {arrivals.data.map(row => (
+                                  <TableRow key={uuid()}>
+                                    <TableCell component='th' scope='row'>
+                                      {row.icao24}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {row.estDepartureAirport === null
+                                        ? 'N/A'
+                                        : row.estDepartureAirport}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {moment
+                                        .unix(row.firstSeen)
+                                        .format('MMMM Do YYYY, hh:mm:ss a')}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {moment
+                                        .unix(row.lastSeen)
+                                        .format('MMMM Do YYYY, hh:mm:ss a')}
+                                    </TableCell>
+                                  </TableRow>
+                                ))}
+                                }
+                              </TableBody>
+                            </Table>
+                          </Fragment>
+                        )}
+                        <h6>
+                          {' '}
+                          <strong>Departing flights in the last </strong>
+                          <select
+                            className='app-modal__dropdown'
+                            name='days5b'
+                            value={days5b}
+                            onChange={e => {
+                              onChange(e);
+                            }}>
+                            <option value='Select'>Select</option>
+                            <option value='1'>1 day</option>
+                            <option value='3'> 3 days</option>
+                            <option value='7'>7 days</option>
+                          </select>
+                          <Button
+                            onClick={() => fetchDepartures('RJTT', days5b)}>
+                            Search
+                          </Button>
+                        </h6>
+                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
+                          
+                        </div> */}
+                      </div>
 
-                          <StyledTableCell align='right'>
-                            Arrival Airport
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Arrival
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Departure
-                          </StyledTableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {departures.length <= 0
-                          ? 'No records found'
-                          : departures.data.map(row => (
-                              <TableRow key={uuid()}>
-                                <TableCell
-                                  component='th'
-                                  scope='row'></TableCell>
-                                <TableCell component='th' scope='row'>
-                                  {row.icao24}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {row.estArrivalAirport === null
-                                    ? 'N/A'
-                                    : row.estArrivalAirport}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.firstSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.lastSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
+                      {departures.length <= 0 ? (
+                        'No records found'
+                      ) : (
+                        <Fragment>
+                          <Table
+                            stickyHeader
+                            className={classes2.table}
+                            aria-label='custom pagination sticky table'>
+                            <TableHead>
+                              <TableRow>
+                                <StyledTableCell>icao24</StyledTableCell>
+
+                                <StyledTableCell align='right'>
+                                  Arrival Airport
+                                </StyledTableCell>
+                                <StyledTableCell align='right'>
+                                  Time of Departure
+                                </StyledTableCell>
+                                <StyledTableCell align='right'>
+                                  Time of Arrival
+                                </StyledTableCell>
                               </TableRow>
-                            ))}
-                      </TableBody>
-                    </Table>
-                  </div>
+                            </TableHead>
+                            <TableBody>
+                              {departures.data.map(row => (
+                                <TableRow key={uuid()}>
+                                  <TableCell component='th' scope='row'>
+                                    {row.icao24}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {row.estDepartureAirport === null
+                                      ? 'N/A'
+                                      : row.estDepartureAirport}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.firstSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.lastSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                              }
+                            </TableBody>
+                          </Table>
+                        </Fragment>
+                      )}
+                    </div>
+                  </Paper>
                 </div>
               </Modal>
+
               <GridListTileBar
                 title='Tokyo Haneda Airport'
                 actionIcon={
@@ -1353,161 +1360,162 @@ const Dashboard = ({
                 onClose={handleModalClose6}>
                 <div style={modalStyle} className={classes.paper2}>
                   <h2>Heathrow Airport</h2>
-                  <div className={classes2.tableWrapper}>
-                    <h6>
-                      Choose a range to search from. Test date is 29 Jan 2018,
-                      12noon - 29 Jan 2018, 1pm
-                    </h6>
-                    <form
-                      onSubmit={e => {
-                        e.preventDefault();
-                        fetchArrivals(
-                          'EGLL',
-                          moment(begin6).format('X'),
-                          moment(end6).format('X')
-                        );
-                        fetchDepartures(
-                          'EGLL',
-                          moment(begin6).format('X'),
-                          moment(end6).format('X')
-                        );
-                      }}
-                      className={classes.container}
-                      noValidate>
-                      <TextField
-                        name='begin6'
-                        value={begin6}
-                        id='begin6'
-                        onChange={e => onChange(e)}
-                        label='Begin'
-                        type='datetime-local'
-                        className={classes.textField}
-                        InputLabelProps={{
-                          shrink: true
-                        }}
-                      />
-                      <TextField
-                        name='end6'
-                        value={end6}
-                        id='end6'
-                        onChange={e => onChange(e)}
-                        label='End'
-                        type='datetime-local'
-                        className={classes.textField}
-                        InputLabelProps={{
-                          shrink: true
-                        }}
-                      />
-                      <Button
-                        type='submit'
-                        variant='contained'
-                        className={classes.submit}>
-                        {!loading ? 'Search' : 'Searching'}
-                      </Button>
-                    </form>
-                    <Table
-                      stickyHeader
-                      className={classes2.table}
-                      aria-label='custom pagination sticky table'>
-                      <TableHead>
-                        <TableRow>
-                          <StyledTableCell>Arrivals</StyledTableCell>
-                          <StyledTableCell>icao24</StyledTableCell>
+                  <Paper className={classes2.root}>
+                    <div className={classes2.tableWrapper}>
+                      <div className=''>
+                        <h6>
+                          <strong>Arriving flights in the last</strong>{' '}
+                          <select
+                            className='app-modal__dropdown'
+                            name='days6'
+                            value={days6}
+                            onChange={e => {
+                              onChange(e);
+                            }}>
+                            <option value='Select'>Select</option>
+                            <option value='1'>1 day</option>
+                            <option value='3'> 3 days</option>
+                            <option value='7'>7 days</option>
+                          </select>{' '}
+                          <Button onClick={() => fetchArrivals('EGLL', days6)}>
+                            Search
+                          </Button>
+                        </h6>
+                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
+                          
+                        </div> */}
+                        {arrivals.length <= 0 ? (
+                          'No records found'
+                        ) : (
+                          <Fragment>
+                            <Table
+                              stickyHeader
+                              className={classes2.table}
+                              aria-label='custom pagination sticky table'>
+                              <TableHead>
+                                <TableRow>
+                                  <StyledTableCell>icao24</StyledTableCell>
 
-                          <StyledTableCell align='right'>
-                            Departure Airport
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Departure
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Arrival
-                          </StyledTableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {arrivals.length <= 0
-                          ? 'No records found'
-                          : arrivals.data.map(row => (
-                              <TableRow key={uuid()}>
-                                <TableCell
-                                  component='th'
-                                  scope='row'></TableCell>
-                                <TableCell component='th' scope='row'>
-                                  {row.icao24}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {row.estDepartureAirport === null
-                                    ? 'N/A'
-                                    : row.estDepartureAirport}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.firstSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.lastSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                              </TableRow>
-                            ))}
-                      </TableBody>
-                    </Table>
-                    <Table
-                      stickyHeader
-                      className={classes2.table}
-                      aria-label='custom pagination sticky table'>
-                      <TableHead>
-                        <TableRow>
-                          <StyledTableCell>Departures</StyledTableCell>
-                          <StyledTableCell>icao24</StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Departure Airport
+                                  </StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Time of Arrival
+                                  </StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Time of Departure
+                                  </StyledTableCell>
+                                </TableRow>
+                              </TableHead>
+                              <TableBody>
+                                {arrivals.data.map(row => (
+                                  <TableRow key={uuid()}>
+                                    <TableCell component='th' scope='row'>
+                                      {row.icao24}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {row.estDepartureAirport === null
+                                        ? 'N/A'
+                                        : row.estDepartureAirport}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {moment
+                                        .unix(row.firstSeen)
+                                        .format('MMMM Do YYYY, hh:mm:ss a')}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {moment
+                                        .unix(row.lastSeen)
+                                        .format('MMMM Do YYYY, hh:mm:ss a')}
+                                    </TableCell>
+                                  </TableRow>
+                                ))}
+                                }
+                              </TableBody>
+                            </Table>
+                          </Fragment>
+                        )}
+                        <h6>
+                          {' '}
+                          <strong>Departing flights in the last </strong>
+                          <select
+                            className='app-modal__dropdown'
+                            name='days6b'
+                            value={days6b}
+                            onChange={e => {
+                              onChange(e);
+                            }}>
+                            <option value='Select'>Select</option>
+                            <option value='1'>1 day</option>
+                            <option value='3'> 3 days</option>
+                            <option value='7'>7 days</option>
+                          </select>
+                          <Button
+                            onClick={() => fetchDepartures('EGLL', days6b)}>
+                            Search
+                          </Button>
+                        </h6>
+                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
+                          
+                        </div> */}
+                      </div>
 
-                          <StyledTableCell align='right'>
-                            Arrival Airport
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Arrival
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Departure
-                          </StyledTableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {departures.length <= 0
-                          ? 'No records found'
-                          : departures.data.map(row => (
-                              <TableRow key={uuid()}>
-                                <TableCell
-                                  component='th'
-                                  scope='row'></TableCell>
-                                <TableCell component='th' scope='row'>
-                                  {row.icao24}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {row.estArrivalAirport === null
-                                    ? 'N/A'
-                                    : row.estArrivalAirport}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.firstSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.lastSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
+                      {departures.length <= 0 ? (
+                        'No records found'
+                      ) : (
+                        <Fragment>
+                          <Table
+                            stickyHeader
+                            className={classes2.table}
+                            aria-label='custom pagination sticky table'>
+                            <TableHead>
+                              <TableRow>
+                                <StyledTableCell>icao24</StyledTableCell>
+
+                                <StyledTableCell align='right'>
+                                  Arrival Airport
+                                </StyledTableCell>
+                                <StyledTableCell align='right'>
+                                  Time of Departure
+                                </StyledTableCell>
+                                <StyledTableCell align='right'>
+                                  Time of Arrival
+                                </StyledTableCell>
                               </TableRow>
-                            ))}
-                      </TableBody>
-                    </Table>
-                  </div>
+                            </TableHead>
+                            <TableBody>
+                              {departures.data.map(row => (
+                                <TableRow key={uuid()}>
+                                  <TableCell component='th' scope='row'>
+                                    {row.icao24}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {row.estDepartureAirport === null
+                                      ? 'N/A'
+                                      : row.estDepartureAirport}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.firstSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.lastSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                              }
+                            </TableBody>
+                          </Table>
+                        </Fragment>
+                      )}
+                    </div>
+                  </Paper>
                 </div>
               </Modal>
+
               <GridListTileBar
                 title='Heathrow Airport'
                 actionIcon={
@@ -1535,161 +1543,162 @@ const Dashboard = ({
                 onClose={handleModalClose7}>
                 <div style={modalStyle} className={classes.paper2}>
                   <h2>O Hare International Airport</h2>
-                  <div className={classes2.tableWrapper}>
-                    <h6>
-                      Choose a range to search from. Test date is 29 Jan 2018,
-                      12noon - 29 Jan 2018, 1pm
-                    </h6>
-                    <form
-                      onSubmit={e => {
-                        e.preventDefault();
-                        fetchArrivals(
-                          'KORD',
-                          moment(begin7).format('X'),
-                          moment(end7).format('X')
-                        );
-                        fetchDepartures(
-                          'KORD',
-                          moment(begin7).format('X'),
-                          moment(end7).format('X')
-                        );
-                      }}
-                      className={classes.container}
-                      noValidate>
-                      <TextField
-                        name='begin7'
-                        value={begin7}
-                        id='begin7'
-                        onChange={e => onChange(e)}
-                        label='Begin'
-                        type='datetime-local'
-                        className={classes.textField}
-                        InputLabelProps={{
-                          shrink: true
-                        }}
-                      />
-                      <TextField
-                        name='end7'
-                        value={end7}
-                        id='end7'
-                        onChange={e => onChange(e)}
-                        label='End'
-                        type='datetime-local'
-                        className={classes.textField}
-                        InputLabelProps={{
-                          shrink: true
-                        }}
-                      />
-                      <Button
-                        type='submit'
-                        variant='contained'
-                        className={classes.submit}>
-                        {!loading ? 'Search' : 'Searching'}
-                      </Button>
-                    </form>
-                    <Table
-                      stickyHeader
-                      className={classes2.table}
-                      aria-label='custom pagination sticky table'>
-                      <TableHead>
-                        <TableRow>
-                          <StyledTableCell>Arrivals</StyledTableCell>
-                          <StyledTableCell>icao24</StyledTableCell>
+                  <Paper className={classes2.root}>
+                    <div className={classes2.tableWrapper}>
+                      <div className=''>
+                        <h6>
+                          <strong>Arriving flights in the last</strong>{' '}
+                          <select
+                            className='app-modal__dropdown'
+                            name='days7'
+                            value={days7}
+                            onChange={e => {
+                              onChange(e);
+                            }}>
+                            <option value='Select'>Select</option>
+                            <option value='1'>1 day</option>
+                            <option value='3'> 3 days</option>
+                            <option value='7'>7 days</option>
+                          </select>{' '}
+                          <Button onClick={() => fetchArrivals('KORD', days7)}>
+                            Search
+                          </Button>
+                        </h6>
+                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
+                          
+                        </div> */}
+                        {arrivals.length <= 0 ? (
+                          'No records found'
+                        ) : (
+                          <Fragment>
+                            <Table
+                              stickyHeader
+                              className={classes2.table}
+                              aria-label='custom pagination sticky table'>
+                              <TableHead>
+                                <TableRow>
+                                  <StyledTableCell>icao24</StyledTableCell>
 
-                          <StyledTableCell align='right'>
-                            Departure Airport
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Departure
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Arrival
-                          </StyledTableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {arrivals.length <= 0
-                          ? 'No records found'
-                          : arrivals.data.map(row => (
-                              <TableRow key={uuid()}>
-                                <TableCell
-                                  component='th'
-                                  scope='row'></TableCell>
-                                <TableCell component='th' scope='row'>
-                                  {row.icao24}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {row.estDepartureAirport === null
-                                    ? 'N/A'
-                                    : row.estDepartureAirport}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.firstSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.lastSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                              </TableRow>
-                            ))}
-                      </TableBody>
-                    </Table>
-                    <Table
-                      stickyHeader
-                      className={classes2.table}
-                      aria-label='custom pagination sticky table'>
-                      <TableHead>
-                        <TableRow>
-                          <StyledTableCell>Departures</StyledTableCell>
-                          <StyledTableCell>icao24</StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Departure Airport
+                                  </StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Time of Arrival
+                                  </StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Time of Departure
+                                  </StyledTableCell>
+                                </TableRow>
+                              </TableHead>
+                              <TableBody>
+                                {arrivals.data.map(row => (
+                                  <TableRow key={uuid()}>
+                                    <TableCell component='th' scope='row'>
+                                      {row.icao24}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {row.estDepartureAirport === null
+                                        ? 'N/A'
+                                        : row.estDepartureAirport}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {moment
+                                        .unix(row.firstSeen)
+                                        .format('MMMM Do YYYY, hh:mm:ss a')}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {moment
+                                        .unix(row.lastSeen)
+                                        .format('MMMM Do YYYY, hh:mm:ss a')}
+                                    </TableCell>
+                                  </TableRow>
+                                ))}
+                                }
+                              </TableBody>
+                            </Table>
+                          </Fragment>
+                        )}
+                        <h6>
+                          {' '}
+                          <strong>Departing flights in the last </strong>
+                          <select
+                            className='app-modal__dropdown'
+                            name='days7b'
+                            value={days7b}
+                            onChange={e => {
+                              onChange(e);
+                            }}>
+                            <option value='Select'>Select</option>
+                            <option value='1'>1 day</option>
+                            <option value='3'> 3 days</option>
+                            <option value='7'>7 days</option>
+                          </select>
+                          <Button
+                            onClick={() => fetchDepartures('KORD', days7b)}>
+                            Search
+                          </Button>
+                        </h6>
+                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
+                          
+                        </div> */}
+                      </div>
 
-                          <StyledTableCell align='right'>
-                            Arrival Airport
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Arrival
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Departure
-                          </StyledTableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {departures.length <= 0
-                          ? 'No records found'
-                          : departures.data.map(row => (
-                              <TableRow key={uuid()}>
-                                <TableCell
-                                  component='th'
-                                  scope='row'></TableCell>
-                                <TableCell component='th' scope='row'>
-                                  {row.icao24}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {row.estArrivalAirport === null
-                                    ? 'N/A'
-                                    : row.estArrivalAirport}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.firstSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.lastSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
+                      {departures.length <= 0 ? (
+                        'No records found'
+                      ) : (
+                        <Fragment>
+                          <Table
+                            stickyHeader
+                            className={classes2.table}
+                            aria-label='custom pagination sticky table'>
+                            <TableHead>
+                              <TableRow>
+                                <StyledTableCell>icao24</StyledTableCell>
+
+                                <StyledTableCell align='right'>
+                                  Arrival Airport
+                                </StyledTableCell>
+                                <StyledTableCell align='right'>
+                                  Time of Departure
+                                </StyledTableCell>
+                                <StyledTableCell align='right'>
+                                  Time of Arrival
+                                </StyledTableCell>
                               </TableRow>
-                            ))}
-                      </TableBody>
-                    </Table>
-                  </div>
+                            </TableHead>
+                            <TableBody>
+                              {departures.data.map(row => (
+                                <TableRow key={uuid()}>
+                                  <TableCell component='th' scope='row'>
+                                    {row.icao24}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {row.estDepartureAirport === null
+                                      ? 'N/A'
+                                      : row.estDepartureAirport}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.firstSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.lastSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                              }
+                            </TableBody>
+                          </Table>
+                        </Fragment>
+                      )}
+                    </div>
+                  </Paper>
                 </div>
               </Modal>
+
               <GridListTileBar
                 title='O Hare International Airport'
                 actionIcon={
@@ -1717,161 +1726,162 @@ const Dashboard = ({
                 onClose={handleModalClose8}>
                 <div style={modalStyle} className={classes.paper2}>
                   <h2>Hong Kong International Airport</h2>
-                  <div className={classes2.tableWrapper}>
-                    <h6>
-                      Choose a range to search from. Test date is 29 Jan 2018,
-                      12noon - 29 Jan 2018, 1pm
-                    </h6>
-                    <form
-                      onSubmit={e => {
-                        e.preventDefault();
-                        fetchArrivals(
-                          'VHHH',
-                          moment(begin8).format('X'),
-                          moment(end8).format('X')
-                        );
-                        fetchDepartures(
-                          'VHHH',
-                          moment(begin8).format('X'),
-                          moment(end8).format('X')
-                        );
-                      }}
-                      className={classes.container}
-                      noValidate>
-                      <TextField
-                        name='begin8'
-                        value={begin8}
-                        id='begin8'
-                        onChange={e => onChange(e)}
-                        label='Begin'
-                        type='datetime-local'
-                        className={classes.textField}
-                        InputLabelProps={{
-                          shrink: true
-                        }}
-                      />
-                      <TextField
-                        name='en8'
-                        value={end8}
-                        id='end8'
-                        onChange={e => onChange(e)}
-                        label='End'
-                        type='datetime-local'
-                        className={classes.textField}
-                        InputLabelProps={{
-                          shrink: true
-                        }}
-                      />
-                      <Button
-                        type='submit'
-                        variant='contained'
-                        className={classes.submit}>
-                        {!loading ? 'Search' : 'Searching'}
-                      </Button>
-                    </form>
-                    <Table
-                      stickyHeader
-                      className={classes2.table}
-                      aria-label='custom pagination sticky table'>
-                      <TableHead>
-                        <TableRow>
-                          <StyledTableCell>Arrivals</StyledTableCell>
-                          <StyledTableCell>icao24</StyledTableCell>
+                  <Paper className={classes2.root}>
+                    <div className={classes2.tableWrapper}>
+                      <div className=''>
+                        <h6>
+                          <strong>Arriving flights in the last</strong>{' '}
+                          <select
+                            className='app-modal__dropdown'
+                            name='days8'
+                            value={days8}
+                            onChange={e => {
+                              onChange(e);
+                            }}>
+                            <option value='Select'>Select</option>
+                            <option value='1'>1 day</option>
+                            <option value='3'> 3 days</option>
+                            <option value='7'>7 days</option>
+                          </select>{' '}
+                          <Button onClick={() => fetchArrivals('VHHH', days8)}>
+                            Search
+                          </Button>
+                        </h6>
+                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
+                          
+                        </div> */}
+                        {arrivals.length <= 0 ? (
+                          'No records found'
+                        ) : (
+                          <Fragment>
+                            <Table
+                              stickyHeader
+                              className={classes2.table}
+                              aria-label='custom pagination sticky table'>
+                              <TableHead>
+                                <TableRow>
+                                  <StyledTableCell>icao24</StyledTableCell>
 
-                          <StyledTableCell align='right'>
-                            Departure Airport
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Departure
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Arrival
-                          </StyledTableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {arrivals.length <= 0
-                          ? 'No records found'
-                          : arrivals.data.map(row => (
-                              <TableRow key={uuid()}>
-                                <TableCell
-                                  component='th'
-                                  scope='row'></TableCell>
-                                <TableCell component='th' scope='row'>
-                                  {row.icao24}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {row.estDepartureAirport === null
-                                    ? 'N/A'
-                                    : row.estDepartureAirport}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.firstSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.lastSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                              </TableRow>
-                            ))}
-                      </TableBody>
-                    </Table>
-                    <Table
-                      stickyHeader
-                      className={classes2.table}
-                      aria-label='custom pagination sticky table'>
-                      <TableHead>
-                        <TableRow>
-                          <StyledTableCell>Departures</StyledTableCell>
-                          <StyledTableCell>icao24</StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Departure Airport
+                                  </StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Time of Arrival
+                                  </StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Time of Departure
+                                  </StyledTableCell>
+                                </TableRow>
+                              </TableHead>
+                              <TableBody>
+                                {arrivals.data.map(row => (
+                                  <TableRow key={uuid()}>
+                                    <TableCell component='th' scope='row'>
+                                      {row.icao24}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {row.estDepartureAirport === null
+                                        ? 'N/A'
+                                        : row.estDepartureAirport}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {moment
+                                        .unix(row.firstSeen)
+                                        .format('MMMM Do YYYY, hh:mm:ss a')}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {moment
+                                        .unix(row.lastSeen)
+                                        .format('MMMM Do YYYY, hh:mm:ss a')}
+                                    </TableCell>
+                                  </TableRow>
+                                ))}
+                                }
+                              </TableBody>
+                            </Table>
+                          </Fragment>
+                        )}
+                        <h6>
+                          {' '}
+                          <strong>Departing flights in the last </strong>
+                          <select
+                            className='app-modal__dropdown'
+                            name='days8b'
+                            value={days8b}
+                            onChange={e => {
+                              onChange(e);
+                            }}>
+                            <option value='Select'>Select</option>
+                            <option value='1'>1 day</option>
+                            <option value='3'> 3 days</option>
+                            <option value='7'>7 days</option>
+                          </select>
+                          <Button
+                            onClick={() => fetchDepartures('VHHH', days8b)}>
+                            Search
+                          </Button>
+                        </h6>
+                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
+                          
+                        </div> */}
+                      </div>
 
-                          <StyledTableCell align='right'>
-                            Arrival Airport
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Arrival
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Departure
-                          </StyledTableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {departures.length <= 0
-                          ? 'No records found'
-                          : departures.data.map(row => (
-                              <TableRow key={uuid()}>
-                                <TableCell
-                                  component='th'
-                                  scope='row'></TableCell>
-                                <TableCell component='th' scope='row'>
-                                  {row.icao24}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {row.estArrivalAirport === null
-                                    ? 'N/A'
-                                    : row.estArrivalAirport}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.firstSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.lastSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
+                      {departures.length <= 0 ? (
+                        'No records found'
+                      ) : (
+                        <Fragment>
+                          <Table
+                            stickyHeader
+                            className={classes2.table}
+                            aria-label='custom pagination sticky table'>
+                            <TableHead>
+                              <TableRow>
+                                <StyledTableCell>icao24</StyledTableCell>
+
+                                <StyledTableCell align='right'>
+                                  Arrival Airport
+                                </StyledTableCell>
+                                <StyledTableCell align='right'>
+                                  Time of Departure
+                                </StyledTableCell>
+                                <StyledTableCell align='right'>
+                                  Time of Arrival
+                                </StyledTableCell>
                               </TableRow>
-                            ))}
-                      </TableBody>
-                    </Table>
-                  </div>
+                            </TableHead>
+                            <TableBody>
+                              {departures.data.map(row => (
+                                <TableRow key={uuid()}>
+                                  <TableCell component='th' scope='row'>
+                                    {row.icao24}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {row.estDepartureAirport === null
+                                      ? 'N/A'
+                                      : row.estDepartureAirport}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.firstSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.lastSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                              }
+                            </TableBody>
+                          </Table>
+                        </Fragment>
+                      )}
+                    </div>
+                  </Paper>
                 </div>
               </Modal>
+
               <GridListTileBar
                 title='Hong Kong International Airport'
                 actionIcon={
@@ -1899,161 +1909,162 @@ const Dashboard = ({
                 onClose={handleModalClose9}>
                 <div style={modalStyle} className={classes.paper2}>
                   <h2>Amsterdam Airport Schiphol</h2>
-                  <div className={classes2.tableWrapper}>
-                    <h6>
-                      Choose a range to search from. Test date is 29 Jan 2018,
-                      12noon - 29 Jan 2018, 1pm
-                    </h6>
-                    <form
-                      onSubmit={e => {
-                        e.preventDefault();
-                        fetchArrivals(
-                          'EHAM',
-                          moment(begin9).format('X'),
-                          moment(end9).format('X')
-                        );
-                        fetchDepartures(
-                          'EHAM',
-                          moment(begin9).format('X'),
-                          moment(end9).format('X')
-                        );
-                      }}
-                      className={classes.container}
-                      noValidate>
-                      <TextField
-                        name='begin9'
-                        value={begin9}
-                        id='begin9'
-                        onChange={e => onChange(e)}
-                        label='Begin'
-                        type='datetime-local'
-                        className={classes.textField}
-                        InputLabelProps={{
-                          shrink: true
-                        }}
-                      />
-                      <TextField
-                        name='end9'
-                        value={end9}
-                        id='end9'
-                        onChange={e => onChange(e)}
-                        label='End'
-                        type='datetime-local'
-                        className={classes.textField}
-                        InputLabelProps={{
-                          shrink: true
-                        }}
-                      />
-                      <Button
-                        type='submit'
-                        variant='contained'
-                        className={classes.submit}>
-                        {!loading ? 'Search' : 'Searching'}
-                      </Button>
-                    </form>
-                    <Table
-                      stickyHeader
-                      className={classes2.table}
-                      aria-label='custom pagination sticky table'>
-                      <TableHead>
-                        <TableRow>
-                          <StyledTableCell>Arrivals</StyledTableCell>
-                          <StyledTableCell>icao24</StyledTableCell>
+                  <Paper className={classes2.root}>
+                    <div className={classes2.tableWrapper}>
+                      <div className=''>
+                        <h6>
+                          <strong>Arriving flights in the last</strong>{' '}
+                          <select
+                            className='app-modal__dropdown'
+                            name='days9'
+                            value={days9}
+                            onChange={e => {
+                              onChange(e);
+                            }}>
+                            <option value='Select'>Select</option>
+                            <option value='1'>1 day</option>
+                            <option value='3'> 3 days</option>
+                            <option value='7'>7 days</option>
+                          </select>{' '}
+                          <Button onClick={() => fetchArrivals('EHAM', days9)}>
+                            Search
+                          </Button>
+                        </h6>
+                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
+                          
+                        </div> */}
+                        {arrivals.length <= 0 ? (
+                          'No records found'
+                        ) : (
+                          <Fragment>
+                            <Table
+                              stickyHeader
+                              className={classes2.table}
+                              aria-label='custom pagination sticky table'>
+                              <TableHead>
+                                <TableRow>
+                                  <StyledTableCell>icao24</StyledTableCell>
 
-                          <StyledTableCell align='right'>
-                            Departure Airport
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Departure
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Arrival
-                          </StyledTableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {arrivals.length <= 0
-                          ? 'No records found'
-                          : arrivals.data.map(row => (
-                              <TableRow key={uuid()}>
-                                <TableCell
-                                  component='th'
-                                  scope='row'></TableCell>
-                                <TableCell component='th' scope='row'>
-                                  {row.icao24}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {row.estDepartureAirport === null
-                                    ? 'N/A'
-                                    : row.estDepartureAirport}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.firstSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.lastSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                              </TableRow>
-                            ))}
-                      </TableBody>
-                    </Table>
-                    <Table
-                      stickyHeader
-                      className={classes2.table}
-                      aria-label='custom pagination sticky table'>
-                      <TableHead>
-                        <TableRow>
-                          <StyledTableCell>Departures</StyledTableCell>
-                          <StyledTableCell>icao24</StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Departure Airport
+                                  </StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Time of Arrival
+                                  </StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Time of Departure
+                                  </StyledTableCell>
+                                </TableRow>
+                              </TableHead>
+                              <TableBody>
+                                {arrivals.data.map(row => (
+                                  <TableRow key={uuid()}>
+                                    <TableCell component='th' scope='row'>
+                                      {row.icao24}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {row.estDepartureAirport === null
+                                        ? 'N/A'
+                                        : row.estDepartureAirport}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {moment
+                                        .unix(row.firstSeen)
+                                        .format('MMMM Do YYYY, hh:mm:ss a')}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {moment
+                                        .unix(row.lastSeen)
+                                        .format('MMMM Do YYYY, hh:mm:ss a')}
+                                    </TableCell>
+                                  </TableRow>
+                                ))}
+                                }
+                              </TableBody>
+                            </Table>
+                          </Fragment>
+                        )}
+                        <h6>
+                          {' '}
+                          <strong>Departing flights in the last </strong>
+                          <select
+                            className='app-modal__dropdown'
+                            name='days9b'
+                            value={days9b}
+                            onChange={e => {
+                              onChange(e);
+                            }}>
+                            <option value='Select'>Select</option>
+                            <option value='1'>1 day</option>
+                            <option value='3'> 3 days</option>
+                            <option value='7'>7 days</option>
+                          </select>
+                          <Button
+                            onClick={() => fetchDepartures('EHAM', days9b)}>
+                            Search
+                          </Button>
+                        </h6>
+                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
+                          
+                        </div> */}
+                      </div>
 
-                          <StyledTableCell align='right'>
-                            Arrival Airport
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Arrival
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Departure
-                          </StyledTableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {departures.length <= 0
-                          ? 'No records found'
-                          : departures.data.map(row => (
-                              <TableRow key={uuid()}>
-                                <TableCell
-                                  component='th'
-                                  scope='row'></TableCell>
-                                <TableCell component='th' scope='row'>
-                                  {row.icao24}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {row.estArrivalAirport === null
-                                    ? 'N/A'
-                                    : row.estArrivalAirport}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.firstSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.lastSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
+                      {departures.length <= 0 ? (
+                        'No records found'
+                      ) : (
+                        <Fragment>
+                          <Table
+                            stickyHeader
+                            className={classes2.table}
+                            aria-label='custom pagination sticky table'>
+                            <TableHead>
+                              <TableRow>
+                                <StyledTableCell>icao24</StyledTableCell>
+
+                                <StyledTableCell align='right'>
+                                  Arrival Airport
+                                </StyledTableCell>
+                                <StyledTableCell align='right'>
+                                  Time of Departure
+                                </StyledTableCell>
+                                <StyledTableCell align='right'>
+                                  Time of Arrival
+                                </StyledTableCell>
                               </TableRow>
-                            ))}
-                      </TableBody>
-                    </Table>
-                  </div>
+                            </TableHead>
+                            <TableBody>
+                              {departures.data.map(row => (
+                                <TableRow key={uuid()}>
+                                  <TableCell component='th' scope='row'>
+                                    {row.icao24}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {row.estDepartureAirport === null
+                                      ? 'N/A'
+                                      : row.estDepartureAirport}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.firstSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.lastSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                              }
+                            </TableBody>
+                          </Table>
+                        </Fragment>
+                      )}
+                    </div>
+                  </Paper>
                 </div>
               </Modal>
+
               <GridListTileBar
                 title='Amsterdam Airport Schiphol'
                 actionIcon={
@@ -2081,161 +2092,162 @@ const Dashboard = ({
                 onClose={handleModalClose10}>
                 <div style={modalStyle} className={classes.paper2}>
                   <h2>Toronto Pearson International Airport</h2>
-                  <div className={classes2.tableWrapper}>
-                    <h6>
-                      Choose a range to search from. Test date is 29 Jan 2018,
-                      12noon - 29 Jan 2018, 1pm
-                    </h6>
-                    <form
-                      onSubmit={e => {
-                        e.preventDefault();
-                        fetchArrivals(
-                          'CYYZ',
-                          moment(begin10).format('X'),
-                          moment(end10).format('X')
-                        );
-                        fetchDepartures(
-                          'CYZZ',
-                          moment(begin10).format('X'),
-                          moment(end10).format('X')
-                        );
-                      }}
-                      className={classes.container}
-                      noValidate>
-                      <TextField
-                        name='begin10'
-                        value={begin10}
-                        id='begin10'
-                        onChange={e => onChange(e)}
-                        label='Begin'
-                        type='datetime-local'
-                        className={classes.textField}
-                        InputLabelProps={{
-                          shrink: true
-                        }}
-                      />
-                      <TextField
-                        name='end10'
-                        value={end10}
-                        id='end10'
-                        onChange={e => onChange(e)}
-                        label='End'
-                        type='datetime-local'
-                        className={classes.textField}
-                        InputLabelProps={{
-                          shrink: true
-                        }}
-                      />
-                      <Button
-                        type='submit'
-                        variant='contained'
-                        className={classes.submit}>
-                        {!loading ? 'Search' : 'Searching'}
-                      </Button>
-                    </form>
-                    <Table
-                      stickyHeader
-                      className={classes2.table}
-                      aria-label='custom pagination sticky table'>
-                      <TableHead>
-                        <TableRow>
-                          <StyledTableCell>Arrivals</StyledTableCell>
-                          <StyledTableCell>icao24</StyledTableCell>
+                  <Paper className={classes2.root}>
+                    <div className={classes2.tableWrapper}>
+                      <div className=''>
+                        <h6>
+                          <strong>Arriving flights in the last</strong>{' '}
+                          <select
+                            className='app-modal__dropdown'
+                            name='days10'
+                            value={days10}
+                            onChange={e => {
+                              onChange(e);
+                            }}>
+                            <option value='Select'>Select</option>
+                            <option value='1'>1 day</option>
+                            <option value='3'> 3 days</option>
+                            <option value='7'>7 days</option>
+                          </select>{' '}
+                          <Button onClick={() => fetchArrivals('CYYZ', days10)}>
+                            Search
+                          </Button>
+                        </h6>
+                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
+                          
+                        </div> */}
+                        {arrivals.length <= 0 ? (
+                          'No records found'
+                        ) : (
+                          <Fragment>
+                            <Table
+                              stickyHeader
+                              className={classes2.table}
+                              aria-label='custom pagination sticky table'>
+                              <TableHead>
+                                <TableRow>
+                                  <StyledTableCell>icao24</StyledTableCell>
 
-                          <StyledTableCell align='right'>
-                            Departure Airport
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Departure
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Arrival
-                          </StyledTableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {arrivals.length <= 0
-                          ? 'No records found'
-                          : arrivals.data.map(row => (
-                              <TableRow key={uuid()}>
-                                <TableCell
-                                  component='th'
-                                  scope='row'></TableCell>
-                                <TableCell component='th' scope='row'>
-                                  {row.icao24}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {row.estDepartureAirport === null
-                                    ? 'N/A'
-                                    : row.estDepartureAirport}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.firstSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.lastSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                              </TableRow>
-                            ))}
-                      </TableBody>
-                    </Table>
-                    <Table
-                      stickyHeader
-                      className={classes2.table}
-                      aria-label='custom pagination sticky table'>
-                      <TableHead>
-                        <TableRow>
-                          <StyledTableCell>Departures</StyledTableCell>
-                          <StyledTableCell>icao24</StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Departure Airport
+                                  </StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Time of Arrival
+                                  </StyledTableCell>
+                                  <StyledTableCell align='right'>
+                                    Time of Departure
+                                  </StyledTableCell>
+                                </TableRow>
+                              </TableHead>
+                              <TableBody>
+                                {arrivals.data.map(row => (
+                                  <TableRow key={uuid()}>
+                                    <TableCell component='th' scope='row'>
+                                      {row.icao24}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {row.estDepartureAirport === null
+                                        ? 'N/A'
+                                        : row.estDepartureAirport}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {moment
+                                        .unix(row.firstSeen)
+                                        .format('MMMM Do YYYY, hh:mm:ss a')}
+                                    </TableCell>
+                                    <TableCell align='right'>
+                                      {moment
+                                        .unix(row.lastSeen)
+                                        .format('MMMM Do YYYY, hh:mm:ss a')}
+                                    </TableCell>
+                                  </TableRow>
+                                ))}
+                                }
+                              </TableBody>
+                            </Table>
+                          </Fragment>
+                        )}
+                        <h6>
+                          {' '}
+                          <strong>Departing flights in the last </strong>
+                          <select
+                            className='app-modal__dropdown'
+                            name='days10b'
+                            value={days10b}
+                            onChange={e => {
+                              onChange(e);
+                            }}>
+                            <option value='Select'>Select</option>
+                            <option value='1'>1 day</option>
+                            <option value='3'> 3 days</option>
+                            <option value='7'>7 days</option>
+                          </select>
+                          <Button
+                            onClick={() => fetchDepartures('CYYZ', days10b)}>
+                            Search
+                          </Button>
+                        </h6>
+                        {/* <div className='col s12 m6' style={{ marginTop: 10 }}>
+                          
+                        </div> */}
+                      </div>
 
-                          <StyledTableCell align='right'>
-                            Arrival Airport
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Arrival
-                          </StyledTableCell>
-                          <StyledTableCell align='right'>
-                            Time of Departure
-                          </StyledTableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {departures.length <= 0
-                          ? 'No records found'
-                          : departures.data.map(row => (
-                              <TableRow key={uuid()}>
-                                <TableCell
-                                  component='th'
-                                  scope='row'></TableCell>
-                                <TableCell component='th' scope='row'>
-                                  {row.icao24}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {row.estArrivalAirport === null
-                                    ? 'N/A'
-                                    : row.estArrivalAirport}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.firstSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
-                                <TableCell align='right'>
-                                  {moment
-                                    .unix(row.lastSeen)
-                                    .format('MMMM Do YYYY, hh:mm:ss a')}
-                                </TableCell>
+                      {departures.length <= 0 ? (
+                        'No records found'
+                      ) : (
+                        <Fragment>
+                          <Table
+                            stickyHeader
+                            className={classes2.table}
+                            aria-label='custom pagination sticky table'>
+                            <TableHead>
+                              <TableRow>
+                                <StyledTableCell>icao24</StyledTableCell>
+
+                                <StyledTableCell align='right'>
+                                  Arrival Airport
+                                </StyledTableCell>
+                                <StyledTableCell align='right'>
+                                  Time of Departure
+                                </StyledTableCell>
+                                <StyledTableCell align='right'>
+                                  Time of Arrival
+                                </StyledTableCell>
                               </TableRow>
-                            ))}
-                      </TableBody>
-                    </Table>
-                  </div>
+                            </TableHead>
+                            <TableBody>
+                              {departures.data.map(row => (
+                                <TableRow key={uuid()}>
+                                  <TableCell component='th' scope='row'>
+                                    {row.icao24}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {row.estDepartureAirport === null
+                                      ? 'N/A'
+                                      : row.estDepartureAirport}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.firstSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                  <TableCell align='right'>
+                                    {moment
+                                      .unix(row.lastSeen)
+                                      .format('MMMM Do YYYY, hh:mm:ss a')}
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                              }
+                            </TableBody>
+                          </Table>
+                        </Fragment>
+                      )}
+                    </div>
+                  </Paper>
                 </div>
               </Modal>
+
               <GridListTileBar
                 title='Toronto Pearson International Airport'
                 actionIcon={
