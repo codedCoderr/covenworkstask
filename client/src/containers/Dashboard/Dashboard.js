@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import uuid from 'uuid/v4';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TextField from '@material-ui/core/TextField';
+// import TextField from '@material-ui/core/TextField';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TableHead from '@material-ui/core/TableHead';
@@ -270,7 +270,6 @@ const Dashboard = ({
   } = formData;
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(formData.days1);
   };
 
   const classes = useStyles();
@@ -1152,10 +1151,6 @@ const Dashboard = ({
                             variant='contained'
                             color='primary'
                             className={classes.submit}
-                            type='submit'
-                            variant='contained'
-                            color='primary'
-                            className={classes.submit}
                             onClick={() => fetchDepartures('KLAX', days4b)}>
                             Search
                           </Button>
@@ -1239,8 +1234,8 @@ const Dashboard = ({
               key='5'>
               <img
                 src='https://image.shutterstock.com/image-photo/tokyo-november-13-billboards-shinjukus-600w-1012724596.jpg'
-                alt='Tokyo Haneda Airpor'
-                t
+                alt='Tokyo Haneda Airport'
+                
               />
               <Modal
                 aria-labelledby='simple-modal-title'
